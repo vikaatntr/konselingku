@@ -1,0 +1,219 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:konselingku/app/constant/colors.dart';
+import 'package:konselingku/app/routes/app_pages.dart';
+import 'package:konselingku/app/widget/general/form_input.dart';
+import 'package:konselingku/app/widget/general/form_input_password.dart';
+
+import '../controllers/login_controller.dart';
+
+class LoginView extends GetView<LoginController> {
+  const LoginView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.dark));
+
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      body: _body(),
+    );
+  }
+
+  Widget _body() {
+    return SingleChildScrollView(
+      child: Container(
+        constraints: BoxConstraints(
+          maxHeight: Get.height,
+          maxWidth: Get.width,
+        ),
+        decoration: const BoxDecoration(
+          color: Color(0xFFFAFAFA),
+        ),
+        child: Column(
+          children: [
+            _logo(),
+            _content(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _logo() {
+    return Expanded(
+      flex: 2,
+      child: Center(
+        child: Container(
+          margin: const EdgeInsets.only(top: 90),
+          child: Image.asset(
+            'assets/images/kons1.png',
+            height: Get.height * 0.5,
+            fit: BoxFit.contain,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _content() {
+    return Expanded(
+        flex: 5,
+        child: Container(
+          margin: const EdgeInsets.only(top: 50),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+          ),
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(30, 50, 30, 30),
+            child: Form(
+                child: Column(
+              children: [
+                _emailInput(),
+                const SizedBox(height: 20),
+                _passwordInput(),
+                const SizedBox(height: 20),
+                _forgotPasswordButton(),
+                const Spacer(),
+                _loginButton(),
+                const Spacer(),
+                _registerButton(),
+              ],
+            )),
+          ),
+        ));
+  }
+
+  Widget _emailInput() {
+    return formInput(
+      controller: controller.emailController,
+      title: 'Email',
+      placeholder: 'Masukkan email',
+      // controller: ,
+      inputType: TextInputType.emailAddress,
+      inputAction: TextInputAction.next,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Masukkan email terlebih dahulu';
+        }
+        if (!GetUtils.isEmail(value)) {
+          return 'Masukkan email dengan benar';
+        }
+        return null;
+      },
+    );
+  }
+
+  // Widget _passwordInput() {
+  //   return Obx(
+  //     () => formInputPassword(
+  //       title: 'Password',
+  //       placeholder: 'Masukkan password',
+  //       // controller: controller,
+  //       inputAction: TextInputAction.done,
+  //       // secureText: secureText,
+  //       onShowPassword: () {},
+  //       validator: (value) {
+  //         if (value == null || value.isEmpty) {
+  //           return 'Masukkan password terlebih dahulu';
+  //         }
+  //         return null;
+  //       },
+  //     ),
+  //   );
+  // }
+
+  Widget _passwordInput() {
+    return Obx(
+      () => formInputPassword(
+        controller: controller.passwordController,
+        showPassword: controller.showPassword,
+        title: 'Password',
+        placeholder: 'Masukkan Password',
+        inputAction: TextInputAction.done,
+        onShowPassword: () {
+          controller.passwordToggle();
+        },
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Masukkan password terlebih dahulu';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+
+  Widget _forgotPasswordButton() {
+    return Container(
+      alignment: Alignment.centerRight,
+      child: GestureDetector(
+        onTap: () {
+          Get.toNamed(Routes.FORGOT_PASSWORD);
+        },
+        child: Text("Lupa kata sandi?",
+            style: GoogleFonts.poppins(color: Colors.red)),
+      ),
+    );
+  }
+
+  Widget _loginButton() {
+    return SizedBox(
+      // color: AppColors.primaryColor,
+      width: Get.width / 1.6,
+      child: GetPlatform.isIOS
+          ? CupertinoButton.filled(
+              disabledColor: AppColors.primaryColor,
+              borderRadius: BorderRadius.circular(12),
+              onPressed: () {
+                controller.login();
+              },
+              child: Text("Masuk",
+                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
+            )
+          : ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: AppColors.primaryColor),
+              onPressed: () {
+                controller.login();
+              },
+              child: Text("Masuk",
+                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
+            ),
+    );
+  }
+
+  Widget _registerButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Belum punya akun?",
+          style: GoogleFonts.poppins(
+              fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(width: 5),
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(Routes.REGISTER);
+          },
+          child: Text(
+            "Daftar sekarang",
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              color: AppColors.primaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

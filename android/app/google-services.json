@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "783564368958",
+    "project_id": "konselingku-72977",
+    "storage_bucket": "konselingku-72977.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783564368958:android:e056c0023a35bc3594356f",
+        "android_client_info": {
+          "package_name": "com.vika.konselingku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783564368958-2c53aderf9ffvdvqtv4kfvamahmjavgo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEtZZkeVIbnRwXKQvU8NBN9_tiLkY3cMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783564368958-2c53aderf9ffvdvqtv4kfvamahmjavgo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -160,6 +160,20 @@ class RegisterView extends GetView<RegisterController> {
     );
   }
 
+  Widget _dropdownRole() {
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.centerLeft,
+          child: Text("Role",
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
+        ),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<int>(items: [], onChanged: (val) {})
+      ],
+    );
+  }
+
   Widget _passwordInput(TextEditingController controller) {
     return Obx(
       () => formInputPassword(

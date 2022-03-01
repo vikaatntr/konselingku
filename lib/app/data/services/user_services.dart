@@ -1,12 +1,18 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:konselingku/app/constant/collection_path.dart';
 import 'package:konselingku/app/data/model/user.dart';
 
 class UserServices {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
-  static UserServices instance = UserServices._();
+  static UserServices? _userServices;
+
+  static UserServices get instance {
+    _userServices ??= UserServices._();
+    return _userServices!;
+  }
 
   UserServices._();
   Future<bool> createUser(UserData userData) async {
@@ -38,8 +44,4 @@ class UserServices {
       return null;
     }
   }
-}
-
-class CollectionPath {
-  static const userData = 'user';
 }

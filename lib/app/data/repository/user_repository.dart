@@ -4,14 +4,19 @@ import 'package:konselingku/app/data/services/user_services.dart';
 import 'package:konselingku/app/globals/controllers/app_controller.dart';
 
 class UserRepository {
+  final AppController _appController = Get.find();
   static final UserRepository _userRepository = UserRepository._();
   static UserRepository get instance => _userRepository;
-  final AppController _appController = Get.find();
   UserRepository._();
+
+  UserData? user;
 
   Future<bool> createUser(UserData userData) =>
       UserServices.instance.createUser(userData);
 
-  Future<UserData?> getUser() =>
-      UserServices.instance.getUser(_appController.auth.currentUser!.uid);
+  Future<UserData?> getUser() async {
+    String uid = _appController.auth.currentUser!.uid;
+    user = await UserServices.instance.getUser(uid);
+    return user;
+  }
 }

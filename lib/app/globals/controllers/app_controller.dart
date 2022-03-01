@@ -5,9 +5,4 @@ class AppController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? get user => auth.currentUser;
   bool get isLogin => user != null;
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
 }

@@ -123,7 +123,7 @@ class RegisterPage extends StatelessWidget {
     return formInput(
       title: "Email",
       placeholder: "Masukkan emailmu",
-      inputType: TextInputType.text,
+      inputType: TextInputType.emailAddress,
       inputAction: TextInputAction.next,
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -138,7 +138,7 @@ class RegisterPage extends StatelessWidget {
     return formInput(
       title: "No. Telepon",
       placeholder: "Masukkan nomer teleponmu",
-      inputType: TextInputType.text,
+      inputType: TextInputType.number,
       inputAction: TextInputAction.next,
       validator: (value) {
         if (value == null || value.isEmpty) {

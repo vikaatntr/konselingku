@@ -11,4 +11,7 @@ class AppColors {
   static final kBlue = Color(0XFFBEE7FD);
   static final green = Color(0XFFC5FFCF);
   static final purple = Color(0XFFEDD7FE);
+  static final kRed = Color(0XFFFFEAEE);
+  static final pink = Color(0XFFF5BAC6);
+  static final brown = Color(0XFFFFEDDB);
 }

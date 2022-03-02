@@ -13,9 +13,17 @@ class AppRoutes {
     GetPage(name: _Paths.LOGIN, page: () => LoginPage()),
     GetPage(name: _Paths.FORGOT_PASSWORD, page: () => forgotPasswordPage()),
     GetPage(name: _Paths.REGISTER, page: () => RegisterPage()),
+    GetPage(name: _Paths.HOMEPAGE, page: () => HomePage()),
+    GetPage(name: _Paths.HOMEPAGE_ADMIN, page: () => homePageAdmin()),
     GetPage(name: _Paths.NOTIFICATION, page: () => notificationPage()),
     GetPage(name: _Paths.COUNSELING_APPOINTMENT, page: () => appointmentPage()),
     GetPage(name: _Paths.INFORMATION_KUESIONER, page: () => informationKuesionerPage()),
-    GetPage(name: _Paths.KUESIONER, page: () => kuesionerPage())
+    GetPage(name: _Paths.KUESIONER, page: () => kuesionerPage()),
+    GetPage(name: _Paths.HOMEPAGE_DATA_PRIBADI, page: () => homeDataPribadi()),
+    GetPage(name: _Paths.MENU_DATA_PRIBADI, page: () => menuDataPribadi()),
+    GetPage(name: _Paths.INFO_DATA_SISWA, page: () => infoDataSiswa()),
+    GetPage(name: _Paths.INFO_DATA_PRIBADI, page: () => infoDataPribadi()),
+    GetPage(name: _Paths.INFO_DATA_ORTU, page: () => infoDataOrtu()),
+    GetPage(name: _Paths.KET_LINGKUNGAN_KEL, page: () => ketLingkunganKel()),
   ];
 }

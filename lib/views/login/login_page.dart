@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:konselingku/constant/colors.dart';
+import 'package:konselingku/views/admin/home_page_admin.dart';
 import 'package:konselingku/views/home/home_page.dart';
 import 'package:konselingku/views/login/forgot_password_page.dart';
 import 'package:konselingku/views/register/register_page.dart';
@@ -164,7 +165,7 @@ class LoginPage extends StatelessWidget {
               disabledColor: AppColors.primaryColor,
               borderRadius: BorderRadius.circular(12),
               onPressed: () {
-                Get.to(HomePage());
+                Get.to(homePageAdmin());
               },
               child: Text("Masuk",
                   style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
@@ -172,7 +173,7 @@ class LoginPage extends StatelessWidget {
           : ElevatedButton(
               style: ElevatedButton.styleFrom(primary: AppColors.primaryColor),
               onPressed: () {
-                Get.to(HomePage());
+                Get.to(homePageAdmin());
               },
               child: Text("Masuk",
                   style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),

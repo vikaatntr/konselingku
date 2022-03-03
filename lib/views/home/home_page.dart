@@ -6,8 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/constant/colors.dart';
 import 'package:konselingku/views/counseling_appointment/counseling_appointment.dart';
 import 'package:konselingku/views/data_pribadi/home_data_pribadi.dart';
+import 'package:konselingku/views/data_pribadi/menu_data_pribadi.dart';
 import 'package:konselingku/views/kuesioner/informasi_kuesioner_siswa.dart';
 import 'package:konselingku/views/notification/notification_page.dart';
+import 'package:konselingku/views/profile/profile_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -16,6 +18,18 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: GestureDetector(
+            onTap: () {
+              Get.to(profilePage());
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.asset("assets/images/user.png"),
+            ),
+          ),
+        ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 20),
@@ -354,7 +368,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.to(homeDataPribadi());
+                        Get.to(menuDataPribadi());
                       },
                       child: Container(
                         padding: EdgeInsets.only(top: 5),

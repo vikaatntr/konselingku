@@ -12,6 +12,7 @@ import 'package:konselingku/views/kuesioner/kuesioner.dart';
 import 'package:konselingku/views/login/forgot_password_page.dart';
 import 'package:konselingku/views/login/login_page.dart';
 import 'package:konselingku/views/notification/notification_page.dart';
+import 'package:konselingku/views/profile/profile_page.dart';
 import 'package:konselingku/views/register/register_page.dart';
 import 'package:konselingku/views/splash/splash_screen.dart';
 import 'package:get/route_manager.dart';
@@ -27,6 +28,7 @@ class AppPages {
   static const HOMEPAGE = _Paths.HOMEPAGE;
   static const HOMEPAGE_ADMIN = _Paths.HOMEPAGE_ADMIN;
   static const NOTIFICATION = _Paths.NOTIFICATION;
+  static const PROFILE = _Paths.PROFILE;
   static const COUNSELING_APPOINTMENT = _Paths.COUNSELING_APPOINTMENT;
   static const INFORMATION_KUESIONER = _Paths.INFORMATION_KUESIONER;
   static const KUESIONER = _Paths.KUESIONER;
@@ -47,6 +49,7 @@ abstract class _Paths {
   static const HOMEPAGE = '/homepage';
   static const HOMEPAGE_ADMIN = '/homepage_admin';
   static const NOTIFICATION = '/notification';
+  static const PROFILE = '/profile';
   static const COUNSELING_APPOINTMENT = '/counseling_appointment';
   static const INFORMATION_KUESIONER = '/information_kuesioner';
   static const KUESIONER = '/kuesioner';

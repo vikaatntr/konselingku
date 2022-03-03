@@ -16,6 +16,7 @@ class AppRoutes {
     GetPage(name: _Paths.HOMEPAGE, page: () => HomePage()),
     GetPage(name: _Paths.HOMEPAGE_ADMIN, page: () => homePageAdmin()),
     GetPage(name: _Paths.NOTIFICATION, page: () => notificationPage()),
+    GetPage(name: _Paths.PROFILE, page: () => profilePage()),
     GetPage(name: _Paths.COUNSELING_APPOINTMENT, page: () => appointmentPage()),
     GetPage(name: _Paths.INFORMATION_KUESIONER, page: () => informationKuesionerPage()),
     GetPage(name: _Paths.KUESIONER, page: () => kuesionerPage()),

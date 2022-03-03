@@ -3,6 +3,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/constant/colors.dart';
+import 'package:konselingku/views/profile/profile_page.dart';
 
 class homePageWali extends StatelessWidget {
 
@@ -12,6 +13,18 @@ class homePageWali extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: GestureDetector(
+            onTap: () {
+              Get.to(profilePage());
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.asset("assets/images/user.png"),
+            ),
+          ),
+        ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 20),

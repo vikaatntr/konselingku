@@ -165,7 +165,7 @@ class LoginPage extends StatelessWidget {
               disabledColor: AppColors.primaryColor,
               borderRadius: BorderRadius.circular(12),
               onPressed: () {
-                Get.to(homePageAdmin());
+                Get.to(HomePage());
               },
               child: Text("Masuk",
                   style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
@@ -173,7 +173,7 @@ class LoginPage extends StatelessWidget {
           : ElevatedButton(
               style: ElevatedButton.styleFrom(primary: AppColors.primaryColor),
               onPressed: () {
-                Get.to(homePageAdmin());
+                Get.to(HomePage());
               },
               child: Text("Masuk",
                   style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),

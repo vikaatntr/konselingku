@@ -38,7 +38,8 @@ Widget formInputPassword(
                   BorderSide(width: 1, color: Colors.grey.withOpacity(0.2))),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 1, color: AppColors.primaryColor)),
+              borderSide:
+                  const BorderSide(width: 1, color: AppColors.primaryColor)),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide:

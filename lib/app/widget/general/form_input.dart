@@ -46,7 +46,7 @@ Widget formInput(
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide:
-                    BorderSide(width: 1, color: AppColors.primaryColor)),
+                    const BorderSide(width: 1, color: AppColors.primaryColor)),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide:

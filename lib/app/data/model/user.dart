@@ -12,27 +12,34 @@ class UserData {
   String uid;
   String photoUrl;
   String role;
+  String? nip;
+  String? emailAnak;
+  bool isAccept;
 
-  UserData({
-    required this.email,
-    required this.namaLengkap,
-    required this.namaPanggilan,
-    required this.noTelp,
-    required this.photoUrl,
-    required this.role,
-    required this.uid,
-  });
+  UserData(
+      {required this.email,
+      required this.namaLengkap,
+      required this.namaPanggilan,
+      required this.noTelp,
+      required this.photoUrl,
+      required this.role,
+      required this.uid,
+      required this.isAccept,
+      this.nip,
+      this.emailAnak});
 
   factory UserData.fromMap(Map map) {
     return UserData(
-      email: map['email'] ?? '',
-      namaLengkap: map['namaLengkap'] ?? '',
-      namaPanggilan: map['namaPanggilan'] ?? '',
-      noTelp: map['noTelp'] ?? '',
-      photoUrl: map['photoUrl'] ?? '',
-      role: map['role'] ?? '',
-      uid: map['uid'] ?? '',
-    );
+        email: map['email'] ?? '',
+        namaLengkap: map['namaLengkap'] ?? '',
+        namaPanggilan: map['namaPanggilan'] ?? '',
+        noTelp: map['noTelp'] ?? '',
+        photoUrl: map['photoUrl'] ?? '',
+        role: map['role'] ?? '',
+        uid: map['uid'] ?? '',
+        isAccept: map['isAccept'] ?? false,
+        nip: map['nip'],
+        emailAnak: map['emailAnak']);
   }
 
   toMap() {
@@ -44,6 +51,9 @@ class UserData {
       'photoUrl': photoUrl,
       'role': role,
       'uid': uid,
+      'nip': nip,
+      'emailAnak': emailAnak,
+      'isAccept': isAccept
     };
   }
 }

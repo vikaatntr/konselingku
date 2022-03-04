@@ -24,7 +24,7 @@ class VerifikasiController extends GetxController {
     await _appController.user!.reload();
     if (_appController.user!.emailVerified) {
       isReload = false;
-      Get.offAllNamed(Routes.HOME);
+      Get.offAllNamed(Routes.USER_HOME);
     } else {
       log("reload user : " + _appController.user!.emailVerified.toString());
       if (isReload) {

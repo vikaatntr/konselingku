@@ -6,7 +6,8 @@ import 'package:konselingku/app/data/model/user.dart';
 import 'package:konselingku/app/data/repository/artikel_repository.dart';
 import 'package:konselingku/app/data/repository/nomor_penting_repository.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';
-import 'package:konselingku/app/modules/home/views/detail_artikel_view.dart';
+
+import '../views/detail_artikel_view.dart';
 
 class HomeController extends GetxController {
   final Rx<UserData?> _user = Rx<UserData?>(null);

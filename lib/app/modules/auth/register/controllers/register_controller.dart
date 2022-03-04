@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:konselingku/app/constant/colors.dart';
 import 'package:konselingku/app/constant/enum.dart';
 import 'package:konselingku/app/data/model/user.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';
@@ -17,6 +19,10 @@ class RegisterController extends GetxController {
   /// variable [_showPassword1] merupakan type standart dan variable [_showPassword2] merupakan type confirm
   final _showPassword1 = false.obs;
   final _showPassword2 = false.obs;
+
+  final _role = 0.obs;
+  set role(int val) => _role.value = val;
+  int get role => _role.value;
 
   /// membuat controller dari class [TextEditingController]
   /// dan value enum dari [RegisterFormType] untuk register
@@ -79,6 +85,18 @@ class RegisterController extends GetxController {
     if (formKey.currentState!.validate()) {
       try {
         CustomDialog.loadingDialog();
+        if (role == 1) {
+          var anak = await UserRepository.instance
+              .getAnotherUser(textController[RegisterFormType.emailAnak]!.text);
+          if (anak == null) {
+            Get.back();
+            Get.snackbar("Oops!", "Tidak ada siswa dengan email tersebut",
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.red,
+                colorText: Colors.white);
+            return;
+          }
+        }
         var result = await _appController.auth.createUserWithEmailAndPassword(
             email: textController[RegisterFormType.email]!.text,
             password: textController[RegisterFormType.password]!.text);
@@ -90,8 +108,11 @@ class RegisterController extends GetxController {
                   textController[RegisterFormType.namaPanggilan]!.text,
               noTelp: textController[RegisterFormType.noTelepon]!.text,
               photoUrl: '',
-              role: '0',
-              uid: result.user!.uid));
+              role: role.toString(),
+              nip: textController[RegisterFormType.nip]!.text,
+              emailAnak: textController[RegisterFormType.emailAnak]!.text,
+              uid: result.user!.uid,
+              isAccept: role == 0 ? true : false));
           if (createUser) {
             Get.back();
             Get.offNamed(Routes.VERIFIKASI);

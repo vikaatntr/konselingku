@@ -52,6 +52,22 @@ class RegisterView extends GetView<RegisterController> {
                   _phoneInput(
                       controller.textController[RegisterFormType.noTelepon]!),
                   const SizedBox(height: 20),
+                  _dropdownRole(),
+                  const SizedBox(height: 20),
+                  Obx(() {
+                    if (controller.role == 2) {
+                      return _nipInput(
+                          controller.textController[RegisterFormType.nip]!);
+                    } else if (controller.role == 1) {
+                      return _emailAnakInput(controller
+                          .textController[RegisterFormType.emailAnak]!);
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  }),
+                  Obx(() => controller.role != 0
+                      ? const SizedBox(height: 20)
+                      : const SizedBox.shrink()),
                   _passwordInput(
                       controller.textController[RegisterFormType.password]!),
                   const SizedBox(height: 20),
@@ -112,6 +128,22 @@ class RegisterView extends GetView<RegisterController> {
     );
   }
 
+  Widget _nipInput(TextEditingController controller) {
+    return formInput(
+      controller: controller,
+      title: "NIP/NIK",
+      placeholder: "Masukkan NIP/NIK",
+      inputType: TextInputType.text,
+      inputAction: TextInputAction.next,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Masukkan NIP/NIK terlebih dahulu';
+        }
+        return null;
+      },
+    );
+  }
+
   Widget _callNameInput(TextEditingController controller) {
     return formInput(
       controller: controller,
@@ -144,6 +176,22 @@ class RegisterView extends GetView<RegisterController> {
     );
   }
 
+  Widget _emailAnakInput(TextEditingController controller) {
+    return formInput(
+      controller: controller,
+      title: "Email Anak",
+      placeholder: "Masukkan email anakmu",
+      inputType: TextInputType.text,
+      inputAction: TextInputAction.next,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Masukkan email anakmu terlebih dahulu';
+        }
+        return null;
+      },
+    );
+  }
+
   Widget _phoneInput(TextEditingController controller) {
     return formInput(
       controller: controller,
@@ -169,7 +217,38 @@ class RegisterView extends GetView<RegisterController> {
               style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
         ),
         const SizedBox(height: 8),
-        DropdownButtonFormField<int>(items: [], onChanged: (val) {})
+        DropdownButtonFormField<int>(
+          value: controller.role,
+          isExpanded: true,
+          items: const [
+            DropdownMenuItem(value: 0, child: Text("Siswa")),
+            DropdownMenuItem(value: 1, child: Text("Wali Murid")),
+            DropdownMenuItem(value: 2, child: Text("Guru"))
+          ],
+          onChanged: (val) {
+            if (val != null) {
+              controller.role = val;
+            }
+          },
+          decoration: InputDecoration(
+              hintText: "Role",
+              hintStyle: GoogleFonts.poppins(),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                      width: 1, color: Colors.grey.withOpacity(0.2))),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                      width: 1, color: AppColors.primaryColor)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                    BorderSide(width: 1, color: Colors.grey.withOpacity(0.2)),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 20)),
+        )
       ],
     );
   }

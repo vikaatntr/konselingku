@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
 import 'package:konselingku/app/data/model/artikel.dart';
-import 'package:konselingku/app/modules/home/views/detail_artikel_view.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -21,6 +21,18 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: GestureDetector(
+            onTap: () {
+              Get.toNamed(Routes.PROFILE);
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.asset("assets/images/user.png"),
+            ),
+          ),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
@@ -28,7 +40,7 @@ class HomeView extends GetView<HomeController> {
               onTap: () {
                 Get.toNamed(Routes.NOTIFICATION);
               },
-              child: Icon(
+              child: const Icon(
                 Feather.bell,
                 color: AppColors.black,
               ),
@@ -584,6 +596,11 @@ class HomeView extends GetView<HomeController> {
                 children: controller.listNomorPenting
                     .map((e) => Card(
                           child: ListTile(
+                            onTap: () async {
+                              if (await canLaunch(e.link)) {
+                                launch(e.link);
+                              }
+                            },
                             title: Text(
                               e.nama,
                               style: Get.textTheme.headline6,

@@ -7,4 +7,6 @@ enum RegisterFormType {
   noTelepon,
   password,
   passwordConfirm,
+  nip,
+  emailAnak
 }

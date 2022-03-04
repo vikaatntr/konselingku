@@ -44,4 +44,21 @@ class UserServices {
       return null;
     }
   }
+
+  Future<UserData?> getAnotherUser(String email) async {
+    try {
+      var res = await _firebaseFirestore
+          .collection(CollectionPath.userData)
+          .where('email', isEqualTo: email)
+          .get();
+      if (res.size > 0) {
+        return UserData.fromMap(res.docs.first.data());
+      } else {
+        return null;
+      }
+    } catch (e, stackTrace) {
+      log(e.toString(), stackTrace: stackTrace);
+      return null;
+    }
+  }
 }

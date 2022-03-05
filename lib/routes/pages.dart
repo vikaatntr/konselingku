@@ -1,5 +1,9 @@
 import 'package:konselingku/views/admin/home_page_admin.dart';
 import 'package:konselingku/views/counseling_appointment/counseling_appointment.dart';
+import 'package:konselingku/views/counseling_appointment/form_appointment.dart';
+import 'package:konselingku/views/counseling_appointment/hasil_konseling.dart';
+import 'package:konselingku/views/counseling_appointment/home_counseling_appointment.dart';
+import 'package:konselingku/views/counseling_appointment/rekap_counseling.dart';
 import 'package:konselingku/views/data_pribadi/home_data_pribadi.dart';
 import 'package:konselingku/views/data_pribadi/informasi_data_orang_tua.dart';
 import 'package:konselingku/views/data_pribadi/informasi_data_pribadi.dart';
@@ -29,7 +33,11 @@ class AppPages {
   static const HOMEPAGE_ADMIN = _Paths.HOMEPAGE_ADMIN;
   static const NOTIFICATION = _Paths.NOTIFICATION;
   static const PROFILE = _Paths.PROFILE;
+  static const HOME_APPOINTMENT = _Paths.HOME_APPOINTMENT;
+  static const FORM_APPOINTMENT = _Paths.FORM_APPOINTMENT;
+  static const REKAP_COUNSELING = _Paths.REKAP_COUNSELING;
   static const COUNSELING_APPOINTMENT = _Paths.COUNSELING_APPOINTMENT;
+  static const HASIL_KONSELING = _Paths.HASIL_KONSELING;
   static const INFORMATION_KUESIONER = _Paths.INFORMATION_KUESIONER;
   static const KUESIONER = _Paths.KUESIONER;
   static const HOMEPAGE_DATA_PRIBADI = _Paths.HOMEPAGE_DATA_PRIBADI;
@@ -50,7 +58,11 @@ abstract class _Paths {
   static const HOMEPAGE_ADMIN = '/homepage_admin';
   static const NOTIFICATION = '/notification';
   static const PROFILE = '/profile';
+  static const HOME_APPOINTMENT = '/home_appointment';
   static const COUNSELING_APPOINTMENT = '/counseling_appointment';
+  static const FORM_APPOINTMENT = '/form_appointment';
+  static const REKAP_COUNSELING = '/rekap_counseling';
+  static const HASIL_KONSELING = '/hasil_konseling';
   static const INFORMATION_KUESIONER = '/information_kuesioner';
   static const KUESIONER = '/kuesioner';
   static const HOMEPAGE_DATA_PRIBADI = '/homepage_data_pribadi';

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/constant/colors.dart';
+import 'package:konselingku/views/counseling_appointment/form_appointment.dart';
 import 'package:konselingku/widgets/general/app_bar.dart';
 
 class appointmentPage extends StatelessWidget {
@@ -56,48 +57,53 @@ class appointmentPage extends StatelessWidget {
   }
 
   Widget cardTeacher() {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 12),
-      padding: EdgeInsets.all(12),
-      height: 180,
-      width: 370,
-      decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
-          color: AppColors.white,
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(0, 0),
-              spreadRadius: 2,
-              blurRadius: 5,
-              color: Colors.grey.withOpacity(0.5),
+    return GestureDetector(
+      onTap: () {
+        Get.to(formAppointment());
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 12),
+        padding: EdgeInsets.all(12),
+        height: 180,
+        width: 370,
+        decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: AppColors.white,
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(0, 0),
+                spreadRadius: 2,
+                blurRadius: 5,
+                color: Colors.grey.withOpacity(0.5),
+              )
+            ],
+            borderRadius: BorderRadius.all(Radius.circular(12))),
+        child: Row(
+          children: [
+            Container(child: Image.asset('assets/images/ibu.png')),
+            SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Wahyuni Widayati",
+                    style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "Guru Bimbingan Konseling",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    "NIP. xxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    style: GoogleFonts.poppins(),
+                  ),
+                ],
+              ),
             )
           ],
-          borderRadius: BorderRadius.all(Radius.circular(12))),
-      child: Row(
-        children: [
-          Container(child: Image.asset('assets/images/ibu.png')),
-          SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Wahyuni Widayati",
-                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "Guru Bimbingan Konseling",
-                  style: GoogleFonts.poppins(),
-                ),
-                Text(
-                  "NIP. xxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                  style: GoogleFonts.poppins(),
-                ),
-              ],
-            ),
-          )
-        ],
+        ),
       ),
     );
   }

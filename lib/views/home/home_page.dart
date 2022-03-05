@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/constant/colors.dart';
 import 'package:konselingku/views/counseling_appointment/counseling_appointment.dart';
+import 'package:konselingku/views/counseling_appointment/home_counseling_appointment.dart';
 import 'package:konselingku/views/data_pribadi/home_data_pribadi.dart';
 import 'package:konselingku/views/data_pribadi/menu_data_pribadi.dart';
 import 'package:konselingku/views/kuesioner/informasi_kuesioner_siswa.dart';
@@ -266,7 +267,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.to(appointmentPage());
+                        Get.to(homeAppointment());
                       },
                       child: Container(
                         padding: EdgeInsets.only(top: 5),

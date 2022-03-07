@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/modules/admin_home/controllers/admin_home_controller.dart';
 import 'package:konselingku/app/constant/colors.dart';
+import 'package:konselingku/app/modules/admin_home/views/list_user.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
 
 class AdminHomeView extends GetView<AdminHomeController> {
@@ -155,7 +156,9 @@ class AdminHomeView extends GetView<AdminHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(listUser());
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,

@@ -24,7 +24,7 @@ PreferredSizeWidget appBar(
               onTap: () {
                 Get.back();
               },
-              child: Icon(
+              child: const Icon(
                 Feather.chevron_left,
                 size: 32,
                 color: AppColors.black,

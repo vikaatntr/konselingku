@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
-class NotificationController extends GetxController {
+class RekapCounselingController extends GetxController {
   // ignore: todo
-  //TODO: Implement NotificationController
+  //TODO: Implement RekapCounselingController
 
   final count = 0.obs;
 

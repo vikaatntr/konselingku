@@ -25,7 +25,7 @@ PreferredSizeWidget appBar(
               onTap: () {
                 Get.toNamed(Routes.NOTIFICATION);
               },
-              child: Icon(
+              child: const Icon(
                 Feather.bell,
                 size: 32,
                 color: AppColors.black,

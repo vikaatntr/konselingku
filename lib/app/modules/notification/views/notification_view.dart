@@ -18,20 +18,18 @@ class NotificationView extends GetView<NotificationController> {
 
   Widget _body() {
     return Scrollbar(
-        child: Container(
-      child: Column(
-        children: [
-          cardNotif(),
-          cardNotif(),
-          cardNotif(),
-        ],
-      ),
+        child: Column(
+      children: [
+        cardNotif(),
+        cardNotif(),
+        cardNotif(),
+      ],
     ));
   }
 
   Widget cardNotif() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -44,8 +42,8 @@ class NotificationView extends GetView<NotificationController> {
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(width: 12),
-          Expanded(
+          const SizedBox(width: 12),
+          const Expanded(
             child: Text(
               "Vika telah menyetujui janji konseling.",
               style: TextStyle(fontSize: 16),

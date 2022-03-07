@@ -13,15 +13,6 @@ class LoginController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   final _showPassword = false.obs;
   get showPassword => _showPassword.value;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   @override
   void onClose() {

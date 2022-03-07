@@ -18,9 +18,9 @@ class InformasiKuesionerView extends GetView<KuesionerController> {
 
   Widget _body() {
     return SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
+      padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
       child: Form(
-          child: Container(
+          child: SizedBox(
         height: Get.height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

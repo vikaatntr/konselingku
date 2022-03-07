@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
-class NotificationController extends GetxController {
+class FormAppointmentController extends GetxController {
   // ignore: todo
-  //TODO: Implement NotificationController
+  //TODO: Implement FormAppointmentController
 
   final count = 0.obs;
 

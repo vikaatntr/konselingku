@@ -9,10 +9,17 @@ import 'package:konselingku/app/widget/general/dialog.dart';
 
 class LoginController extends GetxController {
   final AppController _appController = Get.find();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
   final _showPassword = false.obs;
   get showPassword => _showPassword.value;
+
+  @override
+  void onInit() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    super.onInit();
+  }
 
   @override
   void onClose() {

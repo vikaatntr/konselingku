@@ -3,10 +3,12 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
-import 'package:konselingku/app/modules/admin_home/views/detail_user.dart';
+import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
-class listUser extends StatelessWidget {
+class ListUser extends StatelessWidget {
+  const ListUser({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,18 +41,18 @@ class listUser extends StatelessWidget {
                   "Vika Kusuma Dyah Tantri",
                   style: GoogleFonts.poppins(),
                 ),
-                SizedBox(width: 180),
+                const SizedBox(width: 180),
                 GestureDetector(
                     onTap: () {
-                      Get.to(detailUser());
+                      Get.toNamed(Routes.DETAIL_USER);
                     },
-                    child: Icon(Feather.chevron_right))
+                    child: const Icon(Feather.chevron_right))
               ],
             ),
           ],
         ),
-        SizedBox(height: 10),
-        Divider(
+        const SizedBox(height: 10),
+        const Divider(
           height: 5,
           color: AppColors.grey,
         )

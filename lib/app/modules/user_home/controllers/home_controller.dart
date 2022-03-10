@@ -1,3 +1,8 @@
+// ignore_for_file: avoid_print
+
+import 'dart:async';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:konselingku/app/data/model/artikel.dart';
@@ -27,7 +32,11 @@ class HomeController extends GetxController {
 
   PageController artikelController = PageController();
 
+  FirebaseMessaging fcm = FirebaseMessaging.instance;
+
   final artikelIndex = 0.obs;
+
+  StreamSubscription<String>? onChangeFCMTokenListener;
 
   @override
   onInit() {
@@ -35,12 +44,48 @@ class HomeController extends GetxController {
     artikelController.addListener(() {
       artikelIndex.value = artikelController.page!.toInt();
     });
+    fcm.getToken().then((value) {
+      if (value != null) {}
+    });
+    requestFCMPermission().then((_) {
+      fcm.getToken().then((value) {
+        if (value != null) {
+          UserRepository.instance.saveFCMToken(value);
+        }
+      });
+    });
+    onChangeFCMTokenListener =
+        fcm.onTokenRefresh.listen(UserRepository.instance.saveFCMToken);
     super.onInit();
+  }
+
+  Future<void> requestFCMPermission() async {
+    NotificationSettings current = await fcm.getNotificationSettings();
+    if (current.authorizationStatus == AuthorizationStatus.authorized) {
+      print('User granted permission');
+    } else if (current.authorizationStatus == AuthorizationStatus.provisional) {
+      print('User granted provisional permission');
+    } else {
+      print('User declined or has not accepted permission');
+      NotificationSettings settings = await fcm.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true,
+      );
+      print('User granted permission: ${settings.authorizationStatus}');
+    }
   }
 
   @override
   void onClose() {
     artikelController.dispose();
+    if (onChangeFCMTokenListener != null) {
+      onChangeFCMTokenListener!.cancel();
+    }
     super.onClose();
   }
 

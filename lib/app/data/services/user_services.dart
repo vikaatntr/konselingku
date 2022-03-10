@@ -61,4 +61,13 @@ class UserServices {
       return null;
     }
   }
+
+  Future<void> saveFCMToken(String token, String uid) async {
+    await FirebaseFirestore.instance
+        .collection(CollectionPath.userData)
+        .doc(uid)
+        .update({
+      'fcmToken': token,
+    });
+  }
 }

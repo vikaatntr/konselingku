@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:konselingku/app/data/model/notification.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
 import '../controllers/notification_controller.dart';
@@ -20,16 +21,16 @@ class NotificationView extends GetView<NotificationController> {
     return Scrollbar(
         child: Column(
       children: [
-        cardNotif(),
-        cardNotif(),
-        cardNotif(),
+        for (var item in controller.appController.userData!.notification)
+          cardNotif(item)
       ],
     ));
   }
 
-  Widget cardNotif() {
+  Widget cardNotif(AppNotification notif) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      color: notif.isRead ? null : Colors.pink,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -43,10 +44,10 @@ class NotificationView extends GetView<NotificationController> {
             ),
           ),
           const SizedBox(width: 12),
-          const Expanded(
+          Expanded(
             child: Text(
-              "Vika telah menyetujui janji konseling.",
-              style: TextStyle(fontSize: 16),
+              notif.message,
+              style: const TextStyle(fontSize: 16),
             ),
           ),
         ],

@@ -99,7 +99,7 @@ class RegisterController extends GetxController {
             email: textController[RegisterFormType.email]!.text,
             password: textController[RegisterFormType.password]!.text);
         if (result.user != null) {
-          var createUser = await UserRepository.instance.createUser(UserData(
+          var registerUser = UserData(
               email: textController[RegisterFormType.email]!.text,
               namaLengkap: textController[RegisterFormType.namaLengkap]!.text,
               namaPanggilan:
@@ -110,7 +110,9 @@ class RegisterController extends GetxController {
               nip: textController[RegisterFormType.nip]!.text,
               emailAnak: textController[RegisterFormType.emailAnak]!.text,
               uid: result.user!.uid,
-              isAccept: role == 0 ? true : false));
+              isAccept: role == 0 ? true : false);
+          var createUser =
+              await UserRepository.instance.createUser(registerUser);
           if (createUser) {
             Get.back();
             Get.offNamed(Routes.VERIFIKASI);

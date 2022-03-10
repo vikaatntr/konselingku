@@ -6,6 +6,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
+import 'package:konselingku/app/modules/kuesioner/views/hasil_kuesioner.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
 import '../controllers/kuesioner_controller.dart';
@@ -1871,7 +1872,9 @@ class KuesionerView extends GetView<KuesionerController> {
           width: 200,
           height: 40,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(hasilKuesioner());
+            },
             child: Text(
               "Selanjutnya",
               style: GoogleFonts.poppins(fontWeight: FontWeight.bold),

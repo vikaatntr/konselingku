@@ -9,15 +9,6 @@ import 'package:konselingku/app/widget/general/dialog.dart';
 class ForgotPasswordController extends GetxController {
   final AppController _appController = Get.find();
   TextEditingController emailController = TextEditingController();
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   @override
   void onClose() {

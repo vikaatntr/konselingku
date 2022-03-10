@@ -288,11 +288,10 @@ class HomeView extends GetView<HomeController> {
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,
                       width: 180,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           shape: BoxShape.rectangle,
                           color: AppColors.yellow,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10))),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Image.asset(
@@ -320,11 +319,10 @@ class HomeView extends GetView<HomeController> {
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,
                       width: 180,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           shape: BoxShape.rectangle,
                           color: AppColors.kBlue,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10))),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Image.asset(
@@ -358,11 +356,10 @@ class HomeView extends GetView<HomeController> {
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,
                       width: 180,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           shape: BoxShape.rectangle,
                           color: AppColors.green,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10))),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Image.asset(
@@ -388,11 +385,10 @@ class HomeView extends GetView<HomeController> {
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,
                       width: 180,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           shape: BoxShape.rectangle,
                           color: AppColors.purple,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10))),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Image.asset(

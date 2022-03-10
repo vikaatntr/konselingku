@@ -22,13 +22,13 @@ class CounselingAppointmentView
   Widget _body() {
     return SingleChildScrollView(
       child: Form(
-          child: Container(
+          child: SizedBox(
         height: Get.height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _subtitle(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _teacherBox1(),
           ],
         ),
@@ -38,7 +38,7 @@ class CounselingAppointmentView
 
   Widget _subtitle() {
     return Container(
-      margin: EdgeInsets.only(top: 15, left: 15, right: 15),
+      margin: const EdgeInsets.only(top: 15, left: 15, right: 15),
       child: Text(
         "Yuk pilih terlebih dahulu konselor terbaik yang akan membantu proses bimbingan konselingmu!",
         style: GoogleFonts.poppins(fontSize: 15),
@@ -71,17 +71,17 @@ class CounselingAppointmentView
           color: AppColors.white,
           boxShadow: [
             BoxShadow(
-              offset: Offset(0, 0),
+              offset: const Offset(0, 0),
               spreadRadius: 2,
               blurRadius: 5,
               color: Colors.grey.withOpacity(0.5),
             )
           ],
-          borderRadius: BorderRadius.all(Radius.circular(12))),
+          borderRadius: const BorderRadius.all(Radius.circular(12))),
       child: Row(
         children: [
-          Container(child: Image.asset('assets/images/ibu.png')),
-          SizedBox(width: 12),
+          Image.asset('assets/images/ibu.png'),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

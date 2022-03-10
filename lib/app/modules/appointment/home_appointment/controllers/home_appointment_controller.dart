@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
-class NotificationController extends GetxController {
+class HomeAppointmentController extends GetxController {
   // ignore: todo
-  //TODO: Implement NotificationController
+  //TODO: Implement HomeAppointmentController
 
   final count = 0.obs;
 

@@ -1,10 +1,8 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:konselingku/app/constant/colors.dart';
 import 'package:konselingku/app/constant/enum.dart';
 import 'package:konselingku/app/data/model/user.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';

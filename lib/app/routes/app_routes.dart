@@ -19,6 +19,11 @@ abstract class Routes {
   static const GURU_HOME = _Paths.GURU_HOME;
   static const WALI_HOME = _Paths.WALI_HOME;
   static const PROFILE = _Paths.PROFILE;
+  static const HOME_APPOINTMENT = _Paths.HOME_APPOINTMENT;
+  static const FORM_APPOINTMENT = _Paths.FORM_APPOINTMENT;
+  static const REKAP_COUNSELING = _Paths.REKAP_COUNSELING;
+  static const HASIL_COUNSELING = _Paths.HASIL_COUNSELING;
+  static const GURU_FORM_APPOINTMENT = _Paths.GURU_FORM_APPOINTMENT;
 }
 
 abstract class _Paths {
@@ -37,4 +42,9 @@ abstract class _Paths {
   static const GURU_HOME = '/guru-home';
   static const WALI_HOME = '/wali-home';
   static const PROFILE = '/profile';
+  static const HOME_APPOINTMENT = '/home-appointment';
+  static const FORM_APPOINTMENT = '/form-appointment';
+  static const REKAP_COUNSELING = '/rekap-counseling';
+  static const HASIL_COUNSELING = '/hasil-counseling';
+  static const GURU_FORM_APPOINTMENT = '/guru-form-appointment';
 }

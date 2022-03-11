@@ -3,10 +3,12 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
+import 'package:konselingku/app/data/model/user.dart';
+import 'package:konselingku/app/modules/admin_home/controllers/admin_home_controller.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
-class ListUser extends StatelessWidget {
+class ListUser extends GetView<AdminHomeController> {
   const ListUser({Key? key}) : super(key: key);
 
   @override
@@ -23,32 +25,26 @@ class ListUser extends StatelessWidget {
       child: Form(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _listUser(),
-        ],
+        children: [for (var item in controller.listUser) _listUser(item)],
       )),
     );
   }
 
-  Widget _listUser() {
+  Widget _listUser(UserData user) {
     return Column(
       children: [
-        Column(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Text(
-                  "Vika Kusuma Dyah Tantri",
-                  style: GoogleFonts.poppins(),
-                ),
-                const SizedBox(width: 180),
-                GestureDetector(
-                    onTap: () {
-                      Get.toNamed(Routes.DETAIL_USER);
-                    },
-                    child: const Icon(Feather.chevron_right))
-              ],
+            Text(
+              user.namaLengkap,
+              style: GoogleFonts.poppins(),
             ),
+            GestureDetector(
+                onTap: () {
+                  Get.toNamed(Routes.DETAIL_USER, arguments: user);
+                },
+                child: const Icon(Feather.chevron_right))
           ],
         ),
         const SizedBox(height: 10),

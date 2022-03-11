@@ -105,7 +105,7 @@ class AppPages {
             name: _Paths.LIST_USER,
             page: () => const ListUser(),
           ),
-          GetPage(name: _Paths.DETAIL_USER, page: () => const DetailUser())
+          GetPage(name: _Paths.DETAIL_USER, page: () => DetailUser())
         ]),
     GetPage(
       name: _Paths.DATA_PRIBADI,

@@ -51,6 +51,8 @@ class UserData {
             ? []
             : (map['notification'] as List)
                 .map((e) => AppNotification.fromMap(e))
+                .toList()
+                .reversed
                 .toList());
   }
 

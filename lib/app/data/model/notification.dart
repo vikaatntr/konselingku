@@ -28,7 +28,7 @@ class AppNotification {
         message: map['message'],
         title: map['title'],
         to: map['to'],
-        isRead: map['isRead'],
+        isRead: map['isRead'] ?? false,
         data: map['data']);
   }
 

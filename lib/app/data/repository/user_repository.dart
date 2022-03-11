@@ -46,6 +46,14 @@ class UserRepository {
     return user;
   }
 
+  Future<void> blockAccount(String uid) =>
+      UserServices.instance.blockAccount(uid);
+
+  Future<void> acceptAccount(String uid) =>
+      UserServices.instance.acceptAccount(uid);
+
+  Future<List<UserData>> getListUser() => UserServices.instance.getListUser();
+
   Future<void> logOut() async {
     await _appController.auth.signOut();
     Get.offAllNamed(Routes.LOGIN);

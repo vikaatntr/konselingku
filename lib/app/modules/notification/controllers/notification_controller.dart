@@ -5,9 +5,9 @@ import 'package:konselingku/app/globals/controllers/app_controller.dart';
 class NotificationController extends GetxController {
   final AppController appController = Get.find();
   @override
-  void onInit() {
+  void onClose() {
     NotificationRepository.instance.readNotif();
     appController.getUserData();
-    super.onInit();
+    super.onClose();
   }
 }

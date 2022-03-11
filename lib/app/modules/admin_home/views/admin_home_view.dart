@@ -41,22 +41,26 @@ class AdminHomeView extends GetView<AdminHomeController> {
                     Feather.bell,
                     color: AppColors.black,
                   ),
-                  Obx(
-                    () => Visibility(
-                      visible: controller.appController.userData!.notification
-                          .where((element) => !element.isRead)
-                          .toList()
-                          .isNotEmpty,
-                      child: Text(
-                        controller.appController.userData!.notification
+                  Obx(() {
+                    if (controller.appController.userData != null) {
+                      return Visibility(
+                        visible: controller.appController.userData!.notification
                             .where((element) => !element.isRead)
                             .toList()
-                            .length
-                            .toString(),
-                        style: const TextStyle(fontSize: 8, color: Colors.pink),
-                      ),
-                    ),
-                  )
+                            .isNotEmpty,
+                        child: Text(
+                          controller.appController.userData!.notification
+                              .where((element) => !element.isRead)
+                              .toList()
+                              .length
+                              .toString(),
+                          style:
+                              const TextStyle(fontSize: 8, color: Colors.pink),
+                        ),
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  })
                 ],
               ),
             ),
@@ -177,7 +181,7 @@ class AdminHomeView extends GetView<AdminHomeController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(Routes.LIST_USER);
+                      controller.routesListUser(0);
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
@@ -208,7 +212,9 @@ class AdminHomeView extends GetView<AdminHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      controller.routesListUser(1);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,
@@ -245,7 +251,9 @@ class AdminHomeView extends GetView<AdminHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      controller.routesListUser(2);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,
@@ -275,7 +283,9 @@ class AdminHomeView extends GetView<AdminHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      controller.routesListUser(3);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,
@@ -312,7 +322,9 @@ class AdminHomeView extends GetView<AdminHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      controller.routesListUser(4);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,

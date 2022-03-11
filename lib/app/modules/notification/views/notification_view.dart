@@ -30,7 +30,8 @@ class NotificationView extends GetView<NotificationController> {
   Widget cardNotif(AppNotification notif) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      color: notif.isRead ? null : Colors.pink,
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      color: notif.isRead ? null : Colors.pink.withOpacity(.1),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

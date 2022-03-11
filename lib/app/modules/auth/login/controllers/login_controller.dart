@@ -9,10 +9,17 @@ import 'package:konselingku/app/widget/general/dialog.dart';
 
 class LoginController extends GetxController {
   final AppController _appController = Get.find();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
   final _showPassword = false.obs;
   get showPassword => _showPassword.value;
+
+  @override
+  void onInit() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    super.onInit();
+  }
 
   @override
   void onClose() {
@@ -30,23 +37,29 @@ class LoginController extends GetxController {
       var result = await _appController.auth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
       await _appController.getUserData();
-      if (_appController.userData!.role == '3') {
-        Get.offAllNamed(Routes.ADMIN_HOME);
-      } else {
-        if (result.user!.emailVerified) {
-          if (_appController.userData!.isAccept) {
-            _appController.getRoutesByRole(_appController.userData!.role);
+      if (_appController.userData != null) {
+        if (_appController.userData!.role == '3') {
+          Get.offAllNamed(Routes.ADMIN_HOME);
+        } else {
+          if (result.user!.emailVerified) {
+            if (_appController.userData!.isAccept) {
+              _appController.getRoutesByRole(_appController.userData!.role);
+            } else {
+              Get.back();
+              Get.snackbar("Oops!", "Pendaftaran belum di setujui Admin",
+                  snackPosition: SnackPosition.BOTTOM,
+                  colorText: Colors.white,
+                  backgroundColor: Colors.red);
+            }
           } else {
             Get.back();
-            Get.snackbar("Oops!", "Pendaftaran belum di setujui Admin",
-                snackPosition: SnackPosition.BOTTOM,
-                colorText: Colors.white,
-                backgroundColor: Colors.red);
+            Get.toNamed(Routes.VERIFIKASI);
           }
-        } else {
-          Get.back();
-          Get.toNamed(Routes.VERIFIKASI);
         }
+      } else {
+        Get.back();
+        Get.snackbar("Oops!",
+            "Akun anda telah di blokir admin, Hubungi admin untuk pemulihan");
       }
     } on FirebaseAuthException catch (e) {
       Get.back();

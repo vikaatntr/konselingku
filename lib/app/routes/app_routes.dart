@@ -24,6 +24,8 @@ abstract class Routes {
   static const REKAP_COUNSELING = _Paths.REKAP_COUNSELING;
   static const HASIL_COUNSELING = _Paths.HASIL_COUNSELING;
   static const GURU_FORM_APPOINTMENT = _Paths.GURU_FORM_APPOINTMENT;
+  static const LIST_USER = _Paths.ADMIN_HOME + _Paths.LIST_USER;
+  static const DETAIL_USER = _Paths.ADMIN_HOME + _Paths.DETAIL_USER;
 }
 
 abstract class _Paths {
@@ -47,4 +49,6 @@ abstract class _Paths {
   static const REKAP_COUNSELING = '/rekap-counseling';
   static const HASIL_COUNSELING = '/hasil-counseling';
   static const GURU_FORM_APPOINTMENT = '/guru-form-appointment';
+  static const LIST_USER = '/list-user';
+  static const DETAIL_USER = '/detail-user';
 }

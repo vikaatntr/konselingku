@@ -1,3 +1,5 @@
+import 'package:konselingku/app/data/model/notification.dart';
+
 class UserData {
   // DataSiswa dataSiswa;
   // DataOrangTua dataOrangTua;
@@ -15,6 +17,8 @@ class UserData {
   String? nip;
   String? emailAnak;
   bool isAccept;
+  String? fcmToken;
+  List<AppNotification> notification;
 
   UserData(
       {required this.email,
@@ -26,7 +30,9 @@ class UserData {
       required this.uid,
       required this.isAccept,
       this.nip,
-      this.emailAnak});
+      this.emailAnak,
+      this.fcmToken,
+      this.notification = const []});
 
   factory UserData.fromMap(Map map) {
     return UserData(
@@ -39,7 +45,15 @@ class UserData {
         uid: map['uid'] ?? '',
         isAccept: map['isAccept'] ?? false,
         nip: map['nip'],
-        emailAnak: map['emailAnak']);
+        emailAnak: map['emailAnak'],
+        fcmToken: map['fcmToken'],
+        notification: map['notification'] == null
+            ? []
+            : (map['notification'] as List)
+                .map((e) => AppNotification.fromMap(e))
+                .toList()
+                .reversed
+                .toList());
   }
 
   toMap() {
@@ -53,7 +67,9 @@ class UserData {
       'uid': uid,
       'nip': nip,
       'emailAnak': emailAnak,
-      'isAccept': isAccept
+      'isAccept': isAccept,
+      'fcmToken': fcmToken,
+      'notification': notification.map((e) => e.toMap()).toList()
     };
   }
 }

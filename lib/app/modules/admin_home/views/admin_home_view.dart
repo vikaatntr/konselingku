@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/modules/admin_home/controllers/admin_home_controller.dart';
 import 'package:konselingku/app/constant/colors.dart';
-import 'package:konselingku/app/modules/admin_home/views/list_user.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
 
 class AdminHomeView extends GetView<AdminHomeController> {
@@ -35,9 +34,34 @@ class AdminHomeView extends GetView<AdminHomeController> {
               onTap: () {
                 Get.toNamed(Routes.NOTIFICATION);
               },
-              child: const Icon(
-                Feather.bell,
-                color: AppColors.black,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  const Icon(
+                    Feather.bell,
+                    color: AppColors.black,
+                  ),
+                  Obx(() {
+                    if (controller.appController.userData != null) {
+                      return Visibility(
+                        visible: controller.appController.userData!.notification
+                            .where((element) => !element.isRead)
+                            .toList()
+                            .isNotEmpty,
+                        child: Text(
+                          controller.appController.userData!.notification
+                              .where((element) => !element.isRead)
+                              .toList()
+                              .length
+                              .toString(),
+                          style:
+                              const TextStyle(fontSize: 8, color: Colors.pink),
+                        ),
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  })
+                ],
               ),
             ),
           )
@@ -157,7 +181,7 @@ class AdminHomeView extends GetView<AdminHomeController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.to(listUser());
+                      controller.routesListUser(0);
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
@@ -188,7 +212,9 @@ class AdminHomeView extends GetView<AdminHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      controller.routesListUser(1);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,
@@ -225,7 +251,9 @@ class AdminHomeView extends GetView<AdminHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      controller.routesListUser(2);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,
@@ -255,7 +283,9 @@ class AdminHomeView extends GetView<AdminHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      controller.routesListUser(3);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,
@@ -292,7 +322,9 @@ class AdminHomeView extends GetView<AdminHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      controller.routesListUser(4);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,

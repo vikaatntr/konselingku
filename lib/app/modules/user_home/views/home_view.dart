@@ -42,9 +42,19 @@ class HomeView extends GetView<HomeController> {
               onTap: () {
                 Get.toNamed(Routes.NOTIFICATION);
               },
-              child: const Icon(
-                Feather.bell,
-                color: AppColors.black,
+              child: Stack(
+                children: [
+                  const Icon(
+                    Feather.bell,
+                    color: AppColors.black,
+                  ),
+                  Positioned(
+                      child: Container(
+                    height: 8,
+                    width: 8,
+                    color: Colors.red,
+                  ))
+                ],
               ),
             ),
           )

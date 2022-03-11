@@ -24,7 +24,20 @@ class VerifikasiController extends GetxController {
     await _appController.user!.reload();
     if (_appController.user!.emailVerified) {
       isReload = false;
-      Get.offAllNamed(Routes.USER_HOME);
+      await _appController.getUserData();
+      switch (_appController.userData!.role) {
+        case "0":
+          Get.offAllNamed(Routes.USER_HOME);
+          break;
+        case "1":
+          Get.until((route) => Get.currentRoute == Routes.LOGIN);
+          break;
+        case "2":
+          Get.until((route) => Get.currentRoute == Routes.LOGIN);
+          break;
+        default:
+          Get.until((route) => Get.currentRoute == Routes.LOGIN);
+      }
     } else {
       log("reload user : " + _appController.user!.emailVerified.toString());
       if (isReload) {

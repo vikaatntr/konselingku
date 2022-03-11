@@ -61,4 +61,44 @@ class UserServices {
       return null;
     }
   }
+
+  Future<List<UserData>> getListUser() async {
+    try {
+      var res =
+          await _firebaseFirestore.collection(CollectionPath.userData).get();
+      if (res.size > 0) {
+        return res.docs.map((e) => UserData.fromMap(e.data())).toList();
+      } else {
+        return [];
+      }
+    } catch (e, stackTrace) {
+      log(e.toString(), stackTrace: stackTrace);
+      return [];
+    }
+  }
+
+  Future<void> saveFCMToken(String token, String uid) async {
+    await FirebaseFirestore.instance
+        .collection(CollectionPath.userData)
+        .doc(uid)
+        .update({
+      'fcmToken': token,
+    });
+  }
+
+  Future<void> acceptAccount(String uid) async {
+    await FirebaseFirestore.instance
+        .collection(CollectionPath.userData)
+        .doc(uid)
+        .update({
+      'isAccept': true,
+    });
+  }
+
+  Future<void> blockAccount(String uid) async {
+    await FirebaseFirestore.instance
+        .collection(CollectionPath.userData)
+        .doc(uid)
+        .delete();
+  }
 }

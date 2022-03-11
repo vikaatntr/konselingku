@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:konselingku/app/modules/admin_home/views/detail_user.dart';
+import 'package:konselingku/app/modules/admin_home/views/list_user.dart';
 
 import '../modules/admin_home/bindings/admin_home_binding.dart';
 import '../modules/admin_home/views/admin_home_view.dart';
@@ -95,10 +97,16 @@ class AppPages {
       binding: VerifikasiBinding(),
     ),
     GetPage(
-      name: _Paths.ADMIN_HOME,
-      page: () => const AdminHomeView(),
-      binding: AdminHomeBinding(),
-    ),
+        name: _Paths.ADMIN_HOME,
+        page: () => const AdminHomeView(),
+        binding: AdminHomeBinding(),
+        children: [
+          GetPage(
+            name: _Paths.LIST_USER,
+            page: () => const ListUser(),
+          ),
+          GetPage(name: _Paths.DETAIL_USER, page: () => DetailUser())
+        ]),
     GetPage(
       name: _Paths.DATA_PRIBADI,
       page: () => const DataPribadiView(),

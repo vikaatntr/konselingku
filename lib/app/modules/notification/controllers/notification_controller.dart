@@ -1,12 +1,13 @@
 import 'package:get/get.dart';
+import 'package:konselingku/app/data/repository/notification_repository.dart';
+import 'package:konselingku/app/globals/controllers/app_controller.dart';
 
 class NotificationController extends GetxController {
-  // ignore: todo
-  //TODO: Implement NotificationController
-
-  final count = 0.obs;
-
+  final AppController appController = Get.find();
   @override
-  void onClose() {}
-  void increment() => count.value++;
+  void onClose() {
+    NotificationRepository.instance.readNotif();
+    appController.getUserData();
+    super.onClose();
+  }
 }

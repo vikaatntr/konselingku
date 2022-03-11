@@ -3,10 +3,14 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
-import 'package:konselingku/app/modules/admin_home/views/detail_user.dart';
+import 'package:konselingku/app/data/model/user.dart';
+import 'package:konselingku/app/modules/admin_home/controllers/admin_home_controller.dart';
+import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
-class listUser extends StatelessWidget {
+class ListUser extends GetView<AdminHomeController> {
+  const ListUser({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,36 +25,30 @@ class listUser extends StatelessWidget {
       child: Form(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _listUser(),
-        ],
+        children: [for (var item in controller.listUser) _listUser(item)],
       )),
     );
   }
 
-  Widget _listUser() {
+  Widget _listUser(UserData user) {
     return Column(
       children: [
-        Column(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Text(
-                  "Vika Kusuma Dyah Tantri",
-                  style: GoogleFonts.poppins(),
-                ),
-                SizedBox(width: 180),
-                GestureDetector(
-                    onTap: () {
-                      Get.to(detailUser());
-                    },
-                    child: Icon(Feather.chevron_right))
-              ],
+            Text(
+              user.namaLengkap,
+              style: GoogleFonts.poppins(),
             ),
+            GestureDetector(
+                onTap: () {
+                  Get.toNamed(Routes.DETAIL_USER, arguments: user);
+                },
+                child: const Icon(Feather.chevron_right))
           ],
         ),
-        SizedBox(height: 10),
-        Divider(
+        const SizedBox(height: 10),
+        const Divider(
           height: 5,
           color: AppColors.grey,
         )

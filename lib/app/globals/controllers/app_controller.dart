@@ -7,7 +7,10 @@ import 'package:konselingku/app/routes/app_pages.dart';
 class AppController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? get user => auth.currentUser;
-  UserData? userData;
+  final Rx<UserData?> _userData = Rx(null);
+  UserData? get userData => _userData.value;
+  set userData(UserData? val) => _userData.value = val;
+
   bool get isLogin => user != null;
 
   void getRoutesByRole(String role) {

@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
 import 'package:konselingku/app/data/model/artikel.dart';
-import 'package:konselingku/app/modules/poin_pelanggaran/views/hasil_poin_pelanggaran.dart';
 import 'package:konselingku/app/modules/poin_pelanggaran/views/poin_pelanggaran_guru.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -294,7 +293,7 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(Routes.COUNSELING_APPOINTMENT);
+                      Get.toNamed(Routes.HOME_APPOINTMENT);
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),

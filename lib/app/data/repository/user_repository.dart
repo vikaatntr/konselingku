@@ -16,6 +16,7 @@ class UserRepository {
 
   UserData? user;
   UserData? admin;
+  List<UserData>? listUser;
 
   Future<bool> createUser(UserData userData) async {
     var result = await UserServices.instance.createUser(userData);
@@ -52,7 +53,15 @@ class UserRepository {
   Future<void> acceptAccount(String uid) =>
       UserServices.instance.acceptAccount(uid);
 
-  Future<List<UserData>> getListUser() => UserServices.instance.getListUser();
+  Future<List<UserData>> getListUser() async {
+    if (listUser == null) {
+      listUser = [];
+    } else {
+      listUser!.clear();
+    }
+    listUser!.addAll(await UserServices.instance.getListUser());
+    return listUser!;
+  }
 
   Future<void> logOut() async {
     await _appController.auth.signOut();

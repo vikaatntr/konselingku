@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
 import 'package:konselingku/app/data/model/artikel.dart';
-import 'package:konselingku/app/modules/poin_pelanggaran/views/hasil_poin_pelanggaran.dart';
+import 'package:konselingku/app/data/repository/counseling_repository.dart';
 import 'package:konselingku/app/modules/poin_pelanggaran/views/poin_pelanggaran_guru.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -43,17 +43,32 @@ class HomeView extends GetView<HomeController> {
                 Get.toNamed(Routes.NOTIFICATION);
               },
               child: Stack(
+                alignment: Alignment.center,
                 children: [
                   const Icon(
                     Feather.bell,
                     color: AppColors.black,
                   ),
-                  Positioned(
-                      child: Container(
-                    height: 8,
-                    width: 8,
-                    color: Colors.red,
-                  ))
+                  Obx(() {
+                    if (controller.user != null) {
+                      return Visibility(
+                        visible: controller.user!.notification
+                            .where((element) => !element.isRead)
+                            .toList()
+                            .isNotEmpty,
+                        child: Text(
+                          controller.user!.notification
+                              .where((element) => !element.isRead)
+                              .toList()
+                              .length
+                              .toString(),
+                          style:
+                              const TextStyle(fontSize: 8, color: Colors.pink),
+                        ),
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  })
                 ],
               ),
             ),
@@ -201,10 +216,13 @@ class HomeView extends GetView<HomeController> {
                                           color: AppColors.blue,
                                           fontSize: 12),
                                     ),
-                                    Text(
-                                      "5 kali",
-                                      style: GoogleFonts.poppins(
-                                          color: AppColors.blue, fontSize: 12),
+                                    Obx(
+                                      () => Text(
+                                        "${CounselingRepository.instance.listAllCounseling.where((e) => e.emailSiswa == controller.user!.email && e.status == "Diterima").length} kali",
+                                        style: GoogleFonts.poppins(
+                                            color: AppColors.blue,
+                                            fontSize: 12),
+                                      ),
                                     ),
                                     Text(
                                       "Bimbingan Konseling",
@@ -294,7 +312,7 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(Routes.COUNSELING_APPOINTMENT);
+                      Get.toNamed(Routes.HOME_APPOINTMENT);
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),

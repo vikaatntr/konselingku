@@ -13,7 +13,6 @@ class FormAppointmentView extends GetView<FormAppointmentController> {
   const FormAppointmentView({Key? key}) : super(key: key);
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(title: 'Janji Konseling'),
@@ -30,6 +29,8 @@ class FormAppointmentView extends GetView<FormAppointmentController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            cardTeacher(),
+            const SizedBox(height: 20),
             _bidangInput(),
             const SizedBox(height: 20),
             _dateInput(),
@@ -48,6 +49,7 @@ class FormAppointmentView extends GetView<FormAppointmentController> {
   Widget _bidangInput() {
     //dropdown bidang
     return formInput(
+        controller: controller.bidangController,
         title: "Permasalahan bidang apa yang akan dikonselingkan",
         placeholder: "Pilih permasalahan di bidang apa",
         inputType: TextInputType.text,
@@ -63,6 +65,7 @@ class FormAppointmentView extends GetView<FormAppointmentController> {
   Widget _dateInput() {
     //pilih tanggal
     return formInput(
+        controller: controller.dateController,
         title: "Tanggal pelaksanaan konseling",
         placeholder: "Pilih tanggal",
         inputType: TextInputType.text,
@@ -78,6 +81,7 @@ class FormAppointmentView extends GetView<FormAppointmentController> {
   Widget _timeInput() {
     // pilih waktu
     return formInput(
+        controller: controller.timeController,
         title: "Waktu",
         placeholder: "Pilih waktu",
         inputType: TextInputType.text,
@@ -92,6 +96,7 @@ class FormAppointmentView extends GetView<FormAppointmentController> {
 
   Widget _descriptionInput() {
     return formInput(
+        controller: controller.descriptionController,
         title: "Deskripsi permasalahan",
         placeholder: "Masukkan deskripsi permasalahanmu",
         inputType: TextInputType.text,
@@ -112,17 +117,71 @@ class FormAppointmentView extends GetView<FormAppointmentController> {
               ? CupertinoButton.filled(
                   disabledColor: AppColors.primaryColor,
                   borderRadius: BorderRadius.circular(12),
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.addCounseling();
+                  },
                   child: Text("Lanjutkan",
                       style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
                 )
               : ElevatedButton(
                   style:
                       ElevatedButton.styleFrom(primary: AppColors.primaryColor),
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.addCounseling();
+                  },
                   child: Text("Lanjutkan",
                       style:
                           GoogleFonts.poppins(fontWeight: FontWeight.bold)))),
+    );
+  }
+
+  Widget cardTeacher() {
+    var guru = controller.guru;
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.all(12),
+      height: 180,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+              offset: const Offset(0, 0),
+              spreadRadius: 2,
+              blurRadius: 5,
+              color: Colors.grey.withOpacity(0.5),
+            )
+          ],
+          borderRadius: const BorderRadius.all(Radius.circular(12))),
+      child: Row(
+        children: [
+          guru.photoUrl == ""
+              ? const SizedBox.shrink()
+              : Image.network(guru.photoUrl),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  guru.namaLengkap,
+                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "Guru Bimbingan Konseling",
+                  style: GoogleFonts.poppins(),
+                ),
+                Text(
+                  "NIP. ${guru.nip}",
+                  style: GoogleFonts.poppins(),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

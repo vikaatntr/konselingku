@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:konselingku/app/data/model/counseling.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 import 'package:konselingku/app/widget/general/form_input.dart';
 
 import '../controllers/hasil_counseling_controller.dart';
 
 class HasilCounselingView extends GetView<HasilCounselingController> {
-  const HasilCounselingView({Key? key}) : super(key: key);
+  HasilCounselingView({Key? key}) : super(key: key);
+
+  final Counseling counseling = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +45,7 @@ class HasilCounselingView extends GetView<HasilCounselingController> {
   Widget _bidangInput() {
     //dropdown bidang
     return formInput(
+        intialValue: counseling.bidang,
         title: "Permasalahan bidang apa yang akan dikonselingkan",
         placeholder: "Pilih permasalahan di bidang apa",
         inputType: TextInputType.text,
@@ -57,6 +61,7 @@ class HasilCounselingView extends GetView<HasilCounselingController> {
   Widget _dateInput() {
     //pilih tanggal
     return formInput(
+        intialValue: counseling.date,
         title: "Tanggal pelaksanaan konseling",
         placeholder: "Pilih tanggal",
         inputType: TextInputType.text,
@@ -73,6 +78,7 @@ class HasilCounselingView extends GetView<HasilCounselingController> {
     // pilih waktu
     return formInput(
         title: "Waktu",
+        intialValue: counseling.jam,
         placeholder: "Pilih waktu",
         inputType: TextInputType.text,
         inputAction: TextInputAction.next,
@@ -87,6 +93,7 @@ class HasilCounselingView extends GetView<HasilCounselingController> {
   Widget _descriptionInput() {
     return formInput(
         title: "Deskripsi permasalahan",
+        intialValue: counseling.description,
         placeholder: "Masukkan deskripsi permasalahanmu",
         inputType: TextInputType.text,
         inputAction: TextInputAction.next,

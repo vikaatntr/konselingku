@@ -9,6 +9,7 @@ import 'package:konselingku/app/data/model/artikel.dart';
 import 'package:konselingku/app/data/model/nomor_penting.dart';
 import 'package:konselingku/app/data/model/user.dart';
 import 'package:konselingku/app/data/repository/artikel_repository.dart';
+import 'package:konselingku/app/data/repository/counseling_repository.dart';
 import 'package:konselingku/app/data/repository/nomor_penting_repository.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';
 
@@ -93,7 +94,8 @@ class HomeController extends GetxController {
     await Future.wait([
       getUserData(refresh: refresh),
       getArtikel(refresh: refresh),
-      getNomorPenting(refresh: refresh)
+      getNomorPenting(refresh: refresh),
+      CounselingRepository.instance.getCounseling()
     ]);
     filterArtikel = "Terbaru";
   }

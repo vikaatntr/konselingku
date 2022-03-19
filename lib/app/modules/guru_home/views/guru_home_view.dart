@@ -33,10 +33,37 @@ class GuruHomeView extends GetView<GuruHomeController> {
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: GestureDetector(
-              onTap: () {},
-              child: const Icon(
-                Feather.bell,
-                color: AppColors.black,
+              onTap: () {
+                Get.toNamed(Routes.NOTIFICATION);
+              },
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  const Icon(
+                    Feather.bell,
+                    color: AppColors.black,
+                  ),
+                  Obx(() {
+                    if (controller.appController.userData != null) {
+                      return Visibility(
+                        visible: controller.appController.userData!.notification
+                            .where((element) => !element.isRead)
+                            .toList()
+                            .isNotEmpty,
+                        child: Text(
+                          controller.appController.userData!.notification
+                              .where((element) => !element.isRead)
+                              .toList()
+                              .length
+                              .toString(),
+                          style:
+                              const TextStyle(fontSize: 8, color: Colors.pink),
+                        ),
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  })
+                ],
               ),
             ),
           )

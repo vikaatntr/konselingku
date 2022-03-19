@@ -18,7 +18,7 @@ class NotificationView extends GetView<NotificationController> {
   }
 
   Widget _body() {
-    return Scrollbar(
+    return SingleChildScrollView(
         child: Column(
       children: [
         for (var item in controller.appController.userData!.notification)

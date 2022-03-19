@@ -81,7 +81,7 @@ class FormAppointmentView extends GetView<FormAppointmentController> {
   Widget _timeInput() {
     // pilih waktu
     return formInput(
-        controller: controller.dateController,
+        controller: controller.timeController,
         title: "Waktu",
         placeholder: "Pilih waktu",
         inputType: TextInputType.text,
@@ -117,14 +117,18 @@ class FormAppointmentView extends GetView<FormAppointmentController> {
               ? CupertinoButton.filled(
                   disabledColor: AppColors.primaryColor,
                   borderRadius: BorderRadius.circular(12),
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.addCounseling();
+                  },
                   child: Text("Lanjutkan",
                       style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
                 )
               : ElevatedButton(
                   style:
                       ElevatedButton.styleFrom(primary: AppColors.primaryColor),
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.addCounseling();
+                  },
                   child: Text("Lanjutkan",
                       style:
                           GoogleFonts.poppins(fontWeight: FontWeight.bold)))),

@@ -144,7 +144,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.HASIL_COUNSELING,
-      page: () => const HasilCounselingView(),
+      page: () => HasilCounselingView(),
       binding: HasilCounselingBinding(),
     ),
     GetPage(

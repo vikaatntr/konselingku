@@ -43,8 +43,7 @@ class UserRepository {
   }
 
   Future<UserData?> getAnotherUser(String email) async {
-    user = await UserServices.instance.getAnotherUser(email);
-    return user;
+    return await UserServices.instance.getAnotherUser(email);
   }
 
   Future<void> blockAccount(String uid) =>

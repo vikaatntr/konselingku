@@ -26,6 +26,9 @@ abstract class Routes {
   static const GURU_FORM_APPOINTMENT = _Paths.GURU_FORM_APPOINTMENT;
   static const LIST_USER = _Paths.ADMIN_HOME + _Paths.LIST_USER;
   static const DETAIL_USER = _Paths.ADMIN_HOME + _Paths.DETAIL_USER;
+  static const GURU_HOME_APPOINTMENT = _Paths.GURU_HOME_APPOINTMENT;
+  static const GURU_REKAP_COUNSELING = _Paths.GURU_REKAP_COUNSELING;
+  static const GURU_COUNSELING_APPOINTMENT = _Paths.GURU_COUNSELING_APPOINTMENT;
 }
 
 abstract class _Paths {
@@ -51,4 +54,7 @@ abstract class _Paths {
   static const GURU_FORM_APPOINTMENT = '/guru-form-appointment';
   static const LIST_USER = '/list-user';
   static const DETAIL_USER = '/detail-user';
+  static const GURU_HOME_APPOINTMENT = '/guru-home-appointment';
+  static const GURU_REKAP_COUNSELING = '/guru-rekap-counseling';
+  static const GURU_COUNSELING_APPOINTMENT = '/guru-counseling-appointment';
 }

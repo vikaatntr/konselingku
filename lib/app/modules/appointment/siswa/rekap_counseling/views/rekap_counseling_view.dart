@@ -23,25 +23,27 @@ class RekapCounselingView extends GetView<RekapCounselingController> {
 
   Widget _body() {
     return controller.obx(
-      (state) => SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
-        child: Form(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              for (var item in state!)
-                Column(
+      (state) => state != null
+          ? SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
+              child: Form(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _counselingStatus(item),
-                    const SizedBox(
-                      height: 20,
-                    )
+                    for (var item in state)
+                      Column(
+                        children: [
+                          _counselingStatus(item),
+                          const SizedBox(
+                            height: 20,
+                          )
+                        ],
+                      )
                   ],
-                )
-            ],
-          ),
-        ),
-      ),
+                ),
+              ),
+            )
+          : const SizedBox.shrink(),
       onEmpty: const Center(
         child: Text("Anda belum melakukan konseling"),
       ),

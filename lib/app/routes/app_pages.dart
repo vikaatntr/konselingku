@@ -1,21 +1,27 @@
 import 'package:get/get.dart';
-import 'package:konselingku/app/modules/admin_home/views/detail_user.dart';
-import 'package:konselingku/app/modules/admin_home/views/list_user.dart';
 
 import '../modules/admin_home/bindings/admin_home_binding.dart';
 import '../modules/admin_home/views/admin_home_view.dart';
-import '../modules/appointment/counseling_appointment/bindings/counseling_appointment_binding.dart';
-import '../modules/appointment/counseling_appointment/views/counseling_appointment_view.dart';
-import '../modules/appointment/form_appointment/bindings/form_appointment_binding.dart';
-import '../modules/appointment/form_appointment/views/form_appointment_view.dart';
-import '../modules/appointment/guru_form_appointment/bindings/guru_form_appointment_binding.dart';
-import '../modules/appointment/guru_form_appointment/views/guru_form_appointment_view.dart';
-import '../modules/appointment/hasil_counseling/bindings/hasil_counseling_binding.dart';
-import '../modules/appointment/hasil_counseling/views/hasil_counseling_view.dart';
-import '../modules/appointment/home_appointment/bindings/home_appointment_binding.dart';
-import '../modules/appointment/home_appointment/views/home_appointment_view.dart';
-import '../modules/appointment/rekap_counseling/bindings/rekap_counseling_binding.dart';
-import '../modules/appointment/rekap_counseling/views/rekap_counseling_view.dart';
+import '../modules/admin_home/views/detail_user.dart';
+import '../modules/admin_home/views/list_user.dart';
+import '../modules/appointment/guru/guru_counseling_appointment/bindings/guru_counseling_appointment_binding.dart';
+import '../modules/appointment/guru/guru_counseling_appointment/views/guru_counseling_appointment_view.dart';
+import '../modules/appointment/guru/guru_form_appointment/bindings/guru_form_appointment_binding.dart';
+import '../modules/appointment/guru/guru_form_appointment/views/guru_form_appointment_view.dart';
+import '../modules/appointment/guru/guru_home_appointment/bindings/guru_home_appointment_binding.dart';
+import '../modules/appointment/guru/guru_home_appointment/views/guru_home_appointment_view.dart';
+import '../modules/appointment/guru/guru_rekap_counseling/bindings/guru_rekap_counseling_binding.dart';
+import '../modules/appointment/guru/guru_rekap_counseling/views/guru_rekap_counseling_view.dart';
+import '../modules/appointment/siswa/counseling_appointment/bindings/counseling_appointment_binding.dart';
+import '../modules/appointment/siswa/counseling_appointment/views/counseling_appointment_view.dart';
+import '../modules/appointment/siswa/form_appointment/bindings/form_appointment_binding.dart';
+import '../modules/appointment/siswa/form_appointment/views/form_appointment_view.dart';
+import '../modules/appointment/siswa/hasil_counseling/bindings/hasil_counseling_binding.dart';
+import '../modules/appointment/siswa/hasil_counseling/views/hasil_counseling_view.dart';
+import '../modules/appointment/siswa/home_appointment/bindings/home_appointment_binding.dart';
+import '../modules/appointment/siswa/home_appointment/views/home_appointment_view.dart';
+import '../modules/appointment/siswa/rekap_counseling/bindings/rekap_counseling_binding.dart';
+import '../modules/appointment/siswa/rekap_counseling/views/rekap_counseling_view.dart';
 import '../modules/auth/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/auth/forgot_password/views/forgot_password_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
@@ -149,8 +155,23 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.GURU_FORM_APPOINTMENT,
-      page: () => const GuruFormAppointmentView(),
+      page: () => GuruFormAppointmentView(),
       binding: GuruFormAppointmentBinding(),
+    ),
+    GetPage(
+      name: _Paths.GURU_HOME_APPOINTMENT,
+      page: () => GuruHomeAppointmentView(),
+      binding: GuruHomeAppointmentBinding(),
+    ),
+    GetPage(
+      name: _Paths.GURU_REKAP_COUNSELING,
+      page: () => GuruRekapCounselingView(),
+      binding: GuruRekapCounselingBinding(),
+    ),
+    GetPage(
+      name: _Paths.GURU_COUNSELING_APPOINTMENT,
+      page: () => GuruCounselingAppointmentView(),
+      binding: GuruCounselingAppointmentBinding(),
     ),
   ];
 }

@@ -14,15 +14,50 @@ class CounselingRepository {
 
   RxList<Counseling> listAllCounseling = RxList();
 
-  Future<void> addCounseling({required Counseling counseling}) async {
+  Future<void> addCounseling(
+      {required Counseling counseling, bool fromGuru = false}) async {
     try {
       await CounselingServices.instance.addCounseling(counseling: counseling);
-      var guru =
-          (await UserRepository.instance.getAnotherUser(counseling.emailGuru))!;
+      var user = (await UserRepository.instance.getAnotherUser(
+          fromGuru ? counseling.emailSiswa : counseling.emailGuru))!;
       await NotificationRepository.instance.sendNotif(
-          to: guru,
-          title: counseling.bidang,
+          to: user,
+          title: "KONSELING : " + counseling.bidang,
           message: counseling.description,
+          from: counseling.emailSiswa,
+          category: "Counseling");
+    } catch (e, stackTrace) {
+      log(e.toString(), stackTrace: stackTrace);
+    }
+  }
+
+  Future<void> accCounseling({required Counseling counseling}) async {
+    try {
+      await CounselingServices.instance.accCounseling(keys: counseling.keys);
+      var user = (await UserRepository.instance
+          .getAnotherUser(counseling.emailSiswa))!;
+      await NotificationRepository.instance.sendNotif(
+          to: user,
+          title: "KONSELING : " + counseling.bidang + "Disetujui",
+          message: "[Konseling Disetujui] " + counseling.description,
+          from: counseling.emailSiswa,
+          category: "Counseling");
+    } catch (e, stackTrace) {
+      log(e.toString(), stackTrace: stackTrace);
+    }
+  }
+
+  Future<void> tolakCounseling({
+    required Counseling counseling,
+  }) async {
+    try {
+      await CounselingServices.instance.tolakCounseling(keys: counseling.keys);
+      var user = (await UserRepository.instance
+          .getAnotherUser(counseling.emailSiswa))!;
+      await NotificationRepository.instance.sendNotif(
+          to: user,
+          title: "KONSELING : " + counseling.bidang + "Ditolak",
+          message: "[Konseling Ditolak] " + counseling.description,
           from: counseling.emailSiswa,
           category: "Counseling");
     } catch (e, stackTrace) {

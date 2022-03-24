@@ -6,6 +6,7 @@ class Counseling {
   String jam;
   String description;
   String status;
+  String keys;
 
   Counseling(
       {required this.bidang,
@@ -14,7 +15,8 @@ class Counseling {
       required this.jam,
       required this.emailGuru,
       required this.emailSiswa,
-      this.status = "Menunggu"});
+      this.status = "Menunggu",
+      this.keys = ""});
 
   factory Counseling.fromMap(Map map) {
     return Counseling(

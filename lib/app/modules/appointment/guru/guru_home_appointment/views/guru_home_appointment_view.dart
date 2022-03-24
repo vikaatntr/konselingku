@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
+import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
+import '../controllers/guru_home_appointment_controller.dart';
 
-class HomeAppointmentViewGuru extends StatelessWidget {
-  const HomeAppointmentViewGuru({ Key? key }) : super(key: key);
+class GuruHomeAppointmentView extends GetView<GuruHomeAppointmentController> {
+  const GuruHomeAppointmentView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,8 @@ class HomeAppointmentViewGuru extends StatelessWidget {
             const SizedBox(height: 20),
             _contentBox2(),
             const SizedBox(height: 20),
-            _contentBox3()          ],
+            _contentBox3()
+          ],
         ),
       )),
     );
@@ -36,7 +40,9 @@ class HomeAppointmentViewGuru extends StatelessWidget {
 
   Widget _contentBox1() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.GURU_COUNSELING_APPOINTMENT);
+      },
       child: Container(
         height: 90,
         width: Get.width,
@@ -66,7 +72,9 @@ class HomeAppointmentViewGuru extends StatelessWidget {
 
   Widget _contentBox2() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.GURU_REKAP_COUNSELING, arguments: "");
+      },
       child: Container(
         height: 90,
         width: Get.width,
@@ -96,7 +104,9 @@ class HomeAppointmentViewGuru extends StatelessWidget {
 
   Widget _contentBox3() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.GURU_REKAP_COUNSELING);
+      },
       child: Container(
         height: 90,
         width: Get.width,

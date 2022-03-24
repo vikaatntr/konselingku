@@ -23,6 +23,20 @@ class CounselingServices {
         .add(counseling.toMap());
   }
 
+  Future<void> accCounseling({required String keys}) async {
+    await _firebaseFirestore
+        .collection(CollectionPath.counseling)
+        .doc(keys)
+        .update({'status': "Diterima"});
+  }
+
+  Future<void> tolakCounseling({required String keys}) async {
+    await _firebaseFirestore
+        .collection(CollectionPath.counseling)
+        .doc(keys)
+        .update({'status': "Ditolak"});
+  }
+
   Future<List<Counseling>> getCounseling(UserData user) async {
     try {
       if (user.role == "0") {
@@ -30,13 +44,17 @@ class CounselingServices {
             .collection(CollectionPath.counseling)
             .where('emailSiswa', isEqualTo: user.email)
             .get();
-        return result.docs.map((e) => Counseling.fromMap(e.data())).toList();
+        return result.docs
+            .map((e) => Counseling.fromMap(e.data())..keys = e.id)
+            .toList();
       } else {
         var result = await _firebaseFirestore
             .collection(CollectionPath.counseling)
             .where('emailGuru', isEqualTo: user.email)
             .get();
-        return result.docs.map((e) => Counseling.fromMap(e.data())).toList();
+        return result.docs
+            .map((e) => Counseling.fromMap(e.data())..keys = e.id)
+            .toList();
       }
     } catch (e, stackTrace) {
       log(e.toString(), stackTrace: stackTrace);

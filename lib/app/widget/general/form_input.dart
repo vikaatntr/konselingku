@@ -13,7 +13,8 @@ Widget formInput(
     bool secureText = false,
     bool enabled = true,
     TextEditingController? controller,
-    required validator}) {
+    required validator,
+    Function()? onTap}) {
   return Column(
     children: [
       Container(
@@ -35,7 +36,8 @@ Widget formInput(
         keyboardType: inputType,
         textInputAction: inputAction,
         obscureText: secureText,
-        enabled: enabled,
+        readOnly: !enabled,
+        onTap: onTap,
         decoration: InputDecoration(
             hintText: placeholder,
             hintStyle: GoogleFonts.poppins(),

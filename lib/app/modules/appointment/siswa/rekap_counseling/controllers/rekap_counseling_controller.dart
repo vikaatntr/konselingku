@@ -5,7 +5,7 @@ import 'package:konselingku/app/data/repository/counseling_repository.dart';
 class RekapCounselingController extends GetxController
     with StateMixin<List<Counseling>> {
   @override
-  void onInit() {
+  void onReady() {
     change(null, status: RxStatus.loading());
     try {
       CounselingRepository.instance.getCounseling().then((value) {
@@ -18,6 +18,6 @@ class RekapCounselingController extends GetxController
     } catch (e) {
       change(null, status: RxStatus.error(e.toString()));
     }
-    super.onInit();
+    super.onReady();
   }
 }

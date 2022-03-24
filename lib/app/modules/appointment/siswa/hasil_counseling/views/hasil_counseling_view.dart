@@ -45,6 +45,7 @@ class HasilCounselingView extends GetView<HasilCounselingController> {
   Widget _bidangInput() {
     //dropdown bidang
     return formInput(
+        enabled: false,
         intialValue: counseling.bidang,
         title: "Permasalahan bidang apa yang akan dikonselingkan",
         placeholder: "Pilih permasalahan di bidang apa",
@@ -61,6 +62,7 @@ class HasilCounselingView extends GetView<HasilCounselingController> {
   Widget _dateInput() {
     //pilih tanggal
     return formInput(
+        enabled: false,
         intialValue: counseling.date,
         title: "Tanggal pelaksanaan konseling",
         placeholder: "Pilih tanggal",
@@ -77,6 +79,7 @@ class HasilCounselingView extends GetView<HasilCounselingController> {
   Widget _timeInput() {
     // pilih waktu
     return formInput(
+        enabled: false,
         title: "Waktu",
         intialValue: counseling.jam,
         placeholder: "Pilih waktu",
@@ -92,6 +95,7 @@ class HasilCounselingView extends GetView<HasilCounselingController> {
 
   Widget _descriptionInput() {
     return formInput(
+        enabled: false,
         title: "Deskripsi permasalahan",
         intialValue: counseling.description,
         placeholder: "Masukkan deskripsi permasalahanmu",

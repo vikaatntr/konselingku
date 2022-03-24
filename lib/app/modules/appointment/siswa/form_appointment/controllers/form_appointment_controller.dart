@@ -50,6 +50,7 @@ class FormAppointmentController extends GetxController {
               emailSiswa: UserRepository.instance.user!.email));
       Get.back();
       Get.back();
+      Get.back();
       Get.snackbar("Success!",
           "Berhasil mengirimkan jadwal ke Pak/Bu ${guru.namaPanggilan}");
     } catch (e) {

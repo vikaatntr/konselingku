@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
 import 'package:konselingku/app/modules/kuesioner/controllers/kuesioner_controller.dart';
+import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
 class InformasiKuesionerView extends GetView<KuesionerController> {
@@ -82,7 +83,9 @@ class InformasiKuesionerView extends GetView<KuesionerController> {
         width: 200,
         height: 40,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed(Routes.KUESIONER);
+          },
           child: Text(
             "Setuju dan Lanjutkan",
             style: GoogleFonts.poppins(fontWeight: FontWeight.bold),

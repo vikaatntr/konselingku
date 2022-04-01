@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:konselingku/app/modules/kuesioner/views/informasi_kuesioner_view.dart';
 
 import '../modules/admin_home/bindings/admin_home_binding.dart';
 import '../modules/admin_home/views/admin_home_view.dart';
@@ -84,8 +85,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.KUESIONER,
-      page: () => const KuesionerView(),
+      page: () => KuesionerView(),
       binding: KuesionerBinding(),
+    ),
+    GetPage(
+      name: _Paths.INFORMASIKUESIONER,
+      page: () => const InformasiKuesionerView(),
     ),
     GetPage(
       name: _Paths.COUNSELING_APPOINTMENT,

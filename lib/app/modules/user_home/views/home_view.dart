@@ -343,7 +343,7 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(Routes.KUESIONER);
+                      Get.toNamed(Routes.INFORMASIKUESIONER);
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),

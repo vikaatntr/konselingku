@@ -23,10 +23,10 @@ PreferredSizeWidget appBar(
         ? customLeading ??
             GestureDetector(
               onTap: () {
-                Get.toNamed(Routes.NOTIFICATION);
+                Get.back();
               },
               child: const Icon(
-                Feather.bell,
+                Feather.chevron_left,
                 size: 32,
                 color: AppColors.black,
               ),

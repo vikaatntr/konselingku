@@ -99,8 +99,8 @@ class RekapCounselingView extends GetView<RekapCounselingController> {
                                     color: counseling.status == "Menunggu"
                                         ? AppColors.kYellow
                                         : counseling.status == "Ditolak"
-                                            ? AppColors.kRed
-                                            : AppColors.green),
+                                            ? AppColors.red
+                                            : AppColors.kGreen),
                               )
                             ],
                           )

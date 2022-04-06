@@ -16,6 +16,7 @@ class KuesionerRepository {
   KuesionerRepository._();
 
   Kuesioner? kuesioner;
+  List<Kuesioner>? listKuesioner;
 
   Future<Kuesioner?> getKuesioner() async {
     if (kuesioner != null) {

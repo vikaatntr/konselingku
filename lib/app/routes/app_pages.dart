@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:konselingku/app/modules/kuesioner/views/hasil_kuesioner.dart';
 import 'package:konselingku/app/modules/kuesioner/views/informasi_kuesioner_view.dart';
+import 'package:konselingku/app/modules/kuesioner/views/list_kuesioner.dart';
 
 import '../modules/admin_home/bindings/admin_home_binding.dart';
 import '../modules/admin_home/views/admin_home_view.dart';
@@ -36,6 +38,7 @@ import '../modules/data_pribadi/views/data_pribadi_view.dart';
 import '../modules/guru_home/bindings/guru_home_binding.dart';
 import '../modules/guru_home/views/guru_home_view.dart';
 import '../modules/kuesioner/bindings/kuesioner_binding.dart';
+import '../modules/kuesioner/bindings/list_kuesioner_binding.dart';
 import '../modules/kuesioner/views/kuesioner_view.dart';
 import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/views/notification_view.dart';
@@ -85,12 +88,17 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.KUESIONER,
-      page: () => KuesionerView(),
+      page: () => const KuesionerView(),
+    ),
+    GetPage(
+      name: _Paths.HASILKUESIONER,
+      page: () => const HasilKuesioner(),
       binding: KuesionerBinding(),
     ),
     GetPage(
       name: _Paths.INFORMASIKUESIONER,
       page: () => const InformasiKuesionerView(),
+      binding: KuesionerBinding(),
     ),
     GetPage(
       name: _Paths.COUNSELING_APPOINTMENT,
@@ -165,18 +173,22 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.GURU_HOME_APPOINTMENT,
-      page: () => GuruHomeAppointmentView(),
+      page: () => const GuruHomeAppointmentView(),
       binding: GuruHomeAppointmentBinding(),
     ),
     GetPage(
       name: _Paths.GURU_REKAP_COUNSELING,
-      page: () => GuruRekapCounselingView(),
+      page: () => const GuruRekapCounselingView(),
       binding: GuruRekapCounselingBinding(),
     ),
     GetPage(
       name: _Paths.GURU_COUNSELING_APPOINTMENT,
-      page: () => GuruCounselingAppointmentView(),
+      page: () => const GuruCounselingAppointmentView(),
       binding: GuruCounselingAppointmentBinding(),
     ),
+    GetPage(
+        name: _Paths.LIST_KUESIONER,
+        page: () => const ListKuesioner(),
+        binding: ListKuesionerBinding())
   ];
 }

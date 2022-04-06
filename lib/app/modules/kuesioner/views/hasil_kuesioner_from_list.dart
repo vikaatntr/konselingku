@@ -5,17 +5,24 @@ import 'package:konselingku/app/constant/colors.dart';
 import 'package:konselingku/app/data/model/kuesioner.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
-import '../controllers/kuesioner_controller.dart';
-
-class HasilKuesioner extends GetView<KuesionerController> {
-  const HasilKuesioner({Key? key}) : super(key: key);
+class HasilKuesionerFromList extends StatelessWidget {
+  final Kuesioner? kuesioner;
+  const HasilKuesionerFromList({Key? key, required this.kuesioner})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar(title: 'Hasil Kuesioner'),
-      body: controller.obx((state) => _body(state!)),
-    );
+    return kuesioner != null
+        ? Scaffold(
+            appBar: appBar(
+                title: 'Hasil Kuesioner ${kuesioner!.user!.namaPanggilan}'),
+            body: _body(kuesioner!))
+        : Scaffold(
+            appBar: appBar(title: "Oops!"),
+            body: const Center(
+              child: Text("Anak anda belum melakukan kuesioner"),
+            ),
+          );
   }
 
   Widget _body(Kuesioner kuesioner) {
@@ -79,7 +86,6 @@ class HasilKuesioner extends GetView<KuesionerController> {
   Widget _contentBox1(String date) {
     return Container(
       width: Get.width,
-      height: 170,
       decoration: const BoxDecoration(
           shape: BoxShape.rectangle,
           color: AppColors.kGreen,
@@ -90,7 +96,7 @@ class HasilKuesioner extends GetView<KuesionerController> {
           Padding(
             padding: const EdgeInsets.all(15),
             child: Text(
-              "Selamat, Kamu telah menyelesaikan Kuesioner",
+              "${kuesioner!.user!.namaLengkap} telah menyelesaikan Kuesioner",
               style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -101,7 +107,7 @@ class HasilKuesioner extends GetView<KuesionerController> {
           Padding(
             padding: const EdgeInsets.all(15),
             child: Text(
-              "Kamu sudah menyelesaikan kuesioner pada tanggal ${date.split('.')[0]}",
+              "${kuesioner!.user!.namaLengkap}  sudah menyelesaikan kuesioner pada tanggal ${date.split('.')[0]}",
               style: GoogleFonts.poppins(),
               textAlign: TextAlign.center,
             ),

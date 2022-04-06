@@ -80,19 +80,23 @@ class InformasiKuesionerView extends GetView<KuesionerController> {
   Widget _buttonNext() {
     return Center(
       child: SizedBox(
-        width: 200,
-        height: 40,
-        child: ElevatedButton(
-          onPressed: () {
-            Get.toNamed(Routes.KUESIONER);
-          },
-          child: Text(
-            "Setuju dan Lanjutkan",
-            style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-          ),
-          style: ElevatedButton.styleFrom(primary: AppColors.primaryColor),
-        ),
-      ),
+          width: 200,
+          height: 40,
+          child: controller.obx(
+              (state) => ElevatedButton(
+                    onPressed: () {
+                      Get.toNamed(Routes.KUESIONER);
+                    },
+                    child: Text(
+                      "Setuju dan Lanjutkan",
+                      style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        primary: AppColors.primaryColor),
+                  ),
+              onLoading: const Center(
+                child: CircularProgressIndicator(),
+              ))),
     );
   }
 }

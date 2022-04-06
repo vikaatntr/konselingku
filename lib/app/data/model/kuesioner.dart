@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:konselingku/app/data/model/user.dart';
 
 class Kuesioner {
@@ -7,12 +8,14 @@ class Kuesioner {
   List<Map<String, int>> pertanyaan4;
   String email;
   UserData? user;
+  Timestamp dateCreated;
 
   Kuesioner(
       {required this.pertanyaan1,
       required this.pertanyaan2,
       required this.pertanyaan3,
       required this.pertanyaan4,
+      required this.dateCreated,
       required this.email});
 
   factory Kuesioner.fromMap(Map<String, dynamic> map) {
@@ -45,7 +48,8 @@ class Kuesioner {
         pertanyaan2: p2,
         pertanyaan3: p3,
         pertanyaan4: p4,
-        email: map['email']);
+        email: map['email'],
+        dateCreated: map['dateCreated']);
   }
 
   toMap() => {
@@ -53,6 +57,7 @@ class Kuesioner {
         'pertanyaan2': pertanyaan2,
         'pertanyaan3': pertanyaan3,
         'pertanyaan4': pertanyaan4,
-        'email': email
+        'email': email,
+        'dateCreated': dateCreated
       };
 }

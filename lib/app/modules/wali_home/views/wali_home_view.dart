@@ -288,7 +288,9 @@ class WaliHomeView extends GetView<WaliHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(Routes.LIST_KUESIONER);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,

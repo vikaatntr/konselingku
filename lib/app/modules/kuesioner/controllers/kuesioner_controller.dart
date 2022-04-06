@@ -1,10 +1,12 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:konselingku/app/data/model/kuesioner.dart';
 import 'package:konselingku/app/data/repository/kuesioner_repository.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';
 import 'package:konselingku/app/modules/kuesioner/views/soal.dart';
+import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:konselingku/app/widget/general/dialog.dart';
 
 class KuesionerController extends GetxController with StateMixin<Kuesioner?> {
@@ -25,6 +27,7 @@ class KuesionerController extends GetxController with StateMixin<Kuesioner?> {
         for (var i = 0; i < pertanyaan4.length; i++) {
           listValuePertanyaan4[i] = value.pertanyaan4[i].values.first;
         }
+        Get.toNamed(Routes.HASILKUESIONER);
         change(value, status: RxStatus.success());
       } else {
         change(null, status: RxStatus.empty());
@@ -48,6 +51,7 @@ class KuesionerController extends GetxController with StateMixin<Kuesioner?> {
     try {
       var kuesioner = Kuesioner(
           email: UserRepository.instance.user!.email,
+          dateCreated: Timestamp.fromDate(DateTime.now()),
           pertanyaan1: List.generate(pertanyaan1.length,
               (index) => {pertanyaan1[index]: listValuePertanyaan1[index]}),
           pertanyaan2: List.generate(pertanyaan2.length,

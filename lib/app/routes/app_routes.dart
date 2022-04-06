@@ -12,6 +12,7 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const KUESIONER = _Paths.KUESIONER;
   static const INFORMASIKUESIONER = _Paths.INFORMASIKUESIONER;
+  static const HASILKUESIONER = _Paths.HASILKUESIONER;
   static const COUNSELING_APPOINTMENT = _Paths.COUNSELING_APPOINTMENT;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const VERIFIKASI = _Paths.VERIFIKASI;
@@ -30,6 +31,7 @@ abstract class Routes {
   static const GURU_HOME_APPOINTMENT = _Paths.GURU_HOME_APPOINTMENT;
   static const GURU_REKAP_COUNSELING = _Paths.GURU_REKAP_COUNSELING;
   static const GURU_COUNSELING_APPOINTMENT = _Paths.GURU_COUNSELING_APPOINTMENT;
+  static const LIST_KUESIONER = _Paths.LIST_KUESIONER;
 }
 
 abstract class _Paths {
@@ -41,6 +43,7 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const KUESIONER = '/kuesioner';
   static const INFORMASIKUESIONER = '/informasi-kuesioner';
+  static const HASILKUESIONER = '/hasil-kuesioner';
   static const COUNSELING_APPOINTMENT = '/counseling-appointment';
   static const FORGOT_PASSWORD = '/forgot-password';
   static const VERIFIKASI = '/verifikasi';
@@ -59,4 +62,5 @@ abstract class _Paths {
   static const GURU_HOME_APPOINTMENT = '/guru-home-appointment';
   static const GURU_REKAP_COUNSELING = '/guru-rekap-counseling';
   static const GURU_COUNSELING_APPOINTMENT = '/guru-counseling-appointment';
+  static const LIST_KUESIONER = '/list-kuesioner';
 }

@@ -8,8 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
 import 'package:konselingku/app/data/model/artikel.dart';
 import 'package:konselingku/app/data/repository/counseling_repository.dart';
+import 'package:konselingku/app/data/repository/kuesioner_repository.dart';
 import 'package:konselingku/app/modules/poin_pelanggaran/views/poin_pelanggaran_guru.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
+import 'package:konselingku/app/widget/general/dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/home_controller.dart';
@@ -342,8 +344,17 @@ class HomeView extends GetView<HomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Get.toNamed(Routes.INFORMASIKUESIONER);
+                    onTap: () async {
+                      CustomDialog.loadingDialog();
+                      KuesionerRepository.instance.getKuesioner().then((value) {
+                        if (value != null) {
+                          Get.back();
+                          Get.toNamed(Routes.HASILKUESIONER);
+                        } else {
+                          Get.back();
+                          Get.toNamed(Routes.INFORMASIKUESIONER);
+                        }
+                      });
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),

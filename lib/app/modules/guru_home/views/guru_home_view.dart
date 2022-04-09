@@ -356,7 +356,9 @@ class GuruHomeView extends GetView<GuruHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(Routes.POIN_PELANGGARAN);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,

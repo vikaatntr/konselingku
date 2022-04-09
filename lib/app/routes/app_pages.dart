@@ -1,7 +1,9 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:get/get.dart';
-import 'package:konselingku/app/modules/kuesioner/views/hasil_kuesioner.dart';
-import 'package:konselingku/app/modules/kuesioner/views/informasi_kuesioner_view.dart';
-import 'package:konselingku/app/modules/kuesioner/views/list_kuesioner.dart';
+import 'package:konselingku/app/modules/poin_pelanggaran/views/hasil_poin_pelanggaran.dart';
+import 'package:konselingku/app/modules/poin_pelanggaran/views/list_siswa.dart';
+import 'package:konselingku/app/modules/poin_pelanggaran/views/poin_pelanggaran_guru.dart';
 
 import '../modules/admin_home/bindings/admin_home_binding.dart';
 import '../modules/admin_home/views/admin_home_view.dart';
@@ -39,9 +41,14 @@ import '../modules/guru_home/bindings/guru_home_binding.dart';
 import '../modules/guru_home/views/guru_home_view.dart';
 import '../modules/kuesioner/bindings/kuesioner_binding.dart';
 import '../modules/kuesioner/bindings/list_kuesioner_binding.dart';
+import '../modules/kuesioner/views/hasil_kuesioner.dart';
+import '../modules/kuesioner/views/informasi_kuesioner_view.dart';
 import '../modules/kuesioner/views/kuesioner_view.dart';
+import '../modules/kuesioner/views/list_kuesioner.dart';
 import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/views/notification_view.dart';
+import '../modules/poin_pelanggaran/bindings/poin_pelanggaran_binding.dart';
+import '../modules/poin_pelanggaran/views/poin_pelanggaran_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
@@ -50,8 +57,6 @@ import '../modules/user_home/bindings/home_binding.dart';
 import '../modules/user_home/views/home_view.dart';
 import '../modules/wali_home/bindings/wali_home_binding.dart';
 import '../modules/wali_home/views/wali_home_view.dart';
-
-// ignore_for_file: constant_identifier_names
 
 part 'app_routes.dart';
 
@@ -189,6 +194,27 @@ class AppPages {
     GetPage(
         name: _Paths.LIST_KUESIONER,
         page: () => const ListKuesioner(),
-        binding: ListKuesionerBinding())
+        binding: ListKuesionerBinding()),
+    GetPage(
+        name: _Paths.POIN_PELANGGARAN,
+        page: () => const PoinPelanggaranView(),
+        binding: PoinPelanggaranBinding(),
+        children: [
+          GetPage(
+            name: _Paths.LIST_SISWA_POIN_PELANGGARAN,
+            page: () => const ListSiswaPoinPelanggaran(),
+            binding: PoinPelanggaranBinding(),
+          ),
+          GetPage(
+            name: _Paths.POIN_PELANGGARAN_SISWA,
+            page: () => PoinPelanggaranSiswa(),
+            binding: PoinPelanggaranBinding(),
+          ),
+          GetPage(
+            name: _Paths.POIN_PELANGGARAN_HASIL,
+            page: () => HasilPoinPelanggaran(),
+            binding: PoinPelanggaranBinding(),
+          ),
+        ]),
   ];
 }

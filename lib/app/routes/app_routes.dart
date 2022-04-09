@@ -32,6 +32,13 @@ abstract class Routes {
   static const GURU_REKAP_COUNSELING = _Paths.GURU_REKAP_COUNSELING;
   static const GURU_COUNSELING_APPOINTMENT = _Paths.GURU_COUNSELING_APPOINTMENT;
   static const LIST_KUESIONER = _Paths.LIST_KUESIONER;
+  static const POIN_PELANGGARAN = _Paths.POIN_PELANGGARAN;
+  static const LIST_SISWA_POIN_PELANGGARAN =
+      _Paths.POIN_PELANGGARAN + _Paths.LIST_SISWA_POIN_PELANGGARAN;
+  static const POIN_PELANGGARAN_SISWA =
+      _Paths.POIN_PELANGGARAN + _Paths.POIN_PELANGGARAN_SISWA;
+  static const POIN_PELANGGARAN_HASIL =
+      _Paths.POIN_PELANGGARAN + _Paths.POIN_PELANGGARAN_HASIL;
 }
 
 abstract class _Paths {
@@ -63,4 +70,8 @@ abstract class _Paths {
   static const GURU_REKAP_COUNSELING = '/guru-rekap-counseling';
   static const GURU_COUNSELING_APPOINTMENT = '/guru-counseling-appointment';
   static const LIST_KUESIONER = '/list-kuesioner';
+  static const POIN_PELANGGARAN = '/poin-pelanggaran';
+  static const LIST_SISWA_POIN_PELANGGARAN = '/list-siswa';
+  static const POIN_PELANGGARAN_SISWA = '/poin-siswa';
+  static const POIN_PELANGGARAN_HASIL = '/hasil-siswa';
 }

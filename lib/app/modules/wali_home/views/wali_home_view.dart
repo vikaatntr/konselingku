@@ -4,7 +4,9 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
+import 'package:konselingku/app/data/repository/user_repository.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
+import 'package:konselingku/app/widget/general/dialog.dart';
 
 import '../controllers/wali_home_controller.dart';
 
@@ -327,7 +329,17 @@ class WaliHomeView extends GetView<WaliHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      CustomDialog.loadingDialog();
+                      UserRepository.instance
+                          .getAnotherUser(
+                              UserRepository.instance.user!.emailAnak!)
+                          .then((value) {
+                        Get.back();
+                        Get.toNamed(Routes.POIN_PELANGGARAN_HASIL,
+                            arguments: value);
+                      });
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,

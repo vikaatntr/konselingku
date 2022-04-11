@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
+import 'package:konselingku/app/data/model/user.dart';
+import 'package:konselingku/app/modules/poin_pelanggaran/controllers/poin_pelanggaran_controller.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
-class hasilPoin extends StatelessWidget {
-  const hasilPoin({Key? key}) : super(key: key);
+class HasilPoinPelanggaran extends GetView<PoinPelanggaranController> {
+  HasilPoinPelanggaran({Key? key}) : super(key: key);
 
+  final UserData siswa = Get.arguments;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,20 +26,27 @@ class hasilPoin extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _contentBox1(),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _subtitle(),
-          SizedBox(height: 15),
-          _content()
+          const SizedBox(height: 15),
+          for (var item in siswa.poinPelanggaran.entries)
+            _content(item.key, item.value)
         ],
       )),
     );
   }
 
   Widget _contentBox1() {
+    int jumlahPoin = 0;
+    for (var element in siswa.poinPelanggaran.values) {
+      element.forEach((key, value) {
+        jumlahPoin += value;
+      });
+    }
     return Container(
       width: Get.width,
       height: 150,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           shape: BoxShape.rectangle,
           color: AppColors.kRed,
           borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -44,73 +54,70 @@ class hasilPoin extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(15),
-            child: Container(
-              child: Text(
-                "Jumlah Pelanggaran",
-                style: GoogleFonts.poppins(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.darkBlue),
-              ),
+            child: Text(
+              "Jumlah Pelanggaran",
+              style: GoogleFonts.poppins(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.darkBlue),
             ),
           ),
-          Container(
-            child: Text("30",
-                style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.bold, fontSize: 45)),
-          ),
+          Text(jumlahPoin.toString(),
+              style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.bold, fontSize: 45)),
         ],
       ),
     );
   }
 
   Widget _subtitle() {
-    return Container(
-      child: Text("Detail Pelanggaran",
-          style: GoogleFonts.poppins(
-              fontSize: 17,
-              color: AppColors.darkBlue,
-              fontWeight: FontWeight.w500)),
-    );
+    return Text("Detail Pelanggaran",
+        style: GoogleFonts.poppins(
+            fontSize: 17,
+            color: AppColors.darkBlue,
+            fontWeight: FontWeight.w500));
   }
 
-  Widget _content() {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "1.  Mengganggu saat KBM dan ibadah",
-            style: GoogleFonts.poppins(),
-          ),
-          Text("poin : 10",
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold,
-              )),
-          SizedBox(height: 5),
-          Divider(height: 10, color: AppColors.darkGrey,),
-          Text(
-            "2.  Mengganggu saat KBM dan ibadah",
-            style: GoogleFonts.poppins(),
-          ),
-          Text("poin : 10",
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold,
-              )),
-          SizedBox(height: 5),
-          Divider(height: 10, color: AppColors.darkGrey,),
-          Text(
-            "3.  Mengganggu saat KBM dan ibadah",
-            style: GoogleFonts.poppins(),
-          ),
-          Text("poin : 10",
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold,
-              )),
-          SizedBox(height: 5),
-          Divider(height: 10, color: AppColors.darkGrey,),
-        ],
-      ),
+  Widget _content(String kategori, Map<String, int> pelanggaran) {
+    var pelanggaranPoin = {};
+    pelanggaran.forEach((key, value) {
+      if (value > 0) {
+        pelanggaranPoin[key] = value;
+      }
+    });
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 12),
+        Text(
+          kategori,
+          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+        ),
+        const Divider(
+          height: 10,
+          color: AppColors.darkGrey,
+        ),
+        const SizedBox(height: 8),
+        for (var i = 0; i < pelanggaranPoin.length; i++)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${i + 1}.  ${pelanggaranPoin.keys.toList()[i]}",
+                style: GoogleFonts.poppins(),
+              ),
+              Text("poin : ${pelanggaranPoin.values.toList()[i]}",
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.bold,
+                  )),
+              const SizedBox(height: 5),
+              const Divider(
+                height: 10,
+                color: AppColors.darkGrey,
+              ),
+            ],
+          )
+      ],
     );
   }
 }

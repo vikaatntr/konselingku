@@ -9,6 +9,7 @@ import 'package:konselingku/app/constant/colors.dart';
 import 'package:konselingku/app/data/model/artikel.dart';
 import 'package:konselingku/app/data/repository/counseling_repository.dart';
 import 'package:konselingku/app/data/repository/kuesioner_repository.dart';
+import 'package:konselingku/app/data/repository/user_repository.dart';
 import 'package:konselingku/app/modules/poin_pelanggaran/views/poin_pelanggaran_guru.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:konselingku/app/widget/general/dialog.dart';
@@ -393,7 +394,8 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.to(poinPelanggaran());
+                      Get.toNamed(Routes.POIN_PELANGGARAN_HASIL,
+                          arguments: UserRepository.instance.user);
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),

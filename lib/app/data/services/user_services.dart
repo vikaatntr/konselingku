@@ -86,6 +86,13 @@ class UserServices {
     });
   }
 
+  Future<void> updateUser(String uid, UserData user) async {
+    await FirebaseFirestore.instance
+        .collection(CollectionPath.userData)
+        .doc(uid)
+        .update(user.toMap());
+  }
+
   Future<void> acceptAccount(String uid) async {
     await FirebaseFirestore.instance
         .collection(CollectionPath.userData)

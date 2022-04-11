@@ -19,6 +19,7 @@ class UserData {
   bool isAccept;
   String? fcmToken;
   List<AppNotification> notification;
+  Map<String, Map<String, int>> poinPelanggaran;
 
   UserData(
       {required this.email,
@@ -32,7 +33,8 @@ class UserData {
       this.nip,
       this.emailAnak,
       this.fcmToken,
-      this.notification = const []});
+      this.notification = const [],
+      this.poinPelanggaran = const {}});
 
   factory UserData.fromMap(Map map) {
     return UserData(
@@ -47,6 +49,9 @@ class UserData {
         nip: map['nip'],
         emailAnak: map['emailAnak'],
         fcmToken: map['fcmToken'],
+        poinPelanggaran: map['poinPelanggaran'] == null
+            ? {}
+            : _convertPoinPelanggaran(map['poinPelanggaran']),
         notification: map['notification'] == null
             ? []
             : (map['notification'] as List)
@@ -54,6 +59,18 @@ class UserData {
                 .toList()
                 .reversed
                 .toList());
+  }
+
+  static Map<String, Map<String, int>> _convertPoinPelanggaran(Map value) {
+    Map<String, Map<String, int>> temp = {};
+    for (var element in value.entries) {
+      Map<String, int> tempValue = {};
+      for (var item in (element.value as Map).entries) {
+        tempValue[item.key] = item.value;
+      }
+      temp[element.key] = tempValue;
+    }
+    return temp;
   }
 
   toMap() {
@@ -69,7 +86,8 @@ class UserData {
       'emailAnak': emailAnak,
       'isAccept': isAccept,
       'fcmToken': fcmToken,
-      'notification': notification.map((e) => e.toMap()).toList()
+      'notification': notification.map((e) => e.toMap()).toList(),
+      'poinPelanggaran': poinPelanggaran
     };
   }
 }

@@ -71,4 +71,7 @@ class UserRepository {
 
   Future<void> saveFCMToken(String token) => UserServices.instance
       .saveFCMToken(token, _appController.auth.currentUser!.uid);
+
+  Future<void> updateUser(UserData user) =>
+      UserServices.instance.updateUser(user.uid, user);
 }

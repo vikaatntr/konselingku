@@ -96,7 +96,19 @@ class InformasiKuesionerView extends GetView<KuesionerController> {
                   ),
               onLoading: const Center(
                 child: CircularProgressIndicator(),
-              ))),
+              ),
+              onEmpty: ElevatedButton(onPressed: () {
+                      Get.toNamed(Routes.KUESIONER);
+                    },
+                    child: Text(
+                      "Setuju dan Lanjutkan",
+                      style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        primary: AppColors.primaryColor),
+                        ),
+              ),
+              ),
     );
   }
 }

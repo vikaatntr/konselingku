@@ -82,7 +82,7 @@ class HasilKuesioner extends GetView<KuesionerController> {
       height: 170,
       decoration: const BoxDecoration(
           shape: BoxShape.rectangle,
-          color: AppColors.kGreen,
+          color: AppColors.green,
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.center,
@@ -147,7 +147,7 @@ class HasilKuesioner extends GetView<KuesionerController> {
           height: 100,
           decoration: const BoxDecoration(
               shape: BoxShape.rectangle,
-              color: AppColors.kYellow,
+              color: AppColors.yellow,
               borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Column(
             children: [

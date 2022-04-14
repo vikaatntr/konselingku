@@ -1,6 +1,12 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/informasi_aktivitas_kelompok.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/informasi_data_orang_tua.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/informasi_data_siswa.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/informasi_kondisi_fisik_psikis.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/informasi_rencana_masa_depan.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/keterangan_lingkungan%20keluarga.dart';
 import 'package:konselingku/app/modules/poin_pelanggaran/views/hasil_poin_pelanggaran.dart';
 import 'package:konselingku/app/modules/poin_pelanggaran/views/list_siswa.dart';
 import 'package:konselingku/app/modules/poin_pelanggaran/views/poin_pelanggaran_guru.dart';
@@ -216,5 +222,35 @@ class AppPages {
             binding: PoinPelanggaranBinding(),
           ),
         ]),
+    GetPage(
+      name: _Paths.FORM_DATA_SISWA,
+      page: () => const InfoDataSiswaView(),
+      binding: DataPribadiBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORM_DATA_ORTU,
+      page: () => const InfoDataOrtuView(),
+      binding: DataPribadiBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORM_LINGKUNGAN_KELUARGA,
+      page: () => const KetLingkunganKelView(),
+      binding: DataPribadiBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORM_KONDISI_FISIK_PSIKIS,
+      page: () => const KondisiFisikPsikisView(),
+      binding: DataPribadiBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORM_AKTIVITAS_KELOMPOK,
+      page: () => const AktivitasKelompokView(),
+      binding: DataPribadiBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORM_RENCANA_MASADEPAN,
+      page: () => const RencanaMasaDepanView(),
+      binding: DataPribadiBinding(),
+    ),
   ];
 }

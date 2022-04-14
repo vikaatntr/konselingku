@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
 import 'package:konselingku/app/widget/general/form_input.dart';
 
-class InfoDataOrtuView extends StatelessWidget {
+import 'package:konselingku/app/modules/data_pribadi/controllers/data_pribadi_controller.dart';
+
+class InfoDataOrtuView extends GetView<DataPribadiController> {
   const InfoDataOrtuView({Key? key}) : super(key: key);
 
   @override
@@ -125,32 +127,100 @@ class InfoDataOrtuView extends StatelessWidget {
 
   Widget _agamaAyahInput() {
     //dropdown agama
-    return formInput(
-        title: "Agama",
-        placeholder: "Masukkan agama ayahmu",
-        inputType: TextInputType.text,
-        inputAction: TextInputAction.next,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Masukkan agama ayahmu';
-          }
-          return null;
-        });
+    return Column(
+      children: [
+        Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Agama",
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+            )),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<int>(
+          value: controller.agamaOrtu,
+          isExpanded: true,
+          items: const [
+            DropdownMenuItem(value: 0, child: Text("Islam")),
+            DropdownMenuItem(value: 1, child: Text("Kristen")),
+            DropdownMenuItem(value: 2, child: Text("Katolik")),
+            DropdownMenuItem(value: 3, child: Text("Hindu")),
+            DropdownMenuItem(value: 4, child: Text("Budha")),
+          ],
+          onChanged: (val) {
+            if (val != null) {
+              controller.agamaOrtu = val;
+            }
+          },
+          decoration: InputDecoration(
+              hintText: "Agama",
+              hintStyle: GoogleFonts.poppins(),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                      width: 1, color: Colors.grey.withOpacity(0.2))),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                      width: 1, color: AppColors.primaryColor)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                    BorderSide(width: 1, color: Colors.grey.withOpacity(0.2)),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 20)),
+        )
+      ],
+    );
   }
 
   Widget _pendidikanAyahInput() {
     //dropdown
-    return formInput(
-        title: "Pendidikan",
-        placeholder: "Masukkan pendidikan terakhir",
-        inputType: TextInputType.text,
-        inputAction: TextInputAction.next,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Masukkan pendidikan terakhir';
-          }
-          return null;
-        });
+    return Column(
+      children: [
+        Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Pendidikan",
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+            )),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<int>(
+          value: controller.pendOrtu,
+          isExpanded: true,
+          items: const [
+            DropdownMenuItem(value: 0, child: Text("SD")),
+            DropdownMenuItem(value: 1, child: Text("SLTP")),
+            DropdownMenuItem(value: 2, child: Text("SLTA")),
+            DropdownMenuItem(value: 3, child: Text("Diploma")),
+            DropdownMenuItem(value: 4, child: Text("Sarjana")),
+          ],
+          onChanged: (val) {
+            if (val != null) {
+              controller.pendOrtu = val;
+            }
+          },
+          decoration: InputDecoration(
+              hintText: "Pendidikan Terakhir Ayah",
+              hintStyle: GoogleFonts.poppins(),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                      width: 1, color: Colors.grey.withOpacity(0.2))),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                      width: 1, color: AppColors.primaryColor)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                    BorderSide(width: 1, color: Colors.grey.withOpacity(0.2)),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 20)),
+        )
+      ],
+    );
   }
 
   Widget _pekerjaaanAyahInput() {
@@ -202,32 +272,100 @@ class InfoDataOrtuView extends StatelessWidget {
 
   Widget _agamaIbuInput() {
     //dropdown agama
-    return formInput(
-        title: "Agama",
-        placeholder: "Masukkan agama ibumu",
-        inputType: TextInputType.text,
-        inputAction: TextInputAction.next,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Masukkan agama ibumu';
-          }
-          return null;
-        });
+    return Column(
+      children: [
+        Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Agama",
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+            )),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<int>(
+          value: controller.agamaOrtu,
+          isExpanded: true,
+          items: const [
+            DropdownMenuItem(value: 0, child: Text("Islam")),
+            DropdownMenuItem(value: 1, child: Text("Kristen")),
+            DropdownMenuItem(value: 2, child: Text("Katolik")),
+            DropdownMenuItem(value: 3, child: Text("Hindu")),
+            DropdownMenuItem(value: 4, child: Text("Budha")),
+          ],
+          onChanged: (val) {
+            if (val != null) {
+              controller.agamaOrtu = val;
+            }
+          },
+          decoration: InputDecoration(
+              hintText: "Agama",
+              hintStyle: GoogleFonts.poppins(),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                      width: 1, color: Colors.grey.withOpacity(0.2))),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                      width: 1, color: AppColors.primaryColor)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                    BorderSide(width: 1, color: Colors.grey.withOpacity(0.2)),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 20)),
+        )
+      ],
+    );
   }
 
   Widget _pendidikanIbuInput() {
     //dropdown
-    return formInput(
-        title: "Pendidikan",
-        placeholder: "Masukkan pendidikan terakhir",
-        inputType: TextInputType.text,
-        inputAction: TextInputAction.next,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Masukkan pendidikan terakhir';
-          }
-          return null;
-        });
+    return Column(
+      children: [
+        Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Pendidikan",
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+            )),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<int>(
+          value: controller.pendOrtu,
+          isExpanded: true,
+          items: const [
+            DropdownMenuItem(value: 0, child: Text("SD")),
+            DropdownMenuItem(value: 1, child: Text("SLTP")),
+            DropdownMenuItem(value: 2, child: Text("SLTA")),
+            DropdownMenuItem(value: 3, child: Text("Diploma")),
+            DropdownMenuItem(value: 4, child: Text("Sarjana")),
+          ],
+          onChanged: (val) {
+            if (val != null) {
+              controller.pendOrtu = val;
+            }
+          },
+          decoration: InputDecoration(
+              hintText: "Pendidikan Terakhir Ibu",
+              hintStyle: GoogleFonts.poppins(),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                      width: 1, color: Colors.grey.withOpacity(0.2))),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                      width: 1, color: AppColors.primaryColor)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                    BorderSide(width: 1, color: Colors.grey.withOpacity(0.2)),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 20)),
+        )
+      ],
+    );
   }
 
   Widget _pekerjaaanIbuInput() {

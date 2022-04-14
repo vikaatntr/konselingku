@@ -7,8 +7,8 @@ import 'package:konselingku/app/widget/general/form_input.dart';
 
 import 'package:konselingku/app/modules/data_pribadi/controllers/data_pribadi_controller.dart';
 
-class InfoDataSiswaView extends GetView<DataPribadiController> {
-  const InfoDataSiswaView({Key? key}) : super(key: key);
+class RencanaMasaDepanView extends GetView<DataPribadiController> {
+  const RencanaMasaDepanView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
           ),
         ),
         title: Text(
-          "Data Siswa",
+          "Rencana Masa Depan",
           style: GoogleFonts.poppins(color: AppColors.black),
         ),
         actions: const [
@@ -52,120 +52,89 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _longNameInput(),
+          _pilihanSekolah(),
           const SizedBox(height: 20),
-          _nameInput(),
+          _rencanaPendidikan(),
           const SizedBox(height: 20),
-          _emailInput(),
+          _citaCita(),
           const SizedBox(height: 20),
-          _phoneInput(),
+          _keterkaitanCitaCita(),
           const SizedBox(height: 20),
-          // _titleJK(),
-          _jKinput(),
+          _dukunganOrtu(),
           const SizedBox(height: 20),
-          Obx(() => controller.jenisKelamin != 0
-                      ? const SizedBox(height: 20)
-                      : const SizedBox.shrink()),
-          _birthdaydateInput(),
-          const SizedBox(height: 20),
-          _placebirthdayInput(),
-          const SizedBox(height: 20),
-          _agamaInput(),
-          const SizedBox(height: 20),
-          _facebookInput()
+          _kemampuanOrtu()
         ],
       )),
     );
   }
 
-  Widget _longNameInput() {
+  Widget _pilihanSekolah() {
     return formInput(
-        title: "Nama Lengkap",
-        placeholder: "Masukkan nama lengkapmu",
+        title: "Pilihan sekolah lanjutan setelah lulus",
+        placeholder: "Masukkan pilihan sekolah lanjutan",
         inputType: TextInputType.text,
         inputAction: TextInputAction.next,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Masukkan nama lengkapmu';
+            return 'Masukkan pilihan sekolah lanjutan';
           }
           return null;
         });
   }
 
-  Widget _nameInput() {
+  Widget _rencanaPendidikan() {
     return formInput(
-        title: "Nama Panggilan",
-        placeholder: "Masukkan nama panggilanmu",
+        title: "Rencana pendidikan lanjutan setelah SLTA",
+        placeholder: "Masukkan rencana pendidikan",
         inputType: TextInputType.text,
         inputAction: TextInputAction.next,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Masukkan nama panggilanmu';
+            return 'Masukkan rencana pendidikan';
           }
           return null;
         });
   }
 
-  Widget _emailInput() {
+  Widget _citaCita() {
     return formInput(
-        title: "Email",
-        placeholder: "Masukkan emailmu",
-        inputType: TextInputType.emailAddress,
+        title: "Cita-cita",
+        placeholder: "Masukkan cita-cita",
+        inputType: TextInputType.text,
         inputAction: TextInputAction.next,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Masukkan emailmu terlebih dahulu';
+            return 'Masukkan cita-cita';
           }
           return null;
         });
   }
 
-  Widget _phoneInput() {
-    return formInput(
-        title: "No. Telepon",
-        placeholder: "Masukkan nomer teleponmu",
-        inputType: TextInputType.number,
-        inputAction: TextInputAction.next,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Masukkan nomer teleponmu terlebih dahulu';
-          }
-          return null;
-        });
-  }
-
-  // Widget _titleJK() {
-  //   return Container(
-  //     alignment: Alignment.centerLeft,
-  //     child: Text("Jenis Kelamin", style: GoogleFonts.poppins(fontWeight: FontWeight.bold),),
-  //   );
-  // }
-
-  Widget _jKinput() {
-    // Droplist jenis kelamin
+  Widget _keterkaitanCitaCita() {
     return Column(
       children: [
         Container(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Jenis Kelamin",
+              "Keterkaitan cita-cita dengan bakat, minat dan kemampuan",
               style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.jenisKelamin,
+          value: controller.agamaOrtu,
           isExpanded: true,
           items: const [
-            DropdownMenuItem(value: 0, child: Text("Laki-laki")),
-            DropdownMenuItem(value: 1, child: Text("Perempuan"))
+            DropdownMenuItem(value: 0, child: Text("Sangat Terkait")),
+            DropdownMenuItem(value: 1, child: Text("Kurang Terkait")),
+            DropdownMenuItem(value: 2, child: Text("Tidak Terkait")),
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.jenisKelamin = val;
+              controller.agamaOrtu = val;
             }
           },
           decoration: InputDecoration(
-              hintText: "Jenis Kelamin",
+              hintText: "Keterkaitan cita-cita",
               hintStyle: GoogleFonts.poppins(),
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -187,63 +156,31 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
     );
   }
 
-  Widget _birthdaydateInput() {
-    // ada kalender untuk memilih tanggal lahir
-    return formInput(
-        title: "Tanggal Lahir",
-        placeholder: "Masukkan tanggal lahirmu",
-        inputType: TextInputType.text,
-        inputAction: TextInputAction.next,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Masukkan tanggal lahirmu terlebih dahulu';
-          }
-          return null;
-        });
-  }
-
-  Widget _placebirthdayInput() {
-    return formInput(
-        title: "Tempat Lahir",
-        placeholder: "Masukkan tempat lahirmu ",
-        inputType: TextInputType.text,
-        inputAction: TextInputAction.next,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Masukkan tempat lahirmu terlebih dahulu';
-          }
-          return null;
-        });
-  }
-
-  Widget _agamaInput() {
-    // droplist agama
+  Widget _dukunganOrtu() {
     return Column(
       children: [
         Container(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Agama",
+              "Dukungan orang tua terhadap cita-cita",
               style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaSiswa,
+          value: controller.agamaOrtu,
           isExpanded: true,
           items: const [
-            DropdownMenuItem(value: 0, child: Text("Islam")),
-            DropdownMenuItem(value: 1, child: Text("Kristen")),
-            DropdownMenuItem(value: 2, child: Text("Katolik")),
-            DropdownMenuItem(value: 3, child: Text("Hindu")),
-            DropdownMenuItem(value: 4, child: Text("Budha")),
+            DropdownMenuItem(value: 0, child: Text("Sangat")),
+            DropdownMenuItem(value: 1, child: Text("Kurang")),
+            DropdownMenuItem(value: 2, child: Text("Tidak")),
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaSiswa = val;
+              controller.agamaOrtu = val;
             }
           },
           decoration: InputDecoration(
-              hintText: "Agama",
+              hintText: "Dukungan orang tua",
               hintStyle: GoogleFonts.poppins(),
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -265,17 +202,50 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
     );
   }
 
-  Widget _facebookInput() {
-    return formInput(
-        title: "Facebook",
-        placeholder: "Masukkan facebookmu",
-        inputType: TextInputType.text,
-        inputAction: TextInputAction.next,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Masukkan facebookmu terlebih dahulu';
-          }
-          return null;
-        });
+  Widget _kemampuanOrtu() {
+    return Column(
+      children: [
+        Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Kemampuan ekonomi/biaya orang tua untuk mewujudkan cita-cita",
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+            )),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<int>(
+          value: controller.agamaOrtu,
+          isExpanded: true,
+          items: const [
+            DropdownMenuItem(value: 0, child: Text("Mampu")),
+            DropdownMenuItem(value: 1, child: Text("Cukup")),
+            DropdownMenuItem(value: 2, child: Text("Kurang")),
+            DropdownMenuItem(value: 3, child: Text("Tidak Mampu")),
+          ],
+          onChanged: (val) {
+            if (val != null) {
+              controller.agamaOrtu = val;
+            }
+          },
+          decoration: InputDecoration(
+              hintText: "Kemampuan ekonomi/biaya orang tua",
+              hintStyle: GoogleFonts.poppins(),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                      width: 1, color: Colors.grey.withOpacity(0.2))),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                      width: 1, color: AppColors.primaryColor)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                    BorderSide(width: 1, color: Colors.grey.withOpacity(0.2)),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 20)),
+        )
+      ],
+    );
   }
 }

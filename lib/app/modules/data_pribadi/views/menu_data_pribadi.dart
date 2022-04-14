@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/informasi_data_orang_tua.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/informasi_data_pribadi.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/informasi_data_siswa.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/keterangan_lingkungan%20keluarga.dart';
+import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
 class MenuDataPribadiView extends StatelessWidget {
@@ -34,7 +39,9 @@ class MenuDataPribadiView extends StatelessWidget {
             const SizedBox(height: 20),
             _contentBox5(),
             const SizedBox(height: 20),
-            _contentBox6()
+            _contentBox6(),
+            const SizedBox(height: 20),
+            _contentBox7()
           ],
         ),
       )),
@@ -43,7 +50,9 @@ class MenuDataPribadiView extends StatelessWidget {
 
   Widget _contentBox1() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.FORM_DATA_SISWA);
+      },
       child: Container(
         height: 100,
         width: Get.width,
@@ -74,7 +83,9 @@ class MenuDataPribadiView extends StatelessWidget {
 
   Widget _contentBox2() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(InfoDataPribadiView());
+      },
       child: Container(
         height: 100,
         width: Get.width,
@@ -105,7 +116,9 @@ class MenuDataPribadiView extends StatelessWidget {
 
   Widget _contentBox3() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.FORM_DATA_ORTU);
+      },
       child: Container(
         height: 100,
         width: Get.width,
@@ -136,7 +149,9 @@ class MenuDataPribadiView extends StatelessWidget {
 
   Widget _contentBox4() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.FORM_LINGKUNGAN_KELUARGA);
+      },
       child: Container(
         height: 100,
         width: Get.width,
@@ -167,7 +182,9 @@ class MenuDataPribadiView extends StatelessWidget {
 
   Widget _contentBox5() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.FORM_KONDISI_FISIK_PSIKIS);
+      },
       child: Container(
         height: 100,
         width: Get.width,
@@ -198,7 +215,9 @@ class MenuDataPribadiView extends StatelessWidget {
 
   Widget _contentBox6() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.FORM_AKTIVITAS_KELOMPOK);
+      },
       child: Container(
         height: 130,
         width: Get.width,
@@ -218,6 +237,39 @@ class MenuDataPribadiView extends StatelessWidget {
               ),
               Text(
                 "Data aktifitas dalam kegiatan kelompok yang diwajibkan diisi",
+                style: GoogleFonts.poppins(fontSize: 13, color: AppColors.grey),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _contentBox7() {
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(Routes.FORM_RENCANA_MASADEPAN);
+      },
+      child: Container(
+        height: 100,
+        width: Get.width,
+        decoration: const BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: AppColors.kRed,
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Informasi Rencana Masa Depan",
+                style: GoogleFonts.poppins(fontSize: 18),
+              ),
+              Text(
+                "Data rencana masa depan yang diwajibkan diisi",
                 style: GoogleFonts.poppins(fontSize: 13, color: AppColors.grey),
               )
             ],

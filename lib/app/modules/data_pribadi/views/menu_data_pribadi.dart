@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
-import 'package:konselingku/app/modules/data_pribadi/views/informasi_data_orang_tua.dart';
-import 'package:konselingku/app/modules/data_pribadi/views/informasi_data_pribadi.dart';
-import 'package:konselingku/app/modules/data_pribadi/views/informasi_data_siswa.dart';
-import 'package:konselingku/app/modules/data_pribadi/views/keterangan_lingkungan%20keluarga.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
@@ -84,7 +80,7 @@ class MenuDataPribadiView extends StatelessWidget {
   Widget _contentBox2() {
     return GestureDetector(
       onTap: () {
-        Get.to(InfoDataPribadiView());
+        Get.toNamed(Routes.FORM_DATA_SISWA_PRIBADI);
       },
       child: Container(
         height: 100,

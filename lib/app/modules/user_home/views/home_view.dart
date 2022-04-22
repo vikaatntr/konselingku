@@ -427,7 +427,8 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.to(MenuDataPribadiView());
+                      Get.toNamed(Routes.MENU_DATA_PRIBADI)!
+                          .then((value) => controller.getData(refresh: true));
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),

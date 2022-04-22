@@ -7,6 +7,7 @@ import 'package:konselingku/app/modules/data_pribadi/views/informasi_data_siswa.
 import 'package:konselingku/app/modules/data_pribadi/views/informasi_kondisi_fisik_psikis.dart';
 import 'package:konselingku/app/modules/data_pribadi/views/informasi_rencana_masa_depan.dart';
 import 'package:konselingku/app/modules/data_pribadi/views/keterangan_lingkungan%20keluarga.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/menu_data_pribadi.dart';
 import 'package:konselingku/app/modules/poin_pelanggaran/views/hasil_poin_pelanggaran.dart';
 import 'package:konselingku/app/modules/poin_pelanggaran/views/list_siswa.dart';
 import 'package:konselingku/app/modules/poin_pelanggaran/views/poin_pelanggaran_guru.dart';
@@ -43,6 +44,7 @@ import '../modules/auth/verifikasi/bindings/verifikasi_binding.dart';
 import '../modules/auth/verifikasi/views/verifikasi_view.dart';
 import '../modules/data_pribadi/bindings/data_pribadi_binding.dart';
 import '../modules/data_pribadi/views/data_pribadi_view.dart';
+import '../modules/data_pribadi/views/informasi_data_pribadi.dart';
 import '../modules/guru_home/bindings/guru_home_binding.dart';
 import '../modules/guru_home/views/guru_home_view.dart';
 import '../modules/kuesioner/bindings/kuesioner_binding.dart';
@@ -223,34 +225,45 @@ class AppPages {
           ),
         ]),
     GetPage(
-      name: _Paths.FORM_DATA_SISWA,
-      page: () => const InfoDataSiswaView(),
-      binding: DataPribadiBinding(),
-    ),
-    GetPage(
-      name: _Paths.FORM_DATA_ORTU,
-      page: () => const InfoDataOrtuView(),
-      binding: DataPribadiBinding(),
-    ),
-    GetPage(
-      name: _Paths.FORM_LINGKUNGAN_KELUARGA,
-      page: () => const KetLingkunganKelView(),
-      binding: DataPribadiBinding(),
-    ),
-    GetPage(
-      name: _Paths.FORM_KONDISI_FISIK_PSIKIS,
-      page: () => const KondisiFisikPsikisView(),
-      binding: DataPribadiBinding(),
-    ),
-    GetPage(
-      name: _Paths.FORM_AKTIVITAS_KELOMPOK,
-      page: () => const AktivitasKelompokView(),
-      binding: DataPribadiBinding(),
-    ),
-    GetPage(
-      name: _Paths.FORM_RENCANA_MASADEPAN,
-      page: () => const RencanaMasaDepanView(),
-      binding: DataPribadiBinding(),
-    ),
+        name: _Paths.MENU_DATA_PRIBADI,
+        page: () => const MenuDataPribadiView(),
+        binding: DataPribadiBinding(),
+        children: [
+          GetPage(
+            name: _Paths.FORM_DATA_SISWA,
+            page: () => InfoDataSiswaView(),
+            binding: DataPribadiBinding(),
+          ),
+          GetPage(
+            name: _Paths.FORM_DATA_SISWA_PRIBADI,
+            page: () => InfoDataPribadiView(),
+            binding: DataPribadiBinding(),
+          ),
+          GetPage(
+            name: _Paths.FORM_DATA_ORTU,
+            page: () => const InfoDataOrtuView(),
+            binding: DataPribadiBinding(),
+          ),
+          GetPage(
+            name: _Paths.FORM_LINGKUNGAN_KELUARGA,
+            page: () => const KetLingkunganKelView(),
+            binding: DataPribadiBinding(),
+          ),
+          GetPage(
+            name: _Paths.FORM_KONDISI_FISIK_PSIKIS,
+            page: () => const KondisiFisikPsikisView(),
+            binding: DataPribadiBinding(),
+          ),
+          GetPage(
+            name: _Paths.FORM_AKTIVITAS_KELOMPOK,
+            page: () => const AktivitasKelompokView(),
+            binding: DataPribadiBinding(),
+          ),
+          GetPage(
+            name: _Paths.FORM_RENCANA_MASADEPAN,
+            page: () => const RencanaMasaDepanView(),
+            binding: DataPribadiBinding(),
+          ),
+        ]),
   ];
 }

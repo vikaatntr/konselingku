@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:konselingku/app/data/model/notification.dart';
 
 class UserData {
@@ -16,10 +17,16 @@ class UserData {
   String role;
   String? nip;
   String? emailAnak;
+  Timestamp? tanggalLahir;
+  int? jenisKelamin;
+  int? agama;
   bool isAccept;
   String? fcmToken;
+  String? tempatLahir;
+  String? facebook;
   List<AppNotification> notification;
   Map<String, Map<String, int>> poinPelanggaran;
+  DataPribadi? dataPribadi;
 
   UserData(
       {required this.email,
@@ -34,7 +41,13 @@ class UserData {
       this.emailAnak,
       this.fcmToken,
       this.notification = const [],
-      this.poinPelanggaran = const {}});
+      this.poinPelanggaran = const {},
+      this.jenisKelamin,
+      this.tanggalLahir,
+      this.tempatLahir,
+      this.agama,
+      this.facebook,
+      this.dataPribadi});
 
   factory UserData.fromMap(Map map) {
     return UserData(
@@ -58,7 +71,15 @@ class UserData {
                 .map((e) => AppNotification.fromMap(e))
                 .toList()
                 .reversed
-                .toList());
+                .toList(),
+        jenisKelamin: map['jenisKelamin'],
+        tanggalLahir: map['tanggalLahir'],
+        tempatLahir: map['tempatLahir'],
+        agama: map['agama'],
+        facebook: map['facebook'],
+        dataPribadi: map['dataPribadi'] != null
+            ? DataPribadi.fromMap(map['dataPribadi'])
+            : null);
   }
 
   static Map<String, Map<String, int>> _convertPoinPelanggaran(Map value) {
@@ -87,58 +108,119 @@ class UserData {
       'isAccept': isAccept,
       'fcmToken': fcmToken,
       'notification': notification.map((e) => e.toMap()).toList(),
-      'poinPelanggaran': poinPelanggaran
+      'poinPelanggaran': poinPelanggaran,
+      'jenisKelamin': jenisKelamin,
+      'tanggalLahir': tanggalLahir,
+      'tempatLahir': tempatLahir,
+      'agama': agama,
+      'facebook': facebook,
+      'dataPribadi': dataPribadi?.toMap()
     };
+  }
+
+  UserData copyWith(
+      {String? namaLengkap,
+      String? namaPanggilan,
+      String? email,
+      String? noTelp,
+      String? uid,
+      String? photoUrl,
+      String? role,
+      String? nip,
+      String? emailAnak,
+      Timestamp? tanggalLahir,
+      int? jenisKelamin,
+      int? agama,
+      bool? isAccept,
+      String? fcmToken,
+      String? tempatLahir,
+      String? facebook,
+      List<AppNotification>? notification,
+      Map<String, Map<String, int>>? poinPelanggaran,
+      DataPribadi? dataPribadi}) {
+    return UserData(
+        email: email ?? this.email,
+        namaLengkap: namaLengkap ?? this.namaLengkap,
+        namaPanggilan: namaPanggilan ?? this.namaPanggilan,
+        noTelp: noTelp ?? this.noTelp,
+        photoUrl: photoUrl ?? this.photoUrl,
+        role: role ?? this.role,
+        uid: uid ?? this.uid,
+        isAccept: isAccept ?? this.isAccept,
+        nip: nip ?? this.nip,
+        emailAnak: emailAnak ?? this.emailAnak,
+        fcmToken: fcmToken ?? this.fcmToken,
+        poinPelanggaran: poinPelanggaran ?? this.poinPelanggaran,
+        notification: notification ?? this.notification,
+        jenisKelamin: jenisKelamin ?? this.jenisKelamin,
+        tanggalLahir: tanggalLahir ?? this.tanggalLahir,
+        tempatLahir: tempatLahir ?? this.tempatLahir,
+        agama: agama ?? this.agama,
+        facebook: facebook ?? this.facebook,
+        dataPribadi: dataPribadi ?? this.dataPribadi);
   }
 }
 
-// class DataSiswa {
-//   String? namaLengkap;
-//   String? namaPanggilan;
-//   String? email;
-//   String? noTelp;
-//   String? uid;
-//   String? photoUrl;
-//   String? role;
-//   String? jenisKelamin;
-//   String? tglLahir;
-//   String? tempatLahir;
-//   String? agama;
-//   String? facebook;
+class DataPribadi {
+  String alamat;
+  String jarakSekolah;
+  String asalSekolah;
+  String kelas;
+  String lulusSekolah;
+  String nilaiSKHUN;
+  String hobby;
+  String pelajaranYangDisenangi;
+  String citaCita;
+  String nisn;
+  String beratBadan;
+  String tinggiBadan;
 
-//   DataSiswa(
-//       {this.agama,
-//       this.email,
-//       this.facebook,
-//       this.jenisKelamin,
-//       this.namaLengkap,
-//       this.namaPanggilan,
-//       this.noTelp,
-//       this.photoUrl,
-//       this.role,
-//       this.tempatLahir,
-//       this.tglLahir,
-//       this.uid});
+  DataPribadi({
+    required this.alamat,
+    required this.jarakSekolah,
+    required this.asalSekolah,
+    required this.kelas,
+    required this.lulusSekolah,
+    required this.nilaiSKHUN,
+    required this.hobby,
+    required this.pelajaranYangDisenangi,
+    required this.citaCita,
+    required this.nisn,
+    required this.beratBadan,
+    required this.tinggiBadan,
+  });
 
-//   factory DataSiswa.fromMap() {
-//     return DataSiswa();
-//   }
-// }
+  factory DataPribadi.fromMap(Map map) {
+    return DataPribadi(
+        alamat: map['alamat'],
+        jarakSekolah: map['jarakSekolah'],
+        asalSekolah: map['asalSekolah'],
+        kelas: map['kelas'],
+        lulusSekolah: map['lulusSekolah'],
+        nilaiSKHUN: map['nilaiSKHUN'],
+        hobby: map['hobby'],
+        pelajaranYangDisenangi: map['pelajaranYangDisenangi'],
+        citaCita: map['citaCita'],
+        nisn: map['nisn'],
+        beratBadan: map['beratBadan'],
+        tinggiBadan: map['tinggiBadan']);
+  }
 
-// class DataPribadi {
-//   String alamat;
-//   int jarakKeSekolah;
-//   String asalSekolah;
-//   String kelas;
-//   String lulusSekolah;
-//   String nilaiSKHUN;
-//   String hobby;
-//   String pelajaranYangDisenangi;
-//   String citaCita;
-//   String NISN;
-//   int beratBadan;
-//   int tinggiBadan;
-// }
+  toMap() => {
+        'alamat': alamat,
+        'jarakSekolah': jarakSekolah,
+        'asalSekolah': asalSekolah,
+        'kelas': kelas,
+        'lulusSekolah': lulusSekolah,
+        'nilaiSKHUN': nilaiSKHUN,
+        'hobby': hobby,
+        'pelajaranYangDisenangi': pelajaranYangDisenangi,
+        'citaCita': citaCita,
+        'nisn': nisn,
+        'beratBadan': beratBadan,
+        'tinggiBadan': tinggiBadan,
+      };
+}
 
 // class DataOrangTua {}
 

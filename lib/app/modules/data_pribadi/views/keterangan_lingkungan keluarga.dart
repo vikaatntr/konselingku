@@ -32,12 +32,17 @@ class KetLingkunganKelView extends GetView<DataPribadiController> {
         ),
         title: Text("Ket. Lingkungan Keluarga",
             style: GoogleFonts.poppins(color: AppColors.black)),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Icon(
-              Feather.check,
-              color: AppColors.black,
+        actions: [
+          InkWell(
+            onTap: () {
+              controller.saveKeteranganKeluarga();
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Icon(
+                Feather.check,
+                color: AppColors.black,
+              ),
             ),
           )
         ],
@@ -229,9 +234,12 @@ class KetLingkunganKelView extends GetView<DataPribadiController> {
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("kurang dari Rp. 500.000")),
-            DropdownMenuItem(value: 1, child: Text("Rp. 500.000 - Rp. 1.000.000")),
-            DropdownMenuItem(value: 2, child: Text("Rp. 1.000.000 - Rp. 2.000.000")),
-            DropdownMenuItem(value: 3, child: Text("Rp. 2.000.000 - Rp. 3.000.000")),
+            DropdownMenuItem(
+                value: 1, child: Text("Rp. 500.000 - Rp. 1.000.000")),
+            DropdownMenuItem(
+                value: 2, child: Text("Rp. 1.000.000 - Rp. 2.000.000")),
+            DropdownMenuItem(
+                value: 3, child: Text("Rp. 2.000.000 - Rp. 3.000.000")),
             DropdownMenuItem(value: 4, child: Text("Rp. 3.000.000 - keatas")),
           ],
           onChanged: (val) {
@@ -273,16 +281,17 @@ class KetLingkunganKelView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.keadaanUtuhOrtu,
+          value: controller.sosialKeluarga,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Harmonis (rukun)")),
             DropdownMenuItem(value: 1, child: Text("Biasa-biasa saja")),
-            DropdownMenuItem(value: 2, child: Text("Orang tua sering bertengkar")),
+            DropdownMenuItem(
+                value: 2, child: Text("Orang tua sering bertengkar")),
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.keadaanUtuhOrtu = val;
+              controller.sosialKeluarga = val;
             }
           },
           decoration: InputDecoration(
@@ -310,6 +319,7 @@ class KetLingkunganKelView extends GetView<DataPribadiController> {
 
   Widget _uangSaku() {
     return formInput(
+        controller: controller.infoLingkunganKeluarga['uangSaku'],
         title: "Uang Saku",
         placeholder: "Masukkan uang sakumu",
         inputType: TextInputType.text,
@@ -324,6 +334,7 @@ class KetLingkunganKelView extends GetView<DataPribadiController> {
 
   Widget _transportasiSekolah() {
     return formInput(
+        controller: controller.infoLingkunganKeluarga['transportSekolah'],
         title: "Transportasi ke Sekolah",
         placeholder: "Masukkan transportasi ke sekolah",
         inputType: TextInputType.text,
@@ -338,6 +349,7 @@ class KetLingkunganKelView extends GetView<DataPribadiController> {
 
   Widget _masalahBelajar() {
     return formInput(
+        controller: controller.infoLingkunganKeluarga['masalah'],
         title: "Masalah yang sering mengganggu konsentrasi belajar",
         placeholder: "Masukkan masalahmu",
         inputType: TextInputType.text,

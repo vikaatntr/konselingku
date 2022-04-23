@@ -3,7 +3,6 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
-import 'package:konselingku/app/widget/general/form_input.dart';
 
 import 'package:konselingku/app/modules/data_pribadi/controllers/data_pribadi_controller.dart';
 
@@ -31,12 +30,17 @@ class AktivitasKelompokView extends GetView<DataPribadiController> {
           "Aktivitas Kelompok",
           style: GoogleFonts.poppins(color: AppColors.black),
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Icon(
-              Feather.check,
-              color: AppColors.black,
+        actions: [
+          InkWell(
+            onTap: () {
+              controller.saveAktifitasKelompok();
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Icon(
+                Feather.check,
+                color: AppColors.black,
+              ),
             ),
           )
         ],
@@ -75,7 +79,7 @@ class AktivitasKelompokView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.kedudukanKelompok,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Populer")),
@@ -84,7 +88,7 @@ class AktivitasKelompokView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.kedudukanKelompok = val;
             }
           },
           decoration: InputDecoration(
@@ -121,7 +125,7 @@ class AktivitasKelompokView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.keterlibatanKelompokKerja,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Pemimpin")),
@@ -131,7 +135,7 @@ class AktivitasKelompokView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.keterlibatanKelompokKerja = val;
             }
           },
           decoration: InputDecoration(
@@ -168,7 +172,7 @@ class AktivitasKelompokView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.kedisiplinan,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Taat Aturan")),
@@ -177,7 +181,7 @@ class AktivitasKelompokView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.kedisiplinan = val;
             }
           },
           decoration: InputDecoration(
@@ -214,16 +218,19 @@ class AktivitasKelompokView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.kerjasamaKelompok,
           isExpanded: true,
           items: const [
-            DropdownMenuItem(value: 0, child: Text("Mementingkan kelasnya/kebersamaan")),
-            DropdownMenuItem(value: 1, child: Text("Mementingkan teman tertentu")),
-            DropdownMenuItem(value: 2, child: Text("Mementingkan diri sendiri")),
+            DropdownMenuItem(
+                value: 0, child: Text("Mementingkan kelasnya/kebersamaan")),
+            DropdownMenuItem(
+                value: 1, child: Text("Mementingkan teman tertentu")),
+            DropdownMenuItem(
+                value: 2, child: Text("Mementingkan diri sendiri")),
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.kerjasamaKelompok = val;
             }
           },
           decoration: InputDecoration(

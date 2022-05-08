@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
-import 'package:konselingku/app/data/model/counseling.dart';
-import 'package:konselingku/app/data/model/user.dart';
 import 'package:konselingku/app/data/repository/counseling_repository.dart';
-import 'package:konselingku/app/data/services/counseling_services.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 import 'package:konselingku/app/widget/general/dialog.dart';
 import 'package:konselingku/app/widget/general/form_input.dart';
@@ -15,7 +12,7 @@ import 'package:konselingku/app/widget/general/form_input.dart';
 import '../controllers/guru_form_appointment_controller.dart';
 
 class GuruFormAppointmentView extends GetView<GuruFormAppointmentController> {
-  GuruFormAppointmentView({Key? key}) : super(key: key);
+  const GuruFormAppointmentView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

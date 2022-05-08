@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
@@ -6,10 +7,13 @@ import 'package:konselingku/app/constant/colors.dart';
 ThemeData lightTheme(BuildContext context) {
   return ThemeData.light().copyWith(
     primaryColor: Colors.white,
+
+    // ignore: deprecated_member_use
     primaryColorBrightness: Brightness.light,
     brightness: Brightness.light,
     // scaffoldBackgroundColor: AppColors.backgroundColor,
-    colorScheme: ColorScheme.light().copyWith(primary: AppColors.primaryColor),
+    colorScheme:
+        const ColorScheme.light().copyWith(primary: AppColors.primaryColor),
     splashColor: (GetPlatform.isIOS)
         ? Colors.transparent
         : Theme.of(context).splashColor,
@@ -17,13 +21,13 @@ ThemeData lightTheme(BuildContext context) {
         ? Colors.grey.shade50
         : Theme.of(context).highlightColor,
     appBarTheme: AppBarTheme(
-      iconTheme: IconThemeData(color: AppColors.black),
-      titleTextStyle: TextStyle(color: AppColors.black),
-      brightness: Brightness.light,
+      iconTheme: const IconThemeData(color: AppColors.black),
+      titleTextStyle: const TextStyle(color: AppColors.black),
       backgroundColor: Colors.white,
       centerTitle: true,
       elevation: 1,
       shadowColor: Colors.grey.shade50,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
     textTheme: GoogleFonts.poppinsTextTheme(
       Theme.of(context).textTheme.copyWith(
@@ -53,20 +57,20 @@ ThemeData lightTheme(BuildContext context) {
             overline: GoogleFonts.poppins(fontSize: 11, color: AppColors.grey),
           ),
     ),
-    inputDecorationTheme: InputDecorationTheme().copyWith(
+    inputDecorationTheme: const InputDecorationTheme().copyWith(
       filled: true,
       fillColor: AppColors.inputBoxColor,
       hintStyle: TextStyle(color: Colors.grey.shade400),
-      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-      border: OutlineInputBorder(
+      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+      border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
           borderSide: BorderSide.none),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 1,
-        textStyle: TextTheme().button,
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+        textStyle: const TextTheme().button,
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     ),

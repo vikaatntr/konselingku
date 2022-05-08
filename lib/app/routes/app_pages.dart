@@ -181,7 +181,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.GURU_FORM_APPOINTMENT,
-      page: () => GuruFormAppointmentView(),
+      page: () => const GuruFormAppointmentView(),
       binding: GuruFormAppointmentBinding(),
     ),
     GetPage(

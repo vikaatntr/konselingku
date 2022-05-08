@@ -1,7 +1,4 @@
-// ignore_for_file: avoid_print
-
-import 'dart:developer';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
@@ -10,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
 import 'package:konselingku/app/modules/kuesioner/views/soal.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
-import 'package:konselingku/app/widget/general/dialog.dart';
 
 import '../controllers/kuesioner_controller.dart';
 
@@ -22,7 +18,9 @@ class KuesionerView extends GetView<KuesionerController> {
     return Scaffold(
       appBar: appBar(title: 'Kuesioner'),
       body: controller.obx((state) {
-        print(state);
+        if (kDebugMode) {
+          print(state);
+        }
         return _bodySubmitted();
       },
           onEmpty: _body(),

@@ -3,10 +3,11 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
+import 'package:konselingku/app/modules/data_pribadi/controllers/data_pribadi_controller.dart';
 import 'package:konselingku/app/widget/general/form_input.dart';
 
-class InfoDataPribadiView extends StatelessWidget {
-  const InfoDataPribadiView({Key? key}) : super(key: key);
+class InfoDataPribadiView extends GetView<DataPribadiController> {
+  InfoDataPribadiView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +30,19 @@ class InfoDataPribadiView extends StatelessWidget {
           "Data Pribadi",
           style: GoogleFonts.poppins(color: AppColors.black),
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Icon(
-              Feather.check,
-              color: AppColors.black,
+        actions: [
+          InkWell(
+            onTap: () {
+              if (_formKey.currentState!.validate()) {
+                controller.saveInfoDataPribadi();
+              }
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Icon(
+                Feather.check,
+                color: AppColors.black,
+              ),
             ),
           )
         ],
@@ -43,43 +51,46 @@ class InfoDataPribadiView extends StatelessWidget {
     );
   }
 
+  final _formKey = GlobalKey<FormState>();
   Widget _body() {
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
       child: Form(
+          key: _formKey,
           child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _alamatInput(),
-          const SizedBox(height: 20),
-          _distanceInput(),
-          const SizedBox(height: 20),
-          _asalSekolahInput(),
-          const SizedBox(height: 20),
-          _kelasInput(),
-          const SizedBox(height: 20),
-          _graduateInput(),
-          const SizedBox(height: 20),
-          _nilaiInput(),
-          const SizedBox(height: 20),
-          _hobbyInput(),
-          const SizedBox(height: 20),
-          _favPelajaranInput(),
-          const SizedBox(height: 20),
-          _citaInput(),
-          const SizedBox(height: 20),
-          _nisnInput(),
-          const SizedBox(height: 20),
-          _bbInput(),
-          const SizedBox(height: 20),
-          _tbInput()
-        ],
-      )),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _alamatInput(),
+              const SizedBox(height: 20),
+              _distanceInput(),
+              const SizedBox(height: 20),
+              _asalSekolahInput(),
+              const SizedBox(height: 20),
+              _kelasInput(),
+              const SizedBox(height: 20),
+              _graduateInput(),
+              const SizedBox(height: 20),
+              _nilaiInput(),
+              const SizedBox(height: 20),
+              _hobbyInput(),
+              const SizedBox(height: 20),
+              _favPelajaranInput(),
+              const SizedBox(height: 20),
+              _citaInput(),
+              const SizedBox(height: 20),
+              _nisnInput(),
+              const SizedBox(height: 20),
+              _bbInput(),
+              const SizedBox(height: 20),
+              _tbInput()
+            ],
+          )),
     );
   }
 
   Widget _alamatInput() {
     return formInput(
+        controller: controller.infoPribadiSiswaTextController['alamat'],
         title: "Alamat",
         placeholder: "Masukkan alamatmu",
         inputType: TextInputType.text,
@@ -94,6 +105,7 @@ class InfoDataPribadiView extends StatelessWidget {
 
   Widget _distanceInput() {
     return formInput(
+        controller: controller.infoPribadiSiswaTextController['jarakSekolah'],
         title: "Jarak dari rumah ke sekolah",
         placeholder: "Masukkan jarak (km)",
         inputType: TextInputType.text,
@@ -108,6 +120,7 @@ class InfoDataPribadiView extends StatelessWidget {
 
   Widget _asalSekolahInput() {
     return formInput(
+        controller: controller.infoPribadiSiswaTextController['asalSekolah'],
         title: "Asal Sekolah",
         placeholder: "Masukkan asal sekolahmu",
         inputType: TextInputType.text,
@@ -122,6 +135,7 @@ class InfoDataPribadiView extends StatelessWidget {
 
   Widget _kelasInput() {
     return formInput(
+        controller: controller.infoPribadiSiswaTextController['kelas'],
         title: "Kelas",
         placeholder: "Masukkan kelasmu",
         inputType: TextInputType.text,
@@ -136,6 +150,7 @@ class InfoDataPribadiView extends StatelessWidget {
 
   Widget _graduateInput() {
     return formInput(
+        controller: controller.infoPribadiSiswaTextController['lulusSekolah'],
         title: "Lulus Sekolah",
         placeholder: "Lulus sekolah pada tahun",
         inputType: TextInputType.number,
@@ -150,6 +165,7 @@ class InfoDataPribadiView extends StatelessWidget {
 
   Widget _nilaiInput() {
     return formInput(
+        controller: controller.infoPribadiSiswaTextController['nilaiSKHUN'],
         title: "Rata-rata Nilai SKHUN",
         placeholder: 'Masukkan rata-rata nilaimu',
         inputType: TextInputType.text,
@@ -164,6 +180,7 @@ class InfoDataPribadiView extends StatelessWidget {
 
   Widget _hobbyInput() {
     return formInput(
+        controller: controller.infoPribadiSiswaTextController['hobby'],
         title: "Hobby",
         placeholder: "Masukkan hobbymu",
         inputType: TextInputType.text,
@@ -178,6 +195,8 @@ class InfoDataPribadiView extends StatelessWidget {
 
   Widget _favPelajaranInput() {
     return formInput(
+        controller:
+            controller.infoPribadiSiswaTextController['pelajaranYangDisenangi'],
         title: "Pelajaran yang Disenangi",
         placeholder: "Masukkan pelajaran yang disenangi",
         inputType: TextInputType.text,
@@ -192,6 +211,7 @@ class InfoDataPribadiView extends StatelessWidget {
 
   Widget _citaInput() {
     return formInput(
+        controller: controller.infoPribadiSiswaTextController['citaCita'],
         title: "Cita-cita",
         placeholder: "Masukkan cita-citamu",
         inputType: TextInputType.text,
@@ -206,6 +226,7 @@ class InfoDataPribadiView extends StatelessWidget {
 
   Widget _nisnInput() {
     return formInput(
+        controller: controller.infoPribadiSiswaTextController['nisn'],
         title: "NISN",
         placeholder: "Masukkan NISN-mu",
         inputType: TextInputType.number,
@@ -220,6 +241,7 @@ class InfoDataPribadiView extends StatelessWidget {
 
   Widget _bbInput() {
     return formInput(
+        controller: controller.infoPribadiSiswaTextController['beratBadan'],
         title: "Berat Badan",
         placeholder: "Masukkan berat badanmu",
         inputType: TextInputType.number,
@@ -234,6 +256,7 @@ class InfoDataPribadiView extends StatelessWidget {
 
   Widget _tbInput() {
     return formInput(
+        controller: controller.infoPribadiSiswaTextController['tinggiBadan'],
         title: "Tinggi Badan",
         placeholder: "Masukkan tinggi badanmu",
         inputType: TextInputType.number,

@@ -39,12 +39,21 @@ abstract class Routes {
       _Paths.POIN_PELANGGARAN + _Paths.POIN_PELANGGARAN_SISWA;
   static const POIN_PELANGGARAN_HASIL =
       _Paths.POIN_PELANGGARAN + _Paths.POIN_PELANGGARAN_HASIL;
-  static const FORM_DATA_SISWA = _Paths.FORM_DATA_SISWA;
-  static const FORM_DATA_ORTU = _Paths.FORM_DATA_ORTU;
-  static const FORM_LINGKUNGAN_KELUARGA = _Paths.FORM_LINGKUNGAN_KELUARGA;
-  static const FORM_KONDISI_FISIK_PSIKIS = _Paths.FORM_KONDISI_FISIK_PSIKIS;
-  static const FORM_AKTIVITAS_KELOMPOK = _Paths.FORM_AKTIVITAS_KELOMPOK;
-  static const FORM_RENCANA_MASADEPAN = _Paths.FORM_RENCANA_MASADEPAN;
+  static const FORM_DATA_SISWA =
+      _Paths.MENU_DATA_PRIBADI + _Paths.FORM_DATA_SISWA;
+  static const FORM_DATA_ORTU =
+      _Paths.MENU_DATA_PRIBADI + _Paths.FORM_DATA_ORTU;
+  static const FORM_LINGKUNGAN_KELUARGA =
+      _Paths.MENU_DATA_PRIBADI + _Paths.FORM_LINGKUNGAN_KELUARGA;
+  static const FORM_KONDISI_FISIK_PSIKIS =
+      _Paths.MENU_DATA_PRIBADI + _Paths.FORM_KONDISI_FISIK_PSIKIS;
+  static const FORM_AKTIVITAS_KELOMPOK =
+      _Paths.MENU_DATA_PRIBADI + _Paths.FORM_AKTIVITAS_KELOMPOK;
+  static const FORM_RENCANA_MASADEPAN =
+      _Paths.MENU_DATA_PRIBADI + _Paths.FORM_RENCANA_MASADEPAN;
+  static const FORM_DATA_SISWA_PRIBADI =
+      _Paths.MENU_DATA_PRIBADI + _Paths.FORM_DATA_SISWA_PRIBADI;
+  static const MENU_DATA_PRIBADI = _Paths.MENU_DATA_PRIBADI;
 }
 
 abstract class _Paths {
@@ -81,9 +90,11 @@ abstract class _Paths {
   static const POIN_PELANGGARAN_SISWA = '/poin-siswa';
   static const POIN_PELANGGARAN_HASIL = '/hasil-siswa';
   static const FORM_DATA_SISWA = '/form-data-siswa';
+  static const FORM_DATA_SISWA_PRIBADI = '/form-data-siswa-pribadi';
   static const FORM_DATA_ORTU = '/form-data-ortu';
   static const FORM_LINGKUNGAN_KELUARGA = '/form-lingkungan-keluarga';
   static const FORM_KONDISI_FISIK_PSIKIS = '/form-kondisi-fisik-psikis';
   static const FORM_AKTIVITAS_KELOMPOK = '/form-aktivitas-kelompok';
   static const FORM_RENCANA_MASADEPAN = '/form-rencana-masa-depan';
+  static const MENU_DATA_PRIBADI = '/menu-data-pribadi';
 }

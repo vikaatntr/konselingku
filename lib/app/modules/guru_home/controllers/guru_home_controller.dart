@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';
 import 'package:konselingku/app/globals/controllers/app_controller.dart';
@@ -36,11 +37,17 @@ class GuruHomeController extends GetxController {
   Future<void> requestFCMPermission() async {
     NotificationSettings current = await fcm.getNotificationSettings();
     if (current.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission');
+      if (kDebugMode) {
+        print('User granted permission');
+      }
     } else if (current.authorizationStatus == AuthorizationStatus.provisional) {
-      print('User granted provisional permission');
+      if (kDebugMode) {
+        print('User granted provisional permission');
+      }
     } else {
-      print('User declined or has not accepted permission');
+      if (kDebugMode) {
+        print('User declined or has not accepted permission');
+      }
       NotificationSettings settings = await fcm.requestPermission(
         alert: true,
         announcement: false,
@@ -50,7 +57,9 @@ class GuruHomeController extends GetxController {
         provisional: false,
         sound: true,
       );
-      print('User granted permission: ${settings.authorizationStatus}');
+      if (kDebugMode) {
+        print('User granted permission: ${settings.authorizationStatus}');
+      }
     }
   }
 }

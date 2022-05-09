@@ -31,12 +31,17 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
           "Data Orang Tua",
           style: GoogleFonts.poppins(color: AppColors.black),
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Icon(
-              Feather.check,
-              color: AppColors.black,
+        actions: [
+          InkWell(
+            onTap: () {
+              controller.saveInfoOrangtua();
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Icon(
+                Feather.check,
+                color: AppColors.black,
+              ),
             ),
           )
         ],
@@ -99,6 +104,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _namaAyahInput() {
     return formInput(
+        controller: controller.infoOrangTuaTextController['ayah.nama'],
         title: "Nama Ayah",
         placeholder: "Masukkan nama ayahmu",
         inputType: TextInputType.text,
@@ -113,6 +119,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _alamatAyahInput() {
     return formInput(
+        controller: controller.infoOrangTuaTextController['ayah.alamat'],
         title: "Alamat Rumah",
         placeholder: "Masukkan alamat rumah ayahmu",
         inputType: TextInputType.text,
@@ -137,7 +144,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.agamaAyah,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Islam")),
@@ -148,7 +155,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.agamaAyah = val;
             }
           },
           decoration: InputDecoration(
@@ -186,7 +193,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.pendOrtu,
+          value: controller.pendAyah,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("SD")),
@@ -197,7 +204,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.pendOrtu = val;
+              controller.pendAyah = val;
             }
           },
           decoration: InputDecoration(
@@ -225,6 +232,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _pekerjaaanAyahInput() {
     return formInput(
+        controller: controller.infoOrangTuaTextController['ayah.pekerjaan'],
         title: "Pekerjaan",
         placeholder: "Masukkan pekerjaan ayahmu",
         inputType: TextInputType.text,
@@ -244,6 +252,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _namaIbuInput() {
     return formInput(
+        controller: controller.infoOrangTuaTextController['ibu.nama'],
         title: "Nama Ibu",
         placeholder: "Masukkan nama ibumu",
         inputType: TextInputType.text,
@@ -258,6 +267,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _alamatIbuInput() {
     return formInput(
+        controller: controller.infoOrangTuaTextController['ibu.alamat'],
         title: "Alamat Rumah",
         placeholder: "Masukkan alamat rumah ibumu",
         inputType: TextInputType.text,
@@ -282,7 +292,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.agamaIbu,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Islam")),
@@ -293,7 +303,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.agamaIbu = val;
             }
           },
           decoration: InputDecoration(
@@ -331,7 +341,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.pendOrtu,
+          value: controller.pendIbu,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("SD")),
@@ -342,7 +352,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.pendOrtu = val;
+              controller.pendIbu = val;
             }
           },
           decoration: InputDecoration(
@@ -370,6 +380,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _pekerjaaanIbuInput() {
     return formInput(
+        controller: controller.infoOrangTuaTextController['ibu.pekerjaan'],
         title: "Pekerjaan",
         placeholder: "Masukkan pekerjaan ibumu",
         inputType: TextInputType.text,
@@ -389,6 +400,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _namaWaliInput() {
     return formInput(
+        controller: controller.infoOrangTuaTextController['wali.nama'],
         title: "Nama Wali",
         placeholder: "Masukkan nama walimu",
         inputType: TextInputType.text,
@@ -403,6 +415,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _alamatWaliInput() {
     return formInput(
+        controller: controller.infoOrangTuaTextController['wali.alamat'],
         title: "Alamat Rumah",
         placeholder: "Masukkan alamat rumah walimu",
         inputType: TextInputType.text,
@@ -417,36 +430,105 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _agamaWaliInput() {
     //dropdown agama
-    return formInput(
-        title: "Agama",
-        placeholder: "Masukkan agama walimu",
-        inputType: TextInputType.text,
-        inputAction: TextInputAction.next,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Masukkan agama walimu';
-          }
-          return null;
-        });
+    return Column(
+      children: [
+        Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Agama",
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+            )),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<int>(
+          value: controller.agamaWali,
+          isExpanded: true,
+          items: const [
+            DropdownMenuItem(value: 0, child: Text("Islam")),
+            DropdownMenuItem(value: 1, child: Text("Kristen")),
+            DropdownMenuItem(value: 2, child: Text("Katolik")),
+            DropdownMenuItem(value: 3, child: Text("Hindu")),
+            DropdownMenuItem(value: 4, child: Text("Budha")),
+          ],
+          onChanged: (val) {
+            if (val != null) {
+              controller.agamaWali = val;
+            }
+          },
+          decoration: InputDecoration(
+              hintText: "Agama",
+              hintStyle: GoogleFonts.poppins(),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                      width: 1, color: Colors.grey.withOpacity(0.2))),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                      width: 1, color: AppColors.primaryColor)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                    BorderSide(width: 1, color: Colors.grey.withOpacity(0.2)),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 20)),
+        )
+      ],
+    );
   }
 
   Widget _pendidikanWaliInput() {
     //dropdown
-    return formInput(
-        title: "Pendidikan",
-        placeholder: "Masukkan pendidikan terakhir",
-        inputType: TextInputType.text,
-        inputAction: TextInputAction.next,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Masukkan pendidikan terakhir';
-          }
-          return null;
-        });
+    return Column(
+      children: [
+        Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Pendidikan",
+              style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+            )),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<int>(
+          value: controller.pendWali,
+          isExpanded: true,
+          items: const [
+            DropdownMenuItem(value: 0, child: Text("SD")),
+            DropdownMenuItem(value: 1, child: Text("SLTP")),
+            DropdownMenuItem(value: 2, child: Text("SLTA")),
+            DropdownMenuItem(value: 3, child: Text("Diploma")),
+            DropdownMenuItem(value: 4, child: Text("Sarjana")),
+          ],
+          onChanged: (val) {
+            if (val != null) {
+              controller.pendWali = val;
+            }
+          },
+          decoration: InputDecoration(
+              hintText: "Pendidikan Terakhir Ibu",
+              hintStyle: GoogleFonts.poppins(),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                      width: 1, color: Colors.grey.withOpacity(0.2))),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                      width: 1, color: AppColors.primaryColor)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                    BorderSide(width: 1, color: Colors.grey.withOpacity(0.2)),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 20)),
+        )
+      ],
+    );
   }
 
   Widget _pekerjaaanWaliInput() {
     return formInput(
+        controller: controller.infoOrangTuaTextController['wali.pekerjaan'],
         title: "Pekerjaan",
         placeholder: "Masukkan pekerjaan ibumu",
         inputType: TextInputType.text,

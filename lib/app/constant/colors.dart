@@ -19,5 +19,5 @@ class AppColors {
   static const kRed = Color(0XFFFFEAEE);
   static const pink = Color(0XFFF5BAC6);
   static const brown = Color(0XFFFFEDDB);
-  static final inputBoxColor = Color(0xFFF8F8FA);
+  static const inputBoxColor = Color(0xFFF8F8FA);
 }

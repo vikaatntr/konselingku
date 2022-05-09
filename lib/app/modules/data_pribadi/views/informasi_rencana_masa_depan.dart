@@ -31,12 +31,17 @@ class RencanaMasaDepanView extends GetView<DataPribadiController> {
           "Rencana Masa Depan",
           style: GoogleFonts.poppins(color: AppColors.black),
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Icon(
-              Feather.check,
-              color: AppColors.black,
+        actions: [
+          InkWell(
+            onTap: () {
+              controller.saveInformasiMasaDepan();
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Icon(
+                Feather.check,
+                color: AppColors.black,
+              ),
             ),
           )
         ],
@@ -70,6 +75,7 @@ class RencanaMasaDepanView extends GetView<DataPribadiController> {
 
   Widget _pilihanSekolah() {
     return formInput(
+        controller: controller.infoRencanaMasaDepan['pilihanSekolah'],
         title: "Pilihan sekolah lanjutan setelah lulus",
         placeholder: "Masukkan pilihan sekolah lanjutan",
         inputType: TextInputType.text,
@@ -84,6 +90,7 @@ class RencanaMasaDepanView extends GetView<DataPribadiController> {
 
   Widget _rencanaPendidikan() {
     return formInput(
+        controller: controller.infoRencanaMasaDepan['rencanaPendidikan'],
         title: "Rencana pendidikan lanjutan setelah SLTA",
         placeholder: "Masukkan rencana pendidikan",
         inputType: TextInputType.text,
@@ -98,6 +105,7 @@ class RencanaMasaDepanView extends GetView<DataPribadiController> {
 
   Widget _citaCita() {
     return formInput(
+        controller: controller.infoRencanaMasaDepan['citaCita'],
         title: "Cita-cita",
         placeholder: "Masukkan cita-cita",
         inputType: TextInputType.text,
@@ -121,7 +129,7 @@ class RencanaMasaDepanView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.keterkaitanMinatBakat,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Sangat Terkait")),
@@ -130,7 +138,7 @@ class RencanaMasaDepanView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.keterkaitanMinatBakat = val;
             }
           },
           decoration: InputDecoration(
@@ -167,7 +175,7 @@ class RencanaMasaDepanView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.dukunganOrtu,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Sangat")),
@@ -176,7 +184,7 @@ class RencanaMasaDepanView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.dukunganOrtu = val;
             }
           },
           decoration: InputDecoration(
@@ -213,7 +221,7 @@ class RencanaMasaDepanView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.ekonomiCita,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Mampu")),
@@ -223,7 +231,7 @@ class RencanaMasaDepanView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.ekonomiCita = val;
             }
           },
           decoration: InputDecoration(

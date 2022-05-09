@@ -31,12 +31,17 @@ class KondisiFisikPsikisView extends GetView<DataPribadiController> {
           "Kondisi Fisik dan Psikis",
           style: GoogleFonts.poppins(color: AppColors.black),
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Icon(
-              Feather.check,
-              color: AppColors.black,
+        actions: [
+          InkWell(
+            onTap: () {
+              controller.saveKondisiFisikdanPsikis();
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Icon(
+                Feather.check,
+                color: AppColors.black,
+              ),
             ),
           )
         ],
@@ -77,7 +82,7 @@ class KondisiFisikPsikisView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.keadaanBadan,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Tinggi")),
@@ -89,7 +94,7 @@ class KondisiFisikPsikisView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.keadaanBadan = val;
             }
           },
           decoration: InputDecoration(
@@ -126,7 +131,7 @@ class KondisiFisikPsikisView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.penyakit,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Typus")),
@@ -138,7 +143,7 @@ class KondisiFisikPsikisView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.penyakit = val;
             }
           },
           decoration: InputDecoration(
@@ -175,7 +180,7 @@ class KondisiFisikPsikisView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.gangguanIndera,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Mata")),
@@ -186,7 +191,7 @@ class KondisiFisikPsikisView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.gangguanIndera = val;
             }
           },
           decoration: InputDecoration(
@@ -214,6 +219,7 @@ class KondisiFisikPsikisView extends GetView<DataPribadiController> {
 
   Widget _gangguanFisik() {
     return formInput(
+        controller: controller.infoKondisiFisikdanPsikis['gangguanFisik'],
         title: "Gangguan Fisik Lainnya",
         placeholder: "Masukkan Gangguan Fisik Lainnya",
         inputType: TextInputType.text,
@@ -237,7 +243,7 @@ class KondisiFisikPsikisView extends GetView<DataPribadiController> {
             )),
         const SizedBox(height: 8),
         DropdownButtonFormField<int>(
-          value: controller.agamaOrtu,
+          value: controller.tampilanEmosi,
           isExpanded: true,
           items: const [
             DropdownMenuItem(value: 0, child: Text("Periang/mudah bergaul")),
@@ -248,7 +254,7 @@ class KondisiFisikPsikisView extends GetView<DataPribadiController> {
           ],
           onChanged: (val) {
             if (val != null) {
-              controller.agamaOrtu = val;
+              controller.tampilanEmosi = val;
             }
           },
           decoration: InputDecoration(

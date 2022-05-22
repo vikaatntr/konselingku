@@ -1,7 +1,15 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
+import 'dart:ffi';
+import 'dart:isolate';
+import 'dart:ui';
 
+import 'package:background_locator/background_locator.dart';
+import 'package:background_locator/location_dto.dart';
+import 'package:background_locator/settings/android_settings.dart';
+import 'package:background_locator/settings/ios_settings.dart';
+import 'package:background_locator/settings/locator_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +22,8 @@ import 'package:konselingku/app/data/repository/nomor_penting_repository.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';
 
 import '../views/detail_artikel_view.dart';
+import 'location_callback_handler.dart';
+import 'location_service_repository.dart';
 
 class HomeController extends GetxController {
   final Rx<UserData?> _user = Rx<UserData?>(null);
@@ -39,6 +49,10 @@ class HomeController extends GetxController {
 
   StreamSubscription<String>? onChangeFCMTokenListener;
 
+  //Location Service
+  static const String _isolateName = "LocatorIsolate";
+  ReceivePort port = ReceivePort();
+
   @override
   onInit() {
     getData();
@@ -57,7 +71,60 @@ class HomeController extends GetxController {
     });
     onChangeFCMTokenListener =
         fcm.onTokenRefresh.listen(UserRepository.instance.saveFCMToken);
+
+    if (IsolateNameServer.lookupPortByName(
+            LocationServiceRepository.isolateName) !=
+        null) {
+      IsolateNameServer.removePortNameMapping(
+          LocationServiceRepository.isolateName);
+    }
+
+    IsolateNameServer.registerPortWithName(
+        port.sendPort, LocationServiceRepository.isolateName);
+    port.listen((dynamic data) {
+      // do something with data
+    });
+    initPlatformState();
     super.onInit();
+  }
+
+  Future<void> initPlatformState() async {
+    await BackgroundLocator.initialize();
+  }
+
+  static void callback(LocationDto locationDto) async {
+    final SendPort? send = IsolateNameServer.lookupPortByName(_isolateName);
+    send?.send(locationDto);
+  }
+
+  void startLocationService() {
+    Map<String, dynamic> data = {'countInit': 1};
+    BackgroundLocator.registerLocationUpdate(LocationCallbackHandler.callback,
+        initCallback: LocationCallbackHandler.initCallback,
+        initDataCallback: data,
+        disposeCallback: LocationCallbackHandler.disposeCallback,
+        autoStop: false,
+        iosSettings: const IOSSettings(
+            accuracy: LocationAccuracy.NAVIGATION, distanceFilter: 0),
+        androidSettings: const AndroidSettings(
+            accuracy: LocationAccuracy.NAVIGATION,
+            interval: 5,
+            distanceFilter: 0,
+            androidNotificationSettings: AndroidNotificationSettings(
+                notificationChannelName: 'Location tracking',
+                notificationTitle: 'Start Location Tracking',
+                notificationMsg: 'Track location in background',
+                notificationBigMsg:
+                    'Background location is on to keep the app up-tp-date with your location. This is required for main features to work properly when the app is not running.',
+                notificationIcon: '',
+                notificationIconColor: Colors.grey,
+                notificationTapCallback:
+                    LocationCallbackHandler.notificationCallback)));
+  }
+
+//Optional
+  static void notificationCallback() {
+    print('User clicked on the notification');
   }
 
   Future<void> requestFCMPermission() async {

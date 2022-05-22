@@ -10,6 +10,7 @@ import 'package:konselingku/app/data/model/artikel.dart';
 import 'package:konselingku/app/data/repository/counseling_repository.dart';
 import 'package:konselingku/app/data/repository/kuesioner_repository.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';
+import 'package:konselingku/app/modules/location/views/location.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:konselingku/app/widget/general/dialog.dart';
 import 'package:url_launcher/url_launcher.dart';

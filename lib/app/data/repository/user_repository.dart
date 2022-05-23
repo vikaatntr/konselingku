@@ -17,6 +17,7 @@ class UserRepository {
   UserData? user;
   UserData? admin;
   List<UserData>? listUser;
+  Map<String, dynamic>? sekolah;
 
   Future<bool> createUser(UserData userData) async {
     var result = await UserServices.instance.createUser(userData);
@@ -39,6 +40,7 @@ class UserRepository {
   Future<UserData?> getUser() async {
     String uid = _appController.auth.currentUser!.uid;
     user = await UserServices.instance.getUser(uid);
+    await getSekolah();
     return user;
   }
 
@@ -75,5 +77,9 @@ class UserRepository {
   Future<void> updateUser(UserData user) async {
     this.user = user;
     await UserServices.instance.updateUser(user.uid, user);
+  }
+
+  Future<void> getSekolah() async {
+    sekolah = await UserServices.instance.getSekolah();
   }
 }

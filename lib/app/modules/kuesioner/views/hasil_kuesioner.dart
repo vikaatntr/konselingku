@@ -115,55 +115,57 @@ class HasilKuesioner extends GetView<KuesionerController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Container(
-          width: 165,
-          height: 100,
-          decoration: const BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: AppColors.kRed,
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
-                child: Text(
-                  "Jumlah Masalah",
-                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+        Expanded(
+          flex: 1,
+          child: Container(
+            decoration: const BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: AppColors.kRed,
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
+                  child: Text(
+                    "Jumlah Masalah",
+                    style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-              Text(
-                "$masalah",
-                style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.bold, fontSize: 35),
-              ),
-            ],
+                Text(
+                  "$masalah",
+                  style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.bold, fontSize: 35),
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(
           width: 10,
         ),
-        Container(
-          width: 165,
-          height: 100,
-          decoration: const BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: AppColors.yellow,
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
-                child: Text(
-                  "Presentase",
-                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+        Expanded(
+          flex: 1,
+          child: Container(
+            decoration: const BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: AppColors.yellow,
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
+                  child: Text(
+                    "Presentase",
+                    style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-              Text(
-                "${presentase.toStringAsFixed(presentase.toString().split('.')[1].contains("0") ? 0 : 2)} %",
-                style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.bold, fontSize: 35),
-              ),
-            ],
+                Text(
+                  "${presentase.toStringAsFixed(presentase.toString().split('.')[1].contains("0") ? 0 : 2)} %",
+                  style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.bold, fontSize: 35),
+                ),
+              ],
+            ),
           ),
         ),
       ],

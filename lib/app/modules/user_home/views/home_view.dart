@@ -466,7 +466,7 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.to(locationView());
+                      Get.to(const locationView());
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),

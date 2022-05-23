@@ -1,18 +1,20 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:isolate';
 import 'dart:ui';
+import 'dart:math';
 
 import 'package:background_locator/background_locator.dart';
 import 'package:background_locator/location_dto.dart';
 import 'package:background_locator/settings/android_settings.dart';
 import 'package:background_locator/settings/ios_settings.dart';
 import 'package:background_locator/settings/locator_settings.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:konselingku/app/constant/collection_path.dart';
 import 'package:konselingku/app/data/model/artikel.dart';
 import 'package:konselingku/app/data/model/nomor_penting.dart';
 import 'package:konselingku/app/data/model/user.dart';
@@ -20,6 +22,7 @@ import 'package:konselingku/app/data/repository/artikel_repository.dart';
 import 'package:konselingku/app/data/repository/counseling_repository.dart';
 import 'package:konselingku/app/data/repository/nomor_penting_repository.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../views/detail_artikel_view.dart';
 import 'location_callback_handler.dart';
@@ -50,8 +53,11 @@ class HomeController extends GetxController {
   StreamSubscription<String>? onChangeFCMTokenListener;
 
   //Location Service
-  static const String _isolateName = "LocatorIsolate";
   ReceivePort port = ReceivePort();
+
+  final _running = false.obs;
+  set isRunning(bool val) => _running.value = val;
+  bool get isRunning => _running.value;
 
   @override
   onInit() {
@@ -81,25 +87,84 @@ class HomeController extends GetxController {
 
     IsolateNameServer.registerPortWithName(
         port.sendPort, LocationServiceRepository.isolateName);
-    port.listen((dynamic data) {
-      // do something with data
-    });
-    initPlatformState();
+
+    port.listen(
+      (dynamic data) async {
+        await updateUI(data);
+        print(data);
+        if (data != null) {
+          var sekolah = UserRepository.instance.sekolah;
+          double lat1 = sekolah!['latitude'];
+          double lon1 = sekolah['longitude'];
+          double lat2 = data.latitude;
+          double lon2 = data.longitude;
+          var p = 0.017453292519943295;
+          var c = cos;
+          var a = 0.5 -
+              c((lat2 - lat1) * p) / 2 +
+              c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+          var result = 12742 * asin(sqrt(a));
+          print(result);
+          if (result > 0.15) {
+            var user = UserRepository.instance.user;
+            if (!(user!.is_update)) {
+              user.is_far = true;
+              user.latitude = data.latitude;
+              user.longitude = data.longitude;
+              UserRepository.instance.updateUser(user);
+              user.is_update = true;
+            }
+          }
+        }
+      },
+    );
+    initPlatformState().then((value) => _onStart());
     super.onInit();
+  }
+
+  void onStop() async {
+    await BackgroundLocator.unRegisterLocationUpdate();
+    final _isRunning = await BackgroundLocator.isServiceRunning();
+    isRunning = _isRunning;
+  }
+
+  void _onStart() async {
+    if (await _checkLocationPermission()) {
+      await startLocationService();
+      final _isRunning = await BackgroundLocator.isServiceRunning();
+      isRunning = _isRunning;
+    } else {
+      // show error
+    }
   }
 
   Future<void> initPlatformState() async {
     await BackgroundLocator.initialize();
+    isRunning = await BackgroundLocator.isServiceRunning();
   }
 
-  static void callback(LocationDto locationDto) async {
-    final SendPort? send = IsolateNameServer.lookupPortByName(_isolateName);
-    send?.send(locationDto);
+  Future<void> updateUI(LocationDto? data) async {
+    if (data == null) {
+      return;
+    }
+    await _updateNotificationText(data);
   }
 
-  void startLocationService() {
+  Future<void> _updateNotificationText(LocationDto? data) async {
+    if (data == null) {
+      return;
+    }
+
+    await BackgroundLocator.updateNotificationText(
+        title: "new location received",
+        msg: "${DateTime.now()}",
+        bigMsg: "${data.latitude}, ${data.longitude}");
+  }
+
+  Future<void> startLocationService() async {
     Map<String, dynamic> data = {'countInit': 1};
-    BackgroundLocator.registerLocationUpdate(LocationCallbackHandler.callback,
+    return await BackgroundLocator.registerLocationUpdate(
+        LocationCallbackHandler.callback,
         initCallback: LocationCallbackHandler.initCallback,
         initDataCallback: data,
         disposeCallback: LocationCallbackHandler.disposeCallback,
@@ -110,21 +175,35 @@ class HomeController extends GetxController {
             accuracy: LocationAccuracy.NAVIGATION,
             interval: 5,
             distanceFilter: 0,
+            client: LocationClient.google,
             androidNotificationSettings: AndroidNotificationSettings(
                 notificationChannelName: 'Location tracking',
                 notificationTitle: 'Start Location Tracking',
                 notificationMsg: 'Track location in background',
                 notificationBigMsg:
                     'Background location is on to keep the app up-tp-date with your location. This is required for main features to work properly when the app is not running.',
-                notificationIcon: '',
                 notificationIconColor: Colors.grey,
                 notificationTapCallback:
                     LocationCallbackHandler.notificationCallback)));
   }
 
-//Optional
-  static void notificationCallback() {
-    print('User clicked on the notification');
+  Future<bool> _checkLocationPermission() async {
+    final access = await Permission.location.status;
+    switch (access) {
+      case PermissionStatus.permanentlyDenied:
+      case PermissionStatus.denied:
+      case PermissionStatus.restricted:
+        final permission = await Permission.location.request();
+        if (permission == PermissionStatus.granted) {
+          return true;
+        } else {
+          return false;
+        }
+      case PermissionStatus.granted:
+        return true;
+      default:
+        return false;
+    }
   }
 
   Future<void> requestFCMPermission() async {

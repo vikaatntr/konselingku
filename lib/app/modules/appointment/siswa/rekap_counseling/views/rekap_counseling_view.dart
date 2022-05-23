@@ -75,8 +75,7 @@ class RekapCounselingView extends GetView<RekapCounselingController> {
             children: [
               Row(
                 children: [
-                  SizedBox(
-                    width: 200,
+                  Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(

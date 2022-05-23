@@ -14,6 +14,10 @@ class UserData {
   String noTelp;
   String uid;
   String photoUrl;
+  bool? is_far;
+  bool is_update;
+  double? latitude;
+  double? longitude;
   String role;
   String? nip;
   String? emailAnak;
@@ -57,7 +61,8 @@ class UserData {
       this.keteranganLingkungan,
       this.informasiMasadepan,
       this.aktivitasKelompok,
-      this.kondisiFisikdanPsikis});
+      this.kondisiFisikdanPsikis,
+      this.is_update = false});
 
   factory UserData.fromMap(Map map) {
     return UserData(
@@ -146,6 +151,9 @@ class UserData {
       'informasiMasadepan': informasiMasadepan?.toMap(),
       'kondisiFisikdanPsikis': kondisiFisikdanPsikis?.toMap(),
       'aktivitasKelompok': aktivitasKelompok?.toMap(),
+      'is_far': is_far,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 

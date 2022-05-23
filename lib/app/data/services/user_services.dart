@@ -77,6 +77,21 @@ class UserServices {
     }
   }
 
+  Future<Map<String, dynamic>?> getSekolah() async {
+    try {
+      var res =
+          await _firebaseFirestore.collection('settings').doc('sekolah').get();
+      if (res.exists) {
+        return res.data();
+      } else {
+        return null;
+      }
+    } catch (e, stackTrace) {
+      log(e.toString(), stackTrace: stackTrace);
+      return null;
+    }
+  }
+
   Future<void> saveFCMToken(String token, String uid) async {
     await FirebaseFirestore.instance
         .collection(CollectionPath.userData)

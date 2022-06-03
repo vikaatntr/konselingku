@@ -98,7 +98,6 @@ class GuruHomeView extends GetView<GuruHomeController> {
       children: [
         SizedBox(
           width: Get.width,
-          height: 230,
           child: DecoratedBox(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -120,8 +119,7 @@ class GuruHomeView extends GetView<GuruHomeController> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                   ),
-                  Text(
-                      "Yuk lakukan bimbingan konseling dengan konselor terbaikmu!",
+                  Text("Yuk lakukan bimbingan konseling dengan siswa!",
                       style: GoogleFonts.poppins(
                           color: AppColors.white,
                           // fontWeight: FontWeight.bold,
@@ -131,130 +129,130 @@ class GuruHomeView extends GetView<GuruHomeController> {
             ),
           ),
         ),
-        Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.only(top: 120),
-          child: SizedBox(
-            width: 330,
-            height: 190,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3)),
-                ],
-              ),
-              child: Container(
-                padding: const EdgeInsets.only(top: 10),
-                child: Column(
-                  children: [
-                    Text(
-                      "Dashboard Konseling",
-                      style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(top: 5),
-                            height: 70,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                color: AppColors.white,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: const Offset(0, 3))
-                                ]),
-                            child: Container(
-                                padding: const EdgeInsets.only(left: 5),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Sudah Melakukan",
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.blue,
-                                          fontSize: 12),
-                                    ),
-                                    Text(
-                                      "5 kali",
-                                      style: GoogleFonts.poppins(
-                                          color: AppColors.blue, fontSize: 12),
-                                    ),
-                                    Text(
-                                      "Bimbingan Konseling",
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.blue,
-                                          fontSize: 12),
-                                    ),
-                                  ],
-                                )),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(top: 5),
-                            height: 70,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                color: AppColors.white,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: const Offset(0, 3))
-                                ]),
-                            child: Container(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Poin Pelanggaran",
-                                    style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.bold,
-                                        color: AppColors.red,
-                                        fontSize: 12),
-                                  ),
-                                  Text(
-                                    "10 kali",
-                                    style: GoogleFonts.poppins(
-                                        color: AppColors.red, fontSize: 12),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+        //   Container(
+        //     alignment: Alignment.center,
+        //     padding: const EdgeInsets.only(top: 120),
+        //     child: SizedBox(
+        //       width: 330,
+        //       height: 190,
+        //       child: DecoratedBox(
+        //         decoration: BoxDecoration(
+        //           color: AppColors.white,
+        //           borderRadius: const BorderRadius.only(
+        //               topLeft: Radius.circular(10),
+        //               topRight: Radius.circular(10),
+        //               bottomLeft: Radius.circular(10),
+        //               bottomRight: Radius.circular(10)),
+        //           boxShadow: [
+        //             BoxShadow(
+        //                 color: Colors.grey.withOpacity(0.5),
+        //                 spreadRadius: 5,
+        //                 blurRadius: 7,
+        //                 offset: const Offset(0, 3)),
+        //           ],
+        //         ),
+        //         child: Container(
+        //           padding: const EdgeInsets.only(top: 10),
+        //           child: Column(
+        //             children: [
+        //               Text(
+        //                 "Dashboard Konseling",
+        //                 style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+        //               ),
+        //               Container(
+        //                 padding: const EdgeInsets.only(top: 15),
+        //                 child: Row(
+        //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //                   children: [
+        //                     Container(
+        //                       padding: const EdgeInsets.only(top: 5),
+        //                       height: 70,
+        //                       width: 150,
+        //                       decoration: BoxDecoration(
+        //                           shape: BoxShape.rectangle,
+        //                           color: AppColors.white,
+        //                           borderRadius:
+        //                               const BorderRadius.all(Radius.circular(10)),
+        //                           boxShadow: [
+        //                             BoxShadow(
+        //                                 color: Colors.grey.withOpacity(0.5),
+        //                                 spreadRadius: 5,
+        //                                 blurRadius: 7,
+        //                                 offset: const Offset(0, 3))
+        //                           ]),
+        //                       child: Container(
+        //                           padding: const EdgeInsets.only(left: 5),
+        //                           child: Column(
+        //                             crossAxisAlignment: CrossAxisAlignment.start,
+        //                             children: [
+        //                               Text(
+        //                                 "Sudah Melakukan",
+        //                                 style: GoogleFonts.poppins(
+        //                                     fontWeight: FontWeight.bold,
+        //                                     color: AppColors.blue,
+        //                                     fontSize: 12),
+        //                               ),
+        //                               Text(
+        //                                 "5 kali",
+        //                                 style: GoogleFonts.poppins(
+        //                                     color: AppColors.blue, fontSize: 12),
+        //                               ),
+        //                               Text(
+        //                                 "Bimbingan Konseling",
+        //                                 style: GoogleFonts.poppins(
+        //                                     fontWeight: FontWeight.bold,
+        //                                     color: AppColors.blue,
+        //                                     fontSize: 12),
+        //                               ),
+        //                             ],
+        //                           )),
+        //                     ),
+        //                     Container(
+        //                       padding: const EdgeInsets.only(top: 5),
+        //                       height: 70,
+        //                       width: 150,
+        //                       decoration: BoxDecoration(
+        //                           shape: BoxShape.rectangle,
+        //                           color: AppColors.white,
+        //                           borderRadius:
+        //                               const BorderRadius.all(Radius.circular(10)),
+        //                           boxShadow: [
+        //                             BoxShadow(
+        //                                 color: Colors.grey.withOpacity(0.5),
+        //                                 spreadRadius: 5,
+        //                                 blurRadius: 7,
+        //                                 offset: const Offset(0, 3))
+        //                           ]),
+        //                       child: Container(
+        //                         padding: const EdgeInsets.only(left: 5),
+        //                         child: Column(
+        //                           crossAxisAlignment: CrossAxisAlignment.start,
+        //                           children: [
+        //                             Text(
+        //                               "Poin Pelanggaran",
+        //                               style: GoogleFonts.poppins(
+        //                                   fontWeight: FontWeight.bold,
+        //                                   color: AppColors.red,
+        //                                   fontSize: 12),
+        //                             ),
+        //                             Text(
+        //                               "10 kali",
+        //                               style: GoogleFonts.poppins(
+        //                                   color: AppColors.red, fontSize: 12),
+        //                             ),
+        //                           ],
+        //                         ),
+        //                       ),
+        //                     ),
+        //                   ],
+        //                 ),
+        //               )
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
       ],
     );
   }

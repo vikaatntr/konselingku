@@ -16,6 +16,7 @@ class UserData {
   String photoUrl;
   bool? is_far;
   bool is_update;
+  Timestamp? locationUpdate;
   double? latitude;
   double? longitude;
   String role;
@@ -62,55 +63,62 @@ class UserData {
       this.informasiMasadepan,
       this.aktivitasKelompok,
       this.kondisiFisikdanPsikis,
-      this.is_update = false});
+      this.is_update = false,
+      this.is_far,
+      this.latitude,
+      this.longitude,
+      this.locationUpdate});
 
   factory UserData.fromMap(Map map) {
     return UserData(
-      email: map['email'] ?? '',
-      namaLengkap: map['namaLengkap'] ?? '',
-      namaPanggilan: map['namaPanggilan'] ?? '',
-      noTelp: map['noTelp'] ?? '',
-      photoUrl: map['photoUrl'] ?? '',
-      role: map['role'] ?? '',
-      uid: map['uid'] ?? '',
-      isAccept: map['isAccept'] ?? false,
-      nip: map['nip'],
-      emailAnak: map['emailAnak'],
-      fcmToken: map['fcmToken'],
-      poinPelanggaran: map['poinPelanggaran'] == null
-          ? {}
-          : _convertPoinPelanggaran(map['poinPelanggaran']),
-      notification: map['notification'] == null
-          ? []
-          : (map['notification'] as List)
-              .map((e) => AppNotification.fromMap(e))
-              .toList()
-              .reversed
-              .toList(),
-      jenisKelamin: map['jenisKelamin'],
-      tanggalLahir: map['tanggalLahir'],
-      tempatLahir: map['tempatLahir'],
-      agama: map['agama'],
-      facebook: map['facebook'],
-      dataPribadi: map['dataPribadi'] != null
-          ? DataPribadi.fromMap(map['dataPribadi'])
-          : null,
-      dataOrangTua: map['dataOrangTua'] != null
-          ? DataOrangTua.fromMap(map['dataOrangTua'])
-          : null,
-      keteranganLingkungan: map['keteranganLingkungan'] != null
-          ? KeteranganLingkungan.fromMap(map['keteranganLingkungan'])
-          : null,
-      informasiMasadepan: map['informasiMasadepan'] != null
-          ? InformasiMasadepan.fromMap(map['informasiMasadepan'])
-          : null,
-      kondisiFisikdanPsikis: map['kondisiFisikdanPsikis'] != null
-          ? KondisiFisikdanPsikis.fromMap(map['kondisiFisikdanPsikis'])
-          : null,
-      aktivitasKelompok: map['aktivitasKelompok'] != null
-          ? AktivitasKelompok.fromMap(map['aktivitasKelompok'])
-          : null,
-    );
+        email: map['email'] ?? '',
+        namaLengkap: map['namaLengkap'] ?? '',
+        namaPanggilan: map['namaPanggilan'] ?? '',
+        noTelp: map['noTelp'] ?? '',
+        photoUrl: map['photoUrl'] ?? '',
+        role: map['role'] ?? '',
+        uid: map['uid'] ?? '',
+        isAccept: map['isAccept'] ?? false,
+        nip: map['nip'],
+        emailAnak: map['emailAnak'],
+        fcmToken: map['fcmToken'],
+        poinPelanggaran: map['poinPelanggaran'] == null
+            ? {}
+            : _convertPoinPelanggaran(map['poinPelanggaran']),
+        notification: map['notification'] == null
+            ? []
+            : (map['notification'] as List)
+                .map((e) => AppNotification.fromMap(e))
+                .toList()
+                .reversed
+                .toList(),
+        jenisKelamin: map['jenisKelamin'],
+        tanggalLahir: map['tanggalLahir'],
+        tempatLahir: map['tempatLahir'],
+        agama: map['agama'],
+        facebook: map['facebook'],
+        dataPribadi: map['dataPribadi'] != null
+            ? DataPribadi.fromMap(map['dataPribadi'])
+            : null,
+        dataOrangTua: map['dataOrangTua'] != null
+            ? DataOrangTua.fromMap(map['dataOrangTua'])
+            : null,
+        keteranganLingkungan: map['keteranganLingkungan'] != null
+            ? KeteranganLingkungan.fromMap(map['keteranganLingkungan'])
+            : null,
+        informasiMasadepan: map['informasiMasadepan'] != null
+            ? InformasiMasadepan.fromMap(map['informasiMasadepan'])
+            : null,
+        kondisiFisikdanPsikis: map['kondisiFisikdanPsikis'] != null
+            ? KondisiFisikdanPsikis.fromMap(map['kondisiFisikdanPsikis'])
+            : null,
+        aktivitasKelompok: map['aktivitasKelompok'] != null
+            ? AktivitasKelompok.fromMap(map['aktivitasKelompok'])
+            : null,
+        is_far: map['is_far'],
+        latitude: map['latitude'],
+        longitude: map['longitude'],
+        locationUpdate: map['locationUpdate']);
   }
 
   static Map<String, Map<String, int>> _convertPoinPelanggaran(Map value) {
@@ -154,6 +162,7 @@ class UserData {
       'is_far': is_far,
       'latitude': latitude,
       'longitude': longitude,
+      'locationUpdate': locationUpdate
     };
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
+import 'package:konselingku/app/data/repository/user_repository.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
 import '../controllers/data_pribadi_controller.dart';
@@ -31,7 +32,9 @@ class DataPribadiView extends GetView<DataPribadiController> {
             const SizedBox(height: 20),
             _profileName(),
             const SizedBox(height: 35),
-            _contentBox1(),
+            UserRepository.instance.user?.role != "0"
+                ? const SizedBox.shrink()
+                : _contentBox1(),
             const SizedBox(height: 20),
             _contentBox2(),
             const SizedBox(height: 20),

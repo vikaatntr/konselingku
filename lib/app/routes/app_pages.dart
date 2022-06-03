@@ -1,16 +1,6 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:get/get.dart';
-import 'package:konselingku/app/modules/data_pribadi/views/informasi_aktivitas_kelompok.dart';
-import 'package:konselingku/app/modules/data_pribadi/views/informasi_data_orang_tua.dart';
-import 'package:konselingku/app/modules/data_pribadi/views/informasi_data_siswa.dart';
-import 'package:konselingku/app/modules/data_pribadi/views/informasi_kondisi_fisik_psikis.dart';
-import 'package:konselingku/app/modules/data_pribadi/views/informasi_rencana_masa_depan.dart';
-import 'package:konselingku/app/modules/data_pribadi/views/keterangan_lingkungan%20keluarga.dart';
-import 'package:konselingku/app/modules/data_pribadi/views/menu_data_pribadi.dart';
-import 'package:konselingku/app/modules/poin_pelanggaran/views/hasil_poin_pelanggaran.dart';
-import 'package:konselingku/app/modules/poin_pelanggaran/views/list_siswa.dart';
-import 'package:konselingku/app/modules/poin_pelanggaran/views/poin_pelanggaran_guru.dart';
+import 'package:konselingku/app/modules/data_pribadi/bindings/list_user_binding.dart';
+import 'package:konselingku/app/modules/data_pribadi/views/list_siswa_view.dart';
 
 import '../modules/admin_home/bindings/admin_home_binding.dart';
 import '../modules/admin_home/views/admin_home_view.dart';
@@ -44,7 +34,14 @@ import '../modules/auth/verifikasi/bindings/verifikasi_binding.dart';
 import '../modules/auth/verifikasi/views/verifikasi_view.dart';
 import '../modules/data_pribadi/bindings/data_pribadi_binding.dart';
 import '../modules/data_pribadi/views/data_pribadi_view.dart';
+import '../modules/data_pribadi/views/informasi_aktivitas_kelompok.dart';
+import '../modules/data_pribadi/views/informasi_data_orang_tua.dart';
 import '../modules/data_pribadi/views/informasi_data_pribadi.dart';
+import '../modules/data_pribadi/views/informasi_data_siswa.dart';
+import '../modules/data_pribadi/views/informasi_kondisi_fisik_psikis.dart';
+import '../modules/data_pribadi/views/informasi_rencana_masa_depan.dart';
+import '../modules/data_pribadi/views/keterangan_lingkungan%20keluarga.dart';
+import '../modules/data_pribadi/views/menu_data_pribadi.dart';
 import '../modules/guru_home/bindings/guru_home_binding.dart';
 import '../modules/guru_home/views/guru_home_view.dart';
 import '../modules/kuesioner/bindings/kuesioner_binding.dart';
@@ -53,9 +50,14 @@ import '../modules/kuesioner/views/hasil_kuesioner.dart';
 import '../modules/kuesioner/views/informasi_kuesioner_view.dart';
 import '../modules/kuesioner/views/kuesioner_view.dart';
 import '../modules/kuesioner/views/list_kuesioner.dart';
+import '../modules/location/bindings/location_binding.dart';
+import '../modules/location/views/location_view.dart';
 import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/views/notification_view.dart';
 import '../modules/poin_pelanggaran/bindings/poin_pelanggaran_binding.dart';
+import '../modules/poin_pelanggaran/views/hasil_poin_pelanggaran.dart';
+import '../modules/poin_pelanggaran/views/list_siswa.dart';
+import '../modules/poin_pelanggaran/views/poin_pelanggaran_guru.dart';
 import '../modules/poin_pelanggaran/views/poin_pelanggaran_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
@@ -65,6 +67,8 @@ import '../modules/user_home/bindings/home_binding.dart';
 import '../modules/user_home/views/home_view.dart';
 import '../modules/wali_home/bindings/wali_home_binding.dart';
 import '../modules/wali_home/views/wali_home_view.dart';
+
+// ignore_for_file: constant_identifier_names
 
 part 'app_routes.dart';
 
@@ -265,5 +269,15 @@ class AppPages {
             binding: DataPribadiBinding(),
           ),
         ]),
+    GetPage(
+      name: _Paths.LOCATION,
+      page: () => LocationView(),
+      binding: LocationBinding(),
+    ),
+    GetPage(
+      name: _Paths.LISTSISWADATAPRIBADI,
+      page: () => ListUserView(),
+      binding: ListUserDataPribadiBinding(),
+    ),
   ];
 }

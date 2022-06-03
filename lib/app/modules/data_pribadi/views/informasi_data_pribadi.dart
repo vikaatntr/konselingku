@@ -31,20 +31,22 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
           style: GoogleFonts.poppins(color: AppColors.black),
         ),
         actions: [
-          InkWell(
-            onTap: () {
-              if (_formKey.currentState!.validate()) {
-                controller.saveInfoDataPribadi();
-              }
-            },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 20),
-              child: Icon(
-                Feather.check,
-                color: AppColors.black,
-              ),
-            ),
-          )
+          controller.isViewOnly
+              ? const SizedBox.shrink()
+              : InkWell(
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      controller.saveInfoDataPribadi();
+                    }
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Icon(
+                      Feather.check,
+                      color: AppColors.black,
+                    ),
+                  ),
+                )
         ],
       ),
       body: _body(),
@@ -90,6 +92,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _alamatInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoPribadiSiswaTextController['alamat'],
         title: "Alamat",
         placeholder: "Masukkan alamatmu",
@@ -105,6 +108,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _distanceInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoPribadiSiswaTextController['jarakSekolah'],
         title: "Jarak dari rumah ke sekolah",
         placeholder: "Masukkan jarak (km)",
@@ -120,6 +124,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _asalSekolahInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoPribadiSiswaTextController['asalSekolah'],
         title: "Asal Sekolah",
         placeholder: "Masukkan asal sekolahmu",
@@ -135,6 +140,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _kelasInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoPribadiSiswaTextController['kelas'],
         title: "Kelas",
         placeholder: "Masukkan kelasmu",
@@ -150,6 +156,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _graduateInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoPribadiSiswaTextController['lulusSekolah'],
         title: "Lulus Sekolah",
         placeholder: "Lulus sekolah pada tahun",
@@ -165,6 +172,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _nilaiInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoPribadiSiswaTextController['nilaiSKHUN'],
         title: "Rata-rata Nilai SKHUN",
         placeholder: 'Masukkan rata-rata nilaimu',
@@ -180,6 +188,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _hobbyInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoPribadiSiswaTextController['hobby'],
         title: "Hobby",
         placeholder: "Masukkan hobbymu",
@@ -195,6 +204,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _favPelajaranInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller:
             controller.infoPribadiSiswaTextController['pelajaranYangDisenangi'],
         title: "Pelajaran yang Disenangi",
@@ -211,6 +221,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _citaInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoPribadiSiswaTextController['citaCita'],
         title: "Cita-cita",
         placeholder: "Masukkan cita-citamu",
@@ -226,6 +237,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _nisnInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoPribadiSiswaTextController['nisn'],
         title: "NISN",
         placeholder: "Masukkan NISN-mu",
@@ -241,6 +253,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _bbInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoPribadiSiswaTextController['beratBadan'],
         title: "Berat Badan",
         placeholder: "Masukkan berat badanmu",
@@ -256,6 +269,7 @@ class InfoDataPribadiView extends GetView<DataPribadiController> {
 
   Widget _tbInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoPribadiSiswaTextController['tinggiBadan'],
         title: "Tinggi Badan",
         placeholder: "Masukkan tinggi badanmu",

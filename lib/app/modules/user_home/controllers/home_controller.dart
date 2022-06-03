@@ -90,9 +90,9 @@ class HomeController extends GetxController {
 
     port.listen(
       (dynamic data) async {
-        await updateUI(data);
         print(data);
         if (data != null) {
+          var now = DateTime.now();
           var sekolah = UserRepository.instance.sekolah;
           double lat1 = sekolah!['latitude'];
           double lon1 = sekolah['longitude'];
@@ -105,14 +105,44 @@ class HomeController extends GetxController {
               c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
           var result = 12742 * asin(sqrt(a));
           print(result);
-          if (result > 0.15) {
+          if (now.hour < 12 && now.hour > 6) {
+            if (result > 0.15) {
+              await updateUI(data,
+                  title: "Pelanggaran", bigMsg: "Anda keluar area sekolah");
+              var user = UserRepository.instance.user;
+              if (!(user!.is_update)) {
+                user.is_far = true;
+                user.latitude = data.latitude;
+                user.longitude = data.longitude;
+                user.locationUpdate = Timestamp.fromDate(now);
+                UserRepository.instance.setFarFromSchool(user);
+                user.is_update = true;
+              }
+            } else {
+              if (user!.is_far ?? false) {
+                if ((user!.locationUpdate?.toDate().day ?? now.day) !=
+                    now.day) {
+                  user!.is_update = false;
+                  user!.is_far = false;
+                  user!.latitude = data.latitude;
+                  user!.longitude = data.longitude;
+                  UserRepository.instance.updateUser(user!);
+                }
+              } else {
+                await updateUI(data,
+                    title: "Yeay!", bigMsg: "Anda masih di area sekolah");
+              }
+            }
+          } else {
+            await updateUI(data,
+                title: "Tetap tenang", bigMsg: "Bukan jam sekolah");
             var user = UserRepository.instance.user;
-            if (!(user!.is_update)) {
-              user.is_far = true;
+            if (user!.is_far ?? false) {
+              user.is_update = false;
+              user.is_far = false;
               user.latitude = data.latitude;
               user.longitude = data.longitude;
               UserRepository.instance.updateUser(user);
-              user.is_update = true;
             }
           }
         }
@@ -143,22 +173,24 @@ class HomeController extends GetxController {
     isRunning = await BackgroundLocator.isServiceRunning();
   }
 
-  Future<void> updateUI(LocationDto? data) async {
+  Future<void> updateUI(LocationDto? data,
+      {String? title, String? msg, String? bigMsg}) async {
     if (data == null) {
       return;
     }
-    await _updateNotificationText(data);
+    await _updateNotificationText(data, title: title, msg: msg, bigMsg: bigMsg);
   }
 
-  Future<void> _updateNotificationText(LocationDto? data) async {
+  Future<void> _updateNotificationText(LocationDto? data,
+      {String? title, String? msg, String? bigMsg}) async {
     if (data == null) {
       return;
     }
 
     await BackgroundLocator.updateNotificationText(
-        title: "new location received",
-        msg: "${DateTime.now()}",
-        bigMsg: "${data.latitude}, ${data.longitude}");
+        title: title ?? "new location received",
+        msg: msg ?? "${DateTime.now()}",
+        bigMsg: bigMsg ?? "${data.latitude}, ${data.longitude}");
   }
 
   Future<void> startLocationService() async {

@@ -33,20 +33,22 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
           style: GoogleFonts.poppins(color: AppColors.black),
         ),
         actions: [
-          InkWell(
-            onTap: () {
-              if (_formKey.currentState!.validate()) {
-                controller.saveInfoDataSiswa();
-              }
-            },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 20),
-              child: Icon(
-                Feather.check,
-                color: AppColors.black,
-              ),
-            ),
-          )
+          controller.isViewOnly
+              ? const SizedBox.shrink()
+              : InkWell(
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      controller.saveInfoDataSiswa();
+                    }
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Icon(
+                      Feather.check,
+                      color: AppColors.black,
+                    ),
+                  ),
+                )
         ],
       ),
       body: _body(),
@@ -91,6 +93,7 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
 
   Widget _longNameInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoDataSiswaTextController['namaLengkap'],
         title: "Nama Lengkap",
         placeholder: "Masukkan nama lengkapmu",
@@ -106,6 +109,7 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
 
   Widget _nameInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoDataSiswaTextController['namaPanggilan'],
         title: "Nama Panggilan",
         placeholder: "Masukkan nama panggilanmu",
@@ -137,6 +141,7 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
 
   Widget _phoneInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         title: "No. Telepon",
         controller: controller.infoDataSiswaTextController['noTelp'],
         placeholder: "Masukkan nomer teleponmu",
@@ -175,11 +180,13 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
             DropdownMenuItem(value: 0, child: Text("Laki-laki")),
             DropdownMenuItem(value: 1, child: Text("Perempuan"))
           ],
-          onChanged: (val) {
-            if (val != null) {
-              controller.jenisKelamin = val;
-            }
-          },
+          onChanged: controller.isViewOnly
+              ? null
+              : (val) {
+                  if (val != null) {
+                    controller.jenisKelamin = val;
+                  }
+                },
           decoration: InputDecoration(
               hintText: "Jenis Kelamin",
               hintStyle: GoogleFonts.poppins(),
@@ -207,15 +214,17 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
     // ada kalender untuk memilih tanggal lahir
     return formInput(
         onTap: () async {
-          FocusScope.of(Get.context!).requestFocus(FocusNode());
-          DateTime? date = await showDatePicker(
-            context: Get.context!,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(1945),
-            lastDate: DateTime.now(),
-          );
-          if (date != null) {
-            controller.tanggalLahir = Timestamp.fromDate(date);
+          if (!controller.isViewOnly) {
+            FocusScope.of(Get.context!).requestFocus(FocusNode());
+            DateTime? date = await showDatePicker(
+              context: Get.context!,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1945),
+              lastDate: DateTime.now(),
+            );
+            if (date != null) {
+              controller.tanggalLahir = Timestamp.fromDate(date);
+            }
           }
         },
         enabled: false,
@@ -238,6 +247,7 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
 
   Widget _placebirthdayInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         title: "Tempat Lahir",
         placeholder: "Masukkan tempat lahirmu ",
         inputType: TextInputType.text,
@@ -272,11 +282,13 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
             DropdownMenuItem(value: 3, child: Text("Hindu")),
             DropdownMenuItem(value: 4, child: Text("Budha")),
           ],
-          onChanged: (val) {
-            if (val != null) {
-              controller.agamaSiswa = val;
-            }
-          },
+          onChanged: controller.isViewOnly
+              ? null
+              : (val) {
+                  if (val != null) {
+                    controller.agamaSiswa = val;
+                  }
+                },
           decoration: InputDecoration(
               hintText: "Agama",
               hintStyle: GoogleFonts.poppins(),
@@ -302,6 +314,7 @@ class InfoDataSiswaView extends GetView<DataPribadiController> {
 
   Widget _facebookInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         title: "Facebook",
         placeholder: "Masukkan facebookmu",
         controller: controller.infoDataSiswaTextController['facebook'],

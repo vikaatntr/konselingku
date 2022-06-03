@@ -14,6 +14,13 @@ class GuruHomeController extends GetxController {
   StreamSubscription<String>? onChangeFCMTokenListener;
   StreamSubscription<RemoteMessage>? onMessage;
   @override
+  void onClose() {
+    onChangeFCMTokenListener!.cancel();
+    onMessage!.cancel();
+    super.onClose();
+  }
+
+  @override
   void onInit() {
     fcm.getToken().then((value) {
       if (value != null) {}

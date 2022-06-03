@@ -31,18 +31,20 @@ class AktivitasKelompokView extends GetView<DataPribadiController> {
           style: GoogleFonts.poppins(color: AppColors.black),
         ),
         actions: [
-          InkWell(
-            onTap: () {
-              controller.saveAktifitasKelompok();
-            },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 20),
-              child: Icon(
-                Feather.check,
-                color: AppColors.black,
-              ),
-            ),
-          )
+          controller.isViewOnly
+              ? const SizedBox.shrink()
+              : InkWell(
+                  onTap: () {
+                    controller.saveAktifitasKelompok();
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Icon(
+                      Feather.check,
+                      color: AppColors.black,
+                    ),
+                  ),
+                )
         ],
       ),
       body: _body(),

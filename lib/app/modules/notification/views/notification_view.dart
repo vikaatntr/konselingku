@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:konselingku/app/data/model/notification.dart';
+import 'package:konselingku/app/data/repository/user_repository.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
 import '../controllers/notification_controller.dart';
@@ -45,11 +46,24 @@ class NotificationView extends GetView<NotificationController> {
             ),
           ),
           const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              notif.message,
-              style: const TextStyle(fontSize: 16),
-            ),
+          Wrap(
+            direction: Axis.vertical,
+            children: [
+              Text(
+                (UserRepository.instance.listUser
+                            ?.where((element) => element.email == notif.from)
+                            .first
+                            .namaPanggilan ??
+                        "") +
+                    " - " +
+                    notif.category,
+                style: const TextStyle(fontSize: 16),
+              ),
+              Text(
+                notif.message,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ],
           ),
         ],
       ),

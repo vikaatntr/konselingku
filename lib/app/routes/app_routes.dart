@@ -54,6 +54,8 @@ abstract class Routes {
   static const FORM_DATA_SISWA_PRIBADI =
       _Paths.MENU_DATA_PRIBADI + _Paths.FORM_DATA_SISWA_PRIBADI;
   static const MENU_DATA_PRIBADI = _Paths.MENU_DATA_PRIBADI;
+  static const LOCATION = _Paths.LOCATION;
+  static const LISTSISWADATAPRIBADI = _Paths.LISTSISWADATAPRIBADI;
 }
 
 abstract class _Paths {
@@ -97,4 +99,6 @@ abstract class _Paths {
   static const FORM_AKTIVITAS_KELOMPOK = '/form-aktivitas-kelompok';
   static const FORM_RENCANA_MASADEPAN = '/form-rencana-masa-depan';
   static const MENU_DATA_PRIBADI = '/menu-data-pribadi';
+  static const LOCATION = '/location';
+  static const LISTSISWADATAPRIBADI = '/listsiswa-datapribadi';
 }

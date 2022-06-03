@@ -64,6 +64,25 @@ class UserRepository {
     return listUser!;
   }
 
+  Future<void> setFarFromSchool(UserData userData) async {
+    await UserServices.instance.updateUser(userData.uid, userData);
+    try {
+      listUser ??= await getListUser();
+      for (var element in listUser!) {
+        if (element.role.contains("2")) {
+          NotificationRepository.instance.sendNotif(
+              to: element,
+              from: userData.email,
+              category: "Pelanggaran",
+              title: "Pelanggaran",
+              message: "${userData.namaLengkap} Jauh dari sekolah");
+        }
+      }
+    } catch (e, stackTrace) {
+      log(e.toString(), stackTrace: stackTrace);
+    }
+  }
+
   Future<void> logOut() async {
     await _appController.auth.signOut();
     Get.offAllNamed(Routes.LOGIN);

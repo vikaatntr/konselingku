@@ -32,18 +32,20 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
           style: GoogleFonts.poppins(color: AppColors.black),
         ),
         actions: [
-          InkWell(
-            onTap: () {
-              controller.saveInfoOrangtua();
-            },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 20),
-              child: Icon(
-                Feather.check,
-                color: AppColors.black,
-              ),
-            ),
-          )
+          controller.isViewOnly
+              ? const SizedBox.shrink()
+              : InkWell(
+                  onTap: () {
+                    controller.saveInfoOrangtua();
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Icon(
+                      Feather.check,
+                      color: AppColors.black,
+                    ),
+                  ),
+                )
         ],
       ),
       body: _body(),
@@ -104,6 +106,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _namaAyahInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoOrangTuaTextController['ayah.nama'],
         title: "Nama Ayah",
         placeholder: "Masukkan nama ayahmu",
@@ -119,6 +122,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _alamatAyahInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoOrangTuaTextController['ayah.alamat'],
         title: "Alamat Rumah",
         placeholder: "Masukkan alamat rumah ayahmu",
@@ -153,11 +157,13 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
             DropdownMenuItem(value: 3, child: Text("Hindu")),
             DropdownMenuItem(value: 4, child: Text("Budha")),
           ],
-          onChanged: (val) {
-            if (val != null) {
-              controller.agamaAyah = val;
-            }
-          },
+          onChanged: !controller.isViewOnly
+              ? (val) {
+                  if (val != null) {
+                    controller.agamaAyah = val;
+                  }
+                }
+              : null,
           decoration: InputDecoration(
               hintText: "Agama",
               hintStyle: GoogleFonts.poppins(),
@@ -202,11 +208,13 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
             DropdownMenuItem(value: 3, child: Text("Diploma")),
             DropdownMenuItem(value: 4, child: Text("Sarjana")),
           ],
-          onChanged: (val) {
-            if (val != null) {
-              controller.pendAyah = val;
-            }
-          },
+          onChanged: !controller.isViewOnly
+              ? (val) {
+                  if (val != null) {
+                    controller.agamaAyah = val;
+                  }
+                }
+              : null,
           decoration: InputDecoration(
               hintText: "Pendidikan Terakhir Ayah",
               hintStyle: GoogleFonts.poppins(),
@@ -232,6 +240,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _pekerjaaanAyahInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoOrangTuaTextController['ayah.pekerjaan'],
         title: "Pekerjaan",
         placeholder: "Masukkan pekerjaan ayahmu",
@@ -252,6 +261,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _namaIbuInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoOrangTuaTextController['ibu.nama'],
         title: "Nama Ibu",
         placeholder: "Masukkan nama ibumu",
@@ -267,6 +277,7 @@ class InfoDataOrtuView extends GetView<DataPribadiController> {
 
   Widget _alamatIbuInput() {
     return formInput(
+        enabled: !controller.isViewOnly,
         controller: controller.infoOrangTuaTextController['ibu.alamat'],
         title: "Alamat Rumah",
         placeholder: "Masukkan alamat rumah ibumu",

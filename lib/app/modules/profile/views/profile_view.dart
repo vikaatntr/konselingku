@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
 import '../../../constant/colors.dart';
+import '../../../data/repository/user_repository.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -31,7 +33,9 @@ class ProfileView extends GetView<ProfileController> {
             const SizedBox(height: 20),
             _profileName(),
             const SizedBox(height: 35),
-            _contentBox1(),
+            UserRepository.instance.user?.role != "0"
+                ? const SizedBox.shrink()
+                : _contentBox1(),
             const SizedBox(height: 20),
             _contentBox2(),
             const SizedBox(height: 20),
@@ -80,7 +84,9 @@ class ProfileView extends GetView<ProfileController> {
 
   Widget _contentBox1() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.MENU_DATA_PRIBADI);
+      },
       child: Container(
         height: 100,
         width: Get.width,
@@ -122,7 +128,9 @@ class ProfileView extends GetView<ProfileController> {
 
   Widget _contentBox2() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(Routes.FORGOT_PASSWORD);
+      },
       child: Container(
         height: 100,
         width: Get.width,

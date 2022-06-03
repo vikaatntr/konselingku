@@ -5,6 +5,8 @@ import 'package:konselingku/app/data/model/user.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';
 
 class DataPribadiController extends GetxController {
+  UserData? userData;
+  bool isViewOnly = Get.arguments != null;
   Map<String, TextEditingController> infoDataSiswaTextController = {};
   Map<String, TextEditingController> infoPribadiSiswaTextController = {};
   Map<String, TextEditingController> infoOrangTuaTextController = {};
@@ -123,6 +125,8 @@ class DataPribadiController extends GetxController {
 
   @override
   void onInit() {
+    userData = Get.arguments ?? UserRepository.instance.user;
+
     initInfoDataSiswa();
     initInformasiDataPribadiSiswa();
     initInfoOrangTuaSiswa();
@@ -135,93 +139,86 @@ class DataPribadiController extends GetxController {
 
   initInfoDataSiswa() {
     infoDataSiswaTextController['namaLengkap'] =
-        TextEditingController(text: UserRepository.instance.user!.namaLengkap);
-    infoDataSiswaTextController['namaPanggilan'] = TextEditingController(
-        text: UserRepository.instance.user!.namaPanggilan);
+        TextEditingController(text: userData!.namaLengkap);
+    infoDataSiswaTextController['namaPanggilan'] =
+        TextEditingController(text: userData!.namaPanggilan);
     infoDataSiswaTextController['email'] =
-        TextEditingController(text: UserRepository.instance.user!.email);
+        TextEditingController(text: userData!.email);
     infoDataSiswaTextController['noTelp'] =
-        TextEditingController(text: UserRepository.instance.user!.noTelp);
-    jenisKelamin = UserRepository.instance.user!.jenisKelamin ?? 0;
-    tanggalLahir =
-        UserRepository.instance.user!.tanggalLahir ?? Timestamp.now();
+        TextEditingController(text: userData!.noTelp);
+    jenisKelamin = userData!.jenisKelamin ?? 0;
+    tanggalLahir = userData!.tanggalLahir ?? Timestamp.now();
     infoDataSiswaTextController['tempatLahir'] =
-        TextEditingController(text: UserRepository.instance.user!.tempatLahir);
+        TextEditingController(text: userData!.tempatLahir);
     infoDataSiswaTextController['tanggalLahir'] = TextEditingController(
-        text: UserRepository.instance.user!.tanggalLahir
-                ?.toDate()
-                .toString()
-                .split(' ')[0] ??
+        text: userData!.tanggalLahir?.toDate().toString().split(' ')[0] ??
             Timestamp.now().toDate().toString().split(' ')[0]);
-    agamaSiswa = UserRepository.instance.user!.agama ?? 0;
+    agamaSiswa = userData!.agama ?? 0;
     infoDataSiswaTextController['facebook'] = TextEditingController(
-      text: UserRepository.instance.user!.facebook,
+      text: userData!.facebook,
     );
   }
 
   initInformasiDataPribadiSiswa() {
-    infoPribadiSiswaTextController['alamat'] = TextEditingController(
-        text: UserRepository.instance.user!.dataPribadi?.alamat);
-    infoPribadiSiswaTextController['jarakSekolah'] = TextEditingController(
-        text: UserRepository.instance.user!.dataPribadi?.jarakSekolah);
-    infoPribadiSiswaTextController['asalSekolah'] = TextEditingController(
-        text: UserRepository.instance.user!.dataPribadi?.asalSekolah);
-    infoPribadiSiswaTextController['kelas'] = TextEditingController(
-        text: UserRepository.instance.user!.dataPribadi?.kelas);
-    infoPribadiSiswaTextController['lulusSekolah'] = TextEditingController(
-        text: UserRepository.instance.user!.dataPribadi?.lulusSekolah);
-    infoPribadiSiswaTextController['nilaiSKHUN'] = TextEditingController(
-        text: UserRepository.instance.user!.dataPribadi?.nilaiSKHUN);
-    infoPribadiSiswaTextController['hobby'] = TextEditingController(
-        text: UserRepository.instance.user!.dataPribadi?.hobby);
+    infoPribadiSiswaTextController['alamat'] =
+        TextEditingController(text: userData!.dataPribadi?.alamat);
+    infoPribadiSiswaTextController['jarakSekolah'] =
+        TextEditingController(text: userData!.dataPribadi?.jarakSekolah);
+    infoPribadiSiswaTextController['asalSekolah'] =
+        TextEditingController(text: userData!.dataPribadi?.asalSekolah);
+    infoPribadiSiswaTextController['kelas'] =
+        TextEditingController(text: userData!.dataPribadi?.kelas);
+    infoPribadiSiswaTextController['lulusSekolah'] =
+        TextEditingController(text: userData!.dataPribadi?.lulusSekolah);
+    infoPribadiSiswaTextController['nilaiSKHUN'] =
+        TextEditingController(text: userData!.dataPribadi?.nilaiSKHUN);
+    infoPribadiSiswaTextController['hobby'] =
+        TextEditingController(text: userData!.dataPribadi?.hobby);
     infoPribadiSiswaTextController['pelajaranYangDisenangi'] =
         TextEditingController(
             text: UserRepository
                 .instance.user!.dataPribadi?.pelajaranYangDisenangi);
-    infoPribadiSiswaTextController['citaCita'] = TextEditingController(
-        text: UserRepository.instance.user!.dataPribadi?.citaCita);
-    infoPribadiSiswaTextController['nisn'] = TextEditingController(
-        text: UserRepository.instance.user!.dataPribadi?.nisn);
-    infoPribadiSiswaTextController['beratBadan'] = TextEditingController(
-        text: UserRepository.instance.user!.dataPribadi?.beratBadan);
-    infoPribadiSiswaTextController['tinggiBadan'] = TextEditingController(
-        text: UserRepository.instance.user!.dataPribadi?.tinggiBadan);
+    infoPribadiSiswaTextController['citaCita'] =
+        TextEditingController(text: userData!.dataPribadi?.citaCita);
+    infoPribadiSiswaTextController['nisn'] =
+        TextEditingController(text: userData!.dataPribadi?.nisn);
+    infoPribadiSiswaTextController['beratBadan'] =
+        TextEditingController(text: userData!.dataPribadi?.beratBadan);
+    infoPribadiSiswaTextController['tinggiBadan'] =
+        TextEditingController(text: userData!.dataPribadi?.tinggiBadan);
   }
 
   initInfoOrangTuaSiswa() {
-    infoOrangTuaTextController['ayah.nama'] = TextEditingController(
-        text: UserRepository.instance.user!.dataOrangTua?.dataAyah.nama);
-    infoOrangTuaTextController['ayah.alamat'] = TextEditingController(
-        text: UserRepository.instance.user!.dataOrangTua?.dataAyah.alamat);
-    infoOrangTuaTextController['ayah.pekerjaan'] = TextEditingController(
-        text: UserRepository.instance.user!.dataOrangTua?.dataAyah.pekerjaan);
-    agamaAyah = UserRepository.instance.user!.dataOrangTua?.dataAyah.agama ?? 0;
-    pendAyah =
-        UserRepository.instance.user!.dataOrangTua?.dataAyah.pendidikan ?? 0;
+    infoOrangTuaTextController['ayah.nama'] =
+        TextEditingController(text: userData!.dataOrangTua?.dataAyah.nama);
+    infoOrangTuaTextController['ayah.alamat'] =
+        TextEditingController(text: userData!.dataOrangTua?.dataAyah.alamat);
+    infoOrangTuaTextController['ayah.pekerjaan'] =
+        TextEditingController(text: userData!.dataOrangTua?.dataAyah.pekerjaan);
+    agamaAyah = userData!.dataOrangTua?.dataAyah.agama ?? 0;
+    pendAyah = userData!.dataOrangTua?.dataAyah.pendidikan ?? 0;
 
-    infoOrangTuaTextController['ibu.nama'] = TextEditingController(
-        text: UserRepository.instance.user!.dataOrangTua?.dataIbu.nama);
-    infoOrangTuaTextController['ibu.alamat'] = TextEditingController(
-        text: UserRepository.instance.user!.dataOrangTua?.dataIbu.alamat);
-    infoOrangTuaTextController['ibu.pekerjaan'] = TextEditingController(
-        text: UserRepository.instance.user!.dataOrangTua?.dataIbu.pekerjaan);
-    agamaIbu = UserRepository.instance.user!.dataOrangTua?.dataIbu.agama ?? 0;
-    pendIbu =
-        UserRepository.instance.user!.dataOrangTua?.dataIbu.pendidikan ?? 0;
+    infoOrangTuaTextController['ibu.nama'] =
+        TextEditingController(text: userData!.dataOrangTua?.dataIbu.nama);
+    infoOrangTuaTextController['ibu.alamat'] =
+        TextEditingController(text: userData!.dataOrangTua?.dataIbu.alamat);
+    infoOrangTuaTextController['ibu.pekerjaan'] =
+        TextEditingController(text: userData!.dataOrangTua?.dataIbu.pekerjaan);
+    agamaIbu = userData!.dataOrangTua?.dataIbu.agama ?? 0;
+    pendIbu = userData!.dataOrangTua?.dataIbu.pendidikan ?? 0;
 
-    infoOrangTuaTextController['wali.nama'] = TextEditingController(
-        text: UserRepository.instance.user!.dataOrangTua?.dataWali.nama);
-    infoOrangTuaTextController['wali.alamat'] = TextEditingController(
-        text: UserRepository.instance.user!.dataOrangTua?.dataWali.alamat);
-    infoOrangTuaTextController['wali.pekerjaan'] = TextEditingController(
-        text: UserRepository.instance.user!.dataOrangTua?.dataWali.pekerjaan);
-    agamaWali = UserRepository.instance.user!.dataOrangTua?.dataWali.agama ?? 0;
-    pendWali =
-        UserRepository.instance.user!.dataOrangTua?.dataWali.pendidikan ?? 0;
+    infoOrangTuaTextController['wali.nama'] =
+        TextEditingController(text: userData!.dataOrangTua?.dataWali.nama);
+    infoOrangTuaTextController['wali.alamat'] =
+        TextEditingController(text: userData!.dataOrangTua?.dataWali.alamat);
+    infoOrangTuaTextController['wali.pekerjaan'] =
+        TextEditingController(text: userData!.dataOrangTua?.dataWali.pekerjaan);
+    agamaWali = userData!.dataOrangTua?.dataWali.agama ?? 0;
+    pendWali = userData!.dataOrangTua?.dataWali.pendidikan ?? 0;
   }
 
   initKeteranganKeluarga() {
-    UserData user = UserRepository.instance.user!;
+    UserData user = userData!;
     infoLingkunganKeluarga['uangSaku'] =
         TextEditingController(text: user.keteranganLingkungan?.uangSaku);
     infoLingkunganKeluarga['transportSekolah'] = TextEditingController(
@@ -237,7 +234,7 @@ class DataPribadiController extends GetxController {
   }
 
   initKondisiFisikdanPsikis() {
-    UserData user = UserRepository.instance.user!;
+    UserData user = userData!;
     keadaanBadan = user.kondisiFisikdanPsikis?.tampilanBadan ?? 0;
     penyakit = user.kondisiFisikdanPsikis?.penyakit ?? 0;
     gangguanIndera = user.kondisiFisikdanPsikis?.gangguanIndera ?? 0;
@@ -247,7 +244,7 @@ class DataPribadiController extends GetxController {
   }
 
   initAktifitasKelompok() {
-    UserData user = UserRepository.instance.user!;
+    UserData user = userData!;
     kedudukanKelompok = user.aktivitasKelompok?.kedudukan ?? 0;
     keterlibatanKelompokKerja = user.aktivitasKelompok?.keterlibatan ?? 0;
     kedisiplinan = user.aktivitasKelompok?.kedisiplinan ?? 0;
@@ -255,7 +252,7 @@ class DataPribadiController extends GetxController {
   }
 
   initInformasiMasaDepan() {
-    UserData user = UserRepository.instance.user!;
+    UserData user = userData!;
     infoRencanaMasaDepan['pilihanSekolah'] =
         TextEditingController(text: user.informasiMasadepan?.pilihanSekolah);
     infoRencanaMasaDepan['rencanaPendidikan'] =
@@ -269,7 +266,7 @@ class DataPribadiController extends GetxController {
   }
 
   saveInfoDataSiswa() {
-    UserRepository.instance.user = UserRepository.instance.user!.copyWith(
+    UserRepository.instance.user = userData!.copyWith(
         email: infoDataSiswaTextController['email']!.text,
         namaLengkap: infoDataSiswaTextController['namaLengkap']!.text,
         namaPanggilan: infoDataSiswaTextController['namaPanggilan']!.text,
@@ -279,13 +276,11 @@ class DataPribadiController extends GetxController {
         tanggalLahir: tanggalLahir,
         jenisKelamin: jenisKelamin,
         agama: agamaSiswa);
-    UserRepository.instance
-        .updateUser(UserRepository.instance.user!)
-        .then((value) => Get.back());
+    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
   }
 
   saveInfoDataPribadi() {
-    UserRepository.instance.user = UserRepository.instance.user!.copyWith(
+    UserRepository.instance.user = userData!.copyWith(
         dataPribadi: DataPribadi(
             alamat: infoPribadiSiswaTextController['alamat']!.text,
             jarakSekolah: infoPribadiSiswaTextController['jarakSekolah']!.text,
@@ -301,13 +296,11 @@ class DataPribadiController extends GetxController {
             beratBadan: infoPribadiSiswaTextController['beratBadan']!.text,
             tinggiBadan: infoPribadiSiswaTextController['tinggiBadan']!.text));
 
-    UserRepository.instance
-        .updateUser(UserRepository.instance.user!)
-        .then((value) => Get.back());
+    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
   }
 
   saveKondisiFisikdanPsikis() {
-    UserRepository.instance.user = UserRepository.instance.user!.copyWith(
+    UserRepository.instance.user = userData!.copyWith(
         kondisiFisikdanPsikis: KondisiFisikdanPsikis(
             tampilanBadan: keadaanBadan,
             penyakit: penyakit,
@@ -315,26 +308,22 @@ class DataPribadiController extends GetxController {
             gangguanFisik: infoKondisiFisikdanPsikis['gangguanFisik']!.text,
             emosiTingkahLaku: tampilanEmosi));
 
-    UserRepository.instance
-        .updateUser(UserRepository.instance.user!)
-        .then((value) => Get.back());
+    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
   }
 
   saveAktifitasKelompok() {
-    UserRepository.instance.user = UserRepository.instance.user!.copyWith(
+    UserRepository.instance.user = userData!.copyWith(
         aktivitasKelompok: AktivitasKelompok(
             kedudukan: kedudukanKelompok,
             keterlibatan: keterlibatanKelompokKerja,
             kedisiplinan: kedisiplinan,
             kerjasama: kerjasamaKelompok));
 
-    UserRepository.instance
-        .updateUser(UserRepository.instance.user!)
-        .then((value) => Get.back());
+    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
   }
 
   saveInformasiMasaDepan() {
-    UserRepository.instance.user = UserRepository.instance.user!.copyWith(
+    UserRepository.instance.user = userData!.copyWith(
         informasiMasadepan: InformasiMasadepan(
             pilihanSekolah: infoRencanaMasaDepan['pilihanSekolah']!.text,
             rencanaPendidikan: infoRencanaMasaDepan['rencanaPendidikan']!.text,
@@ -343,13 +332,11 @@ class DataPribadiController extends GetxController {
             dukunganOrtu: dukunganOrtu,
             kemampuan: ekonomiCita));
 
-    UserRepository.instance
-        .updateUser(UserRepository.instance.user!)
-        .then((value) => Get.back());
+    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
   }
 
   saveInfoOrangtua() {
-    UserRepository.instance.user = UserRepository.instance.user!.copyWith(
+    UserRepository.instance.user = userData!.copyWith(
         dataOrangTua: DataOrangTua(
             dataAyah: DataAyah(
                 nama: infoOrangTuaTextController['ayah.nama']!.text,
@@ -371,13 +358,11 @@ class DataPribadiController extends GetxController {
                 pekerjaan:
                     infoOrangTuaTextController['wali.pekerjaan']!.text)));
 
-    UserRepository.instance
-        .updateUser(UserRepository.instance.user!)
-        .then((value) => Get.back());
+    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
   }
 
   saveKeteranganKeluarga() {
-    UserRepository.instance.user = UserRepository.instance.user!.copyWith(
+    UserRepository.instance.user = userData!.copyWith(
         keteranganLingkungan: KeteranganLingkungan(
             keutuhanOrtu: keadaanUtuhOrtu,
             keadaanOrtu: keadaanOrtu,
@@ -388,9 +373,7 @@ class DataPribadiController extends GetxController {
             transportSekolah: infoLingkunganKeluarga['transportSekolah']!.text,
             masalah: infoLingkunganKeluarga['masalah']!.text));
 
-    UserRepository.instance
-        .updateUser(UserRepository.instance.user!)
-        .then((value) => Get.back());
+    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
   }
 
   @override

@@ -328,6 +328,7 @@ class HomeController extends GetxController {
     if (onChangeFCMTokenListener != null) {
       onChangeFCMTokenListener!.cancel();
     }
+    updateLoaction!.cancel();
     super.onClose();
   }
 

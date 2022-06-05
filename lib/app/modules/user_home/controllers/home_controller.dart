@@ -13,6 +13,7 @@ import 'package:background_locator/settings/locator_settings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart' as geo;
 import 'package:get/get.dart';
 import 'package:konselingku/app/constant/collection_path.dart';
 import 'package:konselingku/app/data/model/artikel.dart';
@@ -58,6 +59,7 @@ class HomeController extends GetxController {
   final _running = false.obs;
   set isRunning(bool val) => _running.value = val;
   bool get isRunning => _running.value;
+  StreamSubscription? updateLoaction;
 
   @override
   onInit() {
@@ -66,7 +68,9 @@ class HomeController extends GetxController {
       artikelIndex.value = artikelController.page!.toInt();
     });
     fcm.getToken().then((value) {
-      if (value != null) {}
+      if (value != null) {
+        UserRepository.instance.saveFCMToken(value);
+      }
     });
     requestFCMPermission().then((_) {
       fcm.getToken().then((value) {
@@ -148,7 +152,66 @@ class HomeController extends GetxController {
         }
       },
     );
-    initPlatformState().then((value) => _onStart());
+    initPlatformState().then((value) async {
+      await _onStart();
+      updateLoaction =
+          Stream.periodic(const Duration(seconds: 5)).listen((event) async {
+        var position = await geo.Geolocator.getCurrentPosition();
+
+        var now = DateTime.now();
+        var sekolah = UserRepository.instance.sekolah;
+        double lat1 = sekolah!['latitude'];
+        double lon1 = sekolah['longitude'];
+        double lat2 = position.latitude;
+        double lon2 = position.longitude;
+        var p = 0.017453292519943295;
+        var c = cos;
+        var a = 0.5 -
+            c((lat2 - lat1) * p) / 2 +
+            c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+        var result = 12742 * asin(sqrt(a));
+        print(result);
+        if (now.hour < 12 && now.hour > 6) {
+          if (result > 0.15) {
+            await updateUI(position,
+                title: "Pelanggaran", bigMsg: "Anda keluar area sekolah");
+            var user = UserRepository.instance.user;
+            if (!(user!.is_update)) {
+              user.is_far = true;
+              user.latitude = position.latitude;
+              user.longitude = position.longitude;
+              user.locationUpdate = Timestamp.fromDate(now);
+              UserRepository.instance.setFarFromSchool(user);
+              user.is_update = true;
+            }
+          } else {
+            if (user!.is_far ?? false) {
+              if ((user!.locationUpdate?.toDate().day ?? now.day) != now.day) {
+                user!.is_update = false;
+                user!.is_far = false;
+                user!.latitude = position.latitude;
+                user!.longitude = position.longitude;
+                UserRepository.instance.updateUser(user!);
+              }
+            } else {
+              await updateUI(position,
+                  title: "Yeay!", bigMsg: "Anda masih di area sekolah");
+            }
+          }
+        } else {
+          await updateUI(position,
+              title: "Tetap tenang", bigMsg: "Bukan jam sekolah");
+          var user = UserRepository.instance.user;
+          if (user!.is_far ?? false) {
+            user.is_update = false;
+            user.is_far = false;
+            user.latitude = position.latitude;
+            user.longitude = position.longitude;
+            UserRepository.instance.updateUser(user);
+          }
+        }
+      });
+    });
     super.onInit();
   }
 
@@ -158,7 +221,7 @@ class HomeController extends GetxController {
     isRunning = _isRunning;
   }
 
-  void _onStart() async {
+  Future<void> _onStart() async {
     if (await _checkLocationPermission()) {
       await startLocationService();
       final _isRunning = await BackgroundLocator.isServiceRunning();
@@ -173,7 +236,7 @@ class HomeController extends GetxController {
     isRunning = await BackgroundLocator.isServiceRunning();
   }
 
-  Future<void> updateUI(LocationDto? data,
+  Future<void> updateUI(data,
       {String? title, String? msg, String? bigMsg}) async {
     if (data == null) {
       return;
@@ -181,7 +244,7 @@ class HomeController extends GetxController {
     await _updateNotificationText(data, title: title, msg: msg, bigMsg: bigMsg);
   }
 
-  Future<void> _updateNotificationText(LocationDto? data,
+  Future<void> _updateNotificationText(data,
       {String? title, String? msg, String? bigMsg}) async {
     if (data == null) {
       return;

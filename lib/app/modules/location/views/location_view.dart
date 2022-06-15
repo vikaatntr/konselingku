@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:konselingku/app/data/model/user.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';
 
 import '../../../widget/general/app_bar.dart';
@@ -20,7 +21,7 @@ class LocationView extends GetView<LocationController> {
 
   Widget _body() {
     return SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(15, 30, 15, 30),
+      padding: const EdgeInsets.fromLTRB(15, 30, 15, 30),
       child: Form(
           child: SizedBox(
         height: Get.height,
@@ -28,7 +29,7 @@ class LocationView extends GetView<LocationController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _pictureBox1(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _contentBox1(),
             _contentBox2()
           ],
@@ -86,8 +87,8 @@ class LocationView extends GetView<LocationController> {
                 Marker(
                   width: 30.0,
                   height: 30.0,
-                  point: LatLng(UserRepository.instance.user!.latitude!,
-                      UserRepository.instance.user!.longitude!),
+                  point: LatLng(
+                      controller.user.latitude!, controller.user.longitude!),
                   builder: (ctx) => const Icon(Icons.location_on),
                 ),
               ],
@@ -100,11 +101,13 @@ class LocationView extends GetView<LocationController> {
 
   Widget _contentBox1() {
     return Container(
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       child: Column(
         children: [
           Text(
-            "Halo ${UserRepository.instance.user?.namaPanggilan}",
+            Get.arguments is UserData
+                ? controller.user.namaPanggilan
+                : "Halo ${controller.user.namaPanggilan}",
             style:
                 GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 20),
           )
@@ -115,13 +118,15 @@ class LocationView extends GetView<LocationController> {
 
   Widget _contentBox2() {
     return Container(
-      padding: EdgeInsets.only(left: 10, right: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10),
       child: Column(
         children: [
           Text(
-            UserRepository.instance.user?.is_far ?? false
-                ? "Kamu berada di luar sekolah di jam pelajaran, kamu akan mendapat hukuman"
-                : "Kamu sudah berada di lokasi yang sudah ditentukan, selamat belajar!",
+            Get.arguments is UserData
+                ? "Berada diluar sekolah"
+                : controller.user.is_far ?? false
+                    ? "Kamu berada di luar sekolah di jam pelajaran, kamu akan mendapat hukuman"
+                    : "Kamu sudah berada di lokasi yang sudah ditentukan, selamat belajar!",
             style: GoogleFonts.poppins(),
           )
         ],

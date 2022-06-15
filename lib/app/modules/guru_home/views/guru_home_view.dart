@@ -415,6 +415,45 @@ class GuruHomeView extends GetView<GuruHomeController> {
               )
             ],
           ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(Routes.LISTSISWALOCATION);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 5),
+                      height: 100,
+                      width: 180,
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: AppColors.brown,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Image.asset(
+                          "assets/images/location.png",
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Text(
+                      "Lokasi",
+                      style: GoogleFonts.poppins(fontSize: 13),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         )
       ],
     );

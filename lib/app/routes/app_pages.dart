@@ -51,6 +51,7 @@ import '../modules/kuesioner/views/informasi_kuesioner_view.dart';
 import '../modules/kuesioner/views/kuesioner_view.dart';
 import '../modules/kuesioner/views/list_kuesioner.dart';
 import '../modules/location/bindings/location_binding.dart';
+import '../modules/location/views/list_siswa_location.dart';
 import '../modules/location/views/location_view.dart';
 import '../modules/notification/bindings/notification_binding.dart';
 import '../modules/notification/views/notification_view.dart';
@@ -275,8 +276,13 @@ class AppPages {
       binding: LocationBinding(),
     ),
     GetPage(
+      name: _Paths.LISTSISWALOCATION,
+      page: () => const ListUserLocationView(),
+      binding: ListSiswaLocationBinding(),
+    ),
+    GetPage(
       name: _Paths.LISTSISWADATAPRIBADI,
-      page: () => ListUserView(),
+      page: () => const ListUserView(),
       binding: ListUserDataPribadiBinding(),
     ),
   ];

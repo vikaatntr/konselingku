@@ -1,20 +1,8 @@
 import 'package:get/get.dart';
+import 'package:konselingku/app/data/model/user.dart';
+import 'package:konselingku/app/data/repository/user_repository.dart';
 
 class LocationController extends GetxController {
-  //TODO: Implement LocationController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
+  UserData user =
+      Get.arguments is UserData ? Get.arguments : UserRepository.instance.user;
 }

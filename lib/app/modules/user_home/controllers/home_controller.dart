@@ -158,6 +158,7 @@ class HomeController extends GetxController {
           Stream.periodic(const Duration(seconds: 5)).listen((event) async {
         var position = await geo.Geolocator.getCurrentPosition();
         if (UserRepository.instance.user!.latitude == null) {
+          print(position.latitude);
           user!.latitude = position.latitude;
           user!.longitude = position.longitude;
           UserRepository.instance.updateUser(user!);

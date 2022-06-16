@@ -210,11 +210,25 @@ class WaliHomeView extends GetView<WaliHomeController> {
                                         color: AppColors.red,
                                         fontSize: 12),
                                   ),
-                                  Text(
-                                    "10 kali",
-                                    style: GoogleFonts.poppins(
-                                        color: AppColors.red, fontSize: 12),
-                                  ),
+                                  FutureBuilder<String>(
+                                      future: controller.getPoinPelanggaran(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return Text(
+                                            snapshot.data! + " Poin",
+                                            style: GoogleFonts.poppins(
+                                                color: AppColors.red,
+                                                fontSize: 12),
+                                          );
+                                        } else {
+                                          return Text(
+                                            "",
+                                            style: GoogleFonts.poppins(
+                                                color: AppColors.red,
+                                                fontSize: 12),
+                                          );
+                                        }
+                                      }),
                                 ],
                               ),
                             ),
@@ -259,8 +273,12 @@ class WaliHomeView extends GetView<WaliHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Get.toNamed(Routes.PROFILE);
+                    onTap: () async {
+                      CustomDialog.loadingDialog();
+                      var anak = (await UserRepository.instance.getAnotherUser(
+                          UserRepository.instance.user!.emailAnak!));
+                      Get.back();
+                      Get.toNamed(Routes.REKAP_COUNSELING, arguments: anak);
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
@@ -368,7 +386,9 @@ class WaliHomeView extends GetView<WaliHomeController> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(Routes.LISTSISWADATAPRIBADI);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(top: 5),
                       height: 100,

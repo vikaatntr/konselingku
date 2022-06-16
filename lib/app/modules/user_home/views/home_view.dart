@@ -265,7 +265,7 @@ class HomeView extends GetView<HomeController> {
                                         fontSize: 12),
                                   ),
                                   Text(
-                                    "10 kali",
+                                    controller.getPoinPelanggaran(),
                                     style: GoogleFonts.poppins(
                                         color: AppColors.red, fontSize: 12),
                                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:konselingku/app/constant/colors.dart';
+import 'package:konselingku/app/data/repository/user_repository.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
 import 'package:konselingku/app/widget/general/app_bar.dart';
 
@@ -10,9 +11,18 @@ class MenuDataPribadiView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar(title: 'Informasi Pribadi'),
-      body: _body(),
+    return WillPopScope(
+      onWillPop: () async {
+        if (UserRepository.instance.user!.role == "1") {
+          Get.back();
+          Get.back();
+        }
+        return true;
+      },
+      child: Scaffold(
+        appBar: appBar(title: 'Informasi Pribadi'),
+        body: _body(),
+      ),
     );
   }
 

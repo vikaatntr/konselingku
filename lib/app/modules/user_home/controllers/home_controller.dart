@@ -236,6 +236,14 @@ class HomeController extends GetxController {
     }
   }
 
+  String getPoinPelanggaran() {
+    int poin = 0;
+    for (var element in UserRepository.instance.user!.poinPelanggaran.values) {
+      poin += element.values.reduce((value, e) => value + e);
+    }
+    return poin.toString();
+  }
+
   Future<void> initPlatformState() async {
     await BackgroundLocator.initialize();
     isRunning = await BackgroundLocator.isServiceRunning();

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:konselingku/app/data/model/counseling.dart';
+import 'package:konselingku/app/data/model/user.dart';
 import 'package:konselingku/app/data/repository/notification_repository.dart';
 import 'package:konselingku/app/data/repository/user_repository.dart';
 import 'package:konselingku/app/data/services/counseling_services.dart';
@@ -65,10 +66,10 @@ class CounselingRepository {
     }
   }
 
-  Future<List<Counseling>> getCounseling() async {
+  Future<List<Counseling>> getCounseling({UserData? user}) async {
     listAllCounseling.clear();
     listAllCounseling.addAll(await CounselingServices.instance
-        .getCounseling(UserRepository.instance.user!));
+        .getCounseling(user ?? UserRepository.instance.user!));
     return listAllCounseling;
   }
 }

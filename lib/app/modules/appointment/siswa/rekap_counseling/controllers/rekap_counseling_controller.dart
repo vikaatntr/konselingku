@@ -8,7 +8,9 @@ class RekapCounselingController extends GetxController
   void onReady() {
     change(null, status: RxStatus.loading());
     try {
-      CounselingRepository.instance.getCounseling().then((value) {
+      CounselingRepository.instance
+          .getCounseling(user: Get.arguments)
+          .then((value) {
         if (value.isNotEmpty) {
           change(value, status: RxStatus.success());
         } else {

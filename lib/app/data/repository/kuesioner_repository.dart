@@ -12,6 +12,11 @@ class KuesionerRepository {
   Kuesioner? kuesioner;
   List<Kuesioner>? listKuesioner;
 
+  dispose() {
+    kuesioner == null;
+    listKuesioner?.clear();
+  }
+
   Future<Kuesioner?> getKuesioner() async {
     if (kuesioner != null) {
       return kuesioner!;

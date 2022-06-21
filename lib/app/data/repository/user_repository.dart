@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:konselingku/app/constant/collection_path.dart';
 import 'package:konselingku/app/data/model/user.dart';
 import 'package:konselingku/app/data/repository/notification_repository.dart';
+import 'package:konselingku/app/data/repository/repository.dart';
 import 'package:konselingku/app/data/services/user_services.dart';
 import 'package:konselingku/app/globals/controllers/app_controller.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
@@ -18,6 +19,13 @@ class UserRepository {
   UserData? admin;
   List<UserData>? listUser;
   Map<String, dynamic>? sekolah;
+
+  dispose() {
+    user = null;
+    admin = null;
+    listUser = null;
+    sekolah = null;
+  }
 
   Future<bool> createUser(UserData userData) async {
     var result = await UserServices.instance.createUser(userData);
@@ -87,7 +95,7 @@ class UserRepository {
     await _appController.auth.signOut();
     Get.offAllNamed(Routes.LOGIN);
     _appController.userData = null;
-    user = null;
+    Repository.dispose();
   }
 
   Future<void> saveFCMToken(String token) => UserServices.instance

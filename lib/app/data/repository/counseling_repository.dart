@@ -15,6 +15,10 @@ class CounselingRepository {
 
   RxList<Counseling> listAllCounseling = RxList();
 
+  void dispose() {
+    listAllCounseling.clear();
+  }
+
   Future<void> addCounseling(
       {required Counseling counseling, bool fromGuru = false}) async {
     try {

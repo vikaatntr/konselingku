@@ -8,6 +8,10 @@ class ArtikelRepository {
 
   List<Artikel>? listArtikel;
 
+  dispose() {
+    listArtikel?.clear();
+  }
+
   Future<List<Artikel>> getArtikel() async {
     if (listArtikel == null) {
       listArtikel = [];

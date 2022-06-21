@@ -9,6 +9,10 @@ class NomorPentingRepository {
 
   List<NomorPenting>? listNomorPenting;
 
+  dispose() {
+    listNomorPenting?.clear();
+  }
+
   Future<List<NomorPenting>> getNomorPenting() async {
     listNomorPenting ??= await NomorPentingServices.instance.getNomorPenting();
     if (listNomorPenting != null) {

@@ -22,7 +22,9 @@ class WaliHomeView extends GetView<WaliHomeController> {
         leading: Padding(
           padding: const EdgeInsets.only(left: 20),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(Routes.PROFILE);
+            },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Image.asset("assets/images/user.png"),

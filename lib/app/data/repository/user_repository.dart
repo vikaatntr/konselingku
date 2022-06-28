@@ -101,9 +101,10 @@ class UserRepository {
   Future<void> saveFCMToken(String token) => UserServices.instance
       .saveFCMToken(token, _appController.auth.currentUser!.uid);
 
-  Future<void> updateUser(UserData user) async {
-    this.user = user;
-    await UserServices.instance.updateUser(user.uid, user);
+  Future<void> updateUser(UserData userUpDate) async {
+    user = userUpDate;
+    print(userUpDate.toMap());
+    await UserServices.instance.updateUser(user!.uid, userUpDate);
   }
 
   Future<void> getSekolah() async {

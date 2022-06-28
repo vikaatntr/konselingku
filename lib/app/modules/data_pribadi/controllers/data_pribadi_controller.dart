@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -276,7 +278,9 @@ class DataPribadiController extends GetxController {
         tanggalLahir: tanggalLahir,
         jenisKelamin: jenisKelamin,
         agama: agamaSiswa);
-    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
+    UserRepository.instance
+        .updateUser(UserRepository.instance.user!)
+        .then((value) => Get.back());
   }
 
   saveInfoDataPribadi() {
@@ -296,7 +300,9 @@ class DataPribadiController extends GetxController {
             beratBadan: infoPribadiSiswaTextController['beratBadan']!.text,
             tinggiBadan: infoPribadiSiswaTextController['tinggiBadan']!.text));
 
-    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
+    UserRepository.instance
+        .updateUser(UserRepository.instance.user!)
+        .then((value) => Get.back());
   }
 
   saveKondisiFisikdanPsikis() {
@@ -308,7 +314,9 @@ class DataPribadiController extends GetxController {
             gangguanFisik: infoKondisiFisikdanPsikis['gangguanFisik']!.text,
             emosiTingkahLaku: tampilanEmosi));
 
-    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
+    UserRepository.instance
+        .updateUser(UserRepository.instance.user!)
+        .then((value) => Get.back());
   }
 
   saveAktifitasKelompok() {
@@ -319,7 +327,9 @@ class DataPribadiController extends GetxController {
             kedisiplinan: kedisiplinan,
             kerjasama: kerjasamaKelompok));
 
-    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
+    UserRepository.instance
+        .updateUser(UserRepository.instance.user!)
+        .then((value) => Get.back());
   }
 
   saveInformasiMasaDepan() {
@@ -332,7 +342,9 @@ class DataPribadiController extends GetxController {
             dukunganOrtu: dukunganOrtu,
             kemampuan: ekonomiCita));
 
-    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
+    UserRepository.instance
+        .updateUser(UserRepository.instance.user!)
+        .then((value) => Get.back());
   }
 
   saveInfoOrangtua() {
@@ -358,7 +370,9 @@ class DataPribadiController extends GetxController {
                 pekerjaan:
                     infoOrangTuaTextController['wali.pekerjaan']!.text)));
 
-    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
+    UserRepository.instance
+        .updateUser(UserRepository.instance.user!)
+        .then((value) => Get.back());
   }
 
   saveKeteranganKeluarga() {
@@ -373,7 +387,9 @@ class DataPribadiController extends GetxController {
             transportSekolah: infoLingkunganKeluarga['transportSekolah']!.text,
             masalah: infoLingkunganKeluarga['masalah']!.text));
 
-    UserRepository.instance.updateUser(userData!).then((value) => Get.back());
+    UserRepository.instance
+        .updateUser(UserRepository.instance.user!)
+        .then((value) => Get.back());
   }
 
   @override

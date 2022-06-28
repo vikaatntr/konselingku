@@ -106,6 +106,7 @@ class UserServices {
         .collection(CollectionPath.userData)
         .doc(uid)
         .update(user.toMap());
+    print(user.toMap());
   }
 
   Future<void> acceptAccount(String uid) async {

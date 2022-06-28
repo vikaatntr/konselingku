@@ -10,6 +10,7 @@ PreferredSizeWidget appBar(
     bool canBack = true,
     Widget? customLeading,
     bool enableLeading = true,
+    Function()? back,
     List<Widget>? actions,
     PreferredSizeWidget? bottom}) {
   return AppBar(
@@ -21,9 +22,10 @@ PreferredSizeWidget appBar(
     leading: canBack
         ? customLeading ??
             GestureDetector(
-              onTap: () {
-                Get.back();
-              },
+              onTap: back ??
+                  () {
+                    Get.back();
+                  },
               child: const Icon(
                 Feather.chevron_left,
                 size: 32,

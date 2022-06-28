@@ -20,7 +20,16 @@ class MenuDataPribadiView extends StatelessWidget {
         return true;
       },
       child: Scaffold(
-        appBar: appBar(title: 'Informasi Pribadi'),
+        appBar: appBar(
+            title: 'Informasi Pribadi',
+            back: () {
+              if (UserRepository.instance.user!.role == "1") {
+                Get.back();
+                Get.back();
+              } else {
+                Get.back();
+              }
+            }),
         body: _body(),
       ),
     );

@@ -8,12 +8,10 @@ class NotificationController extends GetxController {
   var isDone = true.obs;
   @override
   void onInit() {
-    if (UserRepository.instance.user!.role == '3') {
-      isDone.value = false;
-      UserRepository.instance.getListUser().then((value) {
-        isDone.value = true;
-      });
-    }
+    isDone.value = false;
+    UserRepository.instance.getListUser().then((value) {
+      isDone.value = true;
+    });
     super.onInit();
   }
 

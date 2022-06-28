@@ -14,7 +14,15 @@ class NotificationView extends GetView<NotificationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(title: 'Notifikasi'),
-      body: _body(),
+      body: Obx(() {
+        if (controller.isDone.value) {
+          return _body();
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      }),
     );
   }
 
@@ -29,44 +37,49 @@ class NotificationView extends GetView<NotificationController> {
   }
 
   Widget cardNotif(AppNotification notif) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      color: notif.isRead ? null : Colors.pink.withOpacity(.1),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Image.asset(
-              "assets/images/menu1.png",
-              height: 45,
-              width: 45,
-              fit: BoxFit.cover,
+    return UserRepository.instance.listUser!
+            .where((element) => element.email == notif.from)
+            .isEmpty
+        ? const SizedBox.shrink()
+        : Container(
+            margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            color: notif.isRead ? null : Colors.pink.withOpacity(.1),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Image.asset(
+                    "assets/images/menu1.png",
+                    height: 45,
+                    width: 45,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Wrap(
+                  direction: Axis.vertical,
+                  children: [
+                    Text(
+                      (UserRepository.instance.listUser
+                                  ?.where(
+                                      (element) => element.email == notif.from)
+                                  .first
+                                  .namaPanggilan ??
+                              "") +
+                          " - " +
+                          notif.category,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    Text(
+                      notif.message,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ),
-          const SizedBox(width: 12),
-          Wrap(
-            direction: Axis.vertical,
-            children: [
-              Text(
-                (UserRepository.instance.listUser
-                            ?.where((element) => element.email == notif.from)
-                            .first
-                            .namaPanggilan ??
-                        "") +
-                    " - " +
-                    notif.category,
-                style: const TextStyle(fontSize: 16),
-              ),
-              Text(
-                notif.message,
-                style: const TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+          );
   }
 }

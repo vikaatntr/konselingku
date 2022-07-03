@@ -349,7 +349,21 @@ class HomeView extends GetView<HomeController> {
                       KuesionerRepository.instance.getKuesioner().then((value) {
                         if (value != null) {
                           Get.back();
-                          Get.toNamed(Routes.HASILKUESIONER);
+                          print(value.dateCreated
+                              .toDate()
+                              .add(const Duration(days: 6 * 30))
+                              .difference(DateTime.now())
+                              .inDays);
+                          if (value.dateCreated
+                                  .toDate()
+                                  .add(const Duration(days: 6 * 30))
+                                  .difference(DateTime.now())
+                                  .inDays <
+                              0) {
+                            Get.toNamed(Routes.INFORMASIKUESIONER);
+                          } else {
+                            Get.toNamed(Routes.HASILKUESIONER);
+                          }
                         } else {
                           Get.back();
                           Get.toNamed(Routes.INFORMASIKUESIONER);

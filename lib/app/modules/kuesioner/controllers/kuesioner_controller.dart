@@ -27,8 +27,17 @@ class KuesionerController extends GetxController with StateMixin<Kuesioner?> {
         for (var i = 0; i < pertanyaan4.length; i++) {
           listValuePertanyaan4[i] = value.pertanyaan4[i].values.first;
         }
-        Get.toNamed(Routes.HASILKUESIONER);
-        change(value, status: RxStatus.success());
+        if (value.dateCreated
+                .toDate()
+                .add(const Duration(days: 6 * 30))
+                .difference(DateTime.now())
+                .inDays <
+            0) {
+          change(null, status: RxStatus.empty());
+        } else {
+          change(value, status: RxStatus.success());
+          Get.toNamed(Routes.HASILKUESIONER);
+        }
       } else {
         change(null, status: RxStatus.empty());
       }
@@ -61,6 +70,7 @@ class KuesionerController extends GetxController with StateMixin<Kuesioner?> {
           pertanyaan4: List.generate(pertanyaan4.length,
               (index) => {pertanyaan4[index]: listValuePertanyaan4[index]}));
       await KuesionerRepository.instance.submitKuesioner(kuesioner);
+      Get.back();
       Get.back();
       Get.back();
       Get.snackbar("Berhasil!", "Kuesioner sudah disimpan!");

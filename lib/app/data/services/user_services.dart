@@ -102,11 +102,14 @@ class UserServices {
   }
 
   Future<void> updateUser(String uid, UserData user) async {
-    await FirebaseFirestore.instance
-        .collection(CollectionPath.userData)
-        .doc(uid)
-        .update(user.toMap());
-    print(user.toMap());
+    try {
+      await FirebaseFirestore.instance
+          .collection(CollectionPath.userData)
+          .doc(uid)
+          .update(user.toMap());
+    } catch (e, stack) {
+      log(e.toString(), stackTrace: stack);
+    }
   }
 
   Future<void> acceptAccount(String uid) async {

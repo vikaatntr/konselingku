@@ -84,6 +84,13 @@ class LoginView extends GetView<LoginController> {
                 _forgotPasswordButton(),
                 const Spacer(),
                 _loginButton(),
+                InkWell(
+                  onTap: () => controller.kebijakanPrivasi(),
+                  child: const Text(
+                    "Kebijakan Privasi",
+                    style: TextStyle(color: AppColors.primaryColor),
+                  ),
+                ),
                 const Spacer(),
                 _registerButton(),
               ],

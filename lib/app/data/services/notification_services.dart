@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -71,18 +72,20 @@ class NotificationServices {
       required String body,
       required Map data}) async {
     Uri url = Uri.parse('https://fcm.googleapis.com/fcm/send');
-    await http.post(url, body: {
-      "to": fcmToken,
-      "data": data,
-      "priority": "high",
-      "notification": {
-        "title": title,
-        "body": body,
-      }
-    }, headers: {
-      HttpHeaders.contentTypeHeader: "application/json",
-      HttpHeaders.authorizationHeader:
-          "key=AAAAtnATbD4:APA91bEssNtlZzBQd1bi23Hk0qbS25-k_TZN_4v4xlmfc_jfE1PgoRxqFpXUOlZ21N12OG1j68u1hs6qakXDS-ZeSgy9oSpYb6FvRusmIH0jNdajMAsezonePvlDmS1CzDumM44Ovz2L"
-    });
+    await http.post(url,
+        body: json.encode({
+          "to": fcmToken,
+          "data": data,
+          "priority": "high",
+          "notification": {
+            "title": title,
+            "body": body,
+          }
+        }),
+        headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+          HttpHeaders.authorizationHeader:
+              "key=AAAAtnATbD4:APA91bEssNtlZzBQd1bi23Hk0qbS25-k_TZN_4v4xlmfc_jfE1PgoRxqFpXUOlZ21N12OG1j68u1hs6qakXDS-ZeSgy9oSpYb6FvRusmIH0jNdajMAsezonePvlDmS1CzDumM44Ovz2L"
+        });
   }
 }

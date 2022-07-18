@@ -18,8 +18,8 @@ class NotificationRepository {
       required String category}) async {
     await NotificationServices.instance.saveNotification(
         to: to, category: category, user: from, message: message, title: title);
-    await NotificationServices.instance
-        .sendFCM(fcmToken: to.fcmToken!, title: title, body: message, data: {});
+    await NotificationServices.instance.sendFCM(
+        fcmToken: to.fcmToken ?? '', title: title, body: message, data: {});
   }
 
   Future<void> readNotif() =>

@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'dart:ui';
 
+import 'package:background_locator/background_locator.dart';
 import 'package:get/get.dart';
 import 'package:konselingku/app/constant/collection_path.dart';
 import 'package:konselingku/app/data/model/user.dart';
@@ -8,6 +10,8 @@ import 'package:konselingku/app/data/repository/repository.dart';
 import 'package:konselingku/app/data/services/user_services.dart';
 import 'package:konselingku/app/globals/controllers/app_controller.dart';
 import 'package:konselingku/app/routes/app_pages.dart';
+
+import '../../modules/user_home/controllers/location_service_repository.dart';
 
 class UserRepository {
   final AppController _appController = Get.find();
@@ -95,6 +99,11 @@ class UserRepository {
     await _appController.auth.signOut();
     Get.offAllNamed(Routes.LOGIN);
     _appController.userData = null;
+    if (user!.role == "0") {
+      IsolateNameServer.removePortNameMapping(
+          LocationServiceRepository.isolateName);
+      BackgroundLocator.unRegisterLocationUpdate();
+    }
     Repository.dispose();
   }
 

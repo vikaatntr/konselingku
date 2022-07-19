@@ -96,13 +96,13 @@ class HomeView extends GetView<HomeController> {
             const SizedBox(height: 15),
             _menuApp(),
             const SizedBox(height: 15),
-            _title("Artikel"),
-            const SizedBox(height: 15),
-            _artikel(),
-            _title("Nomor Penting"),
-            const SizedBox(height: 15),
-            _nomorPenting(),
-            const SizedBox(height: 40),
+            // _title("Artikel"),
+            // const SizedBox(height: 15),
+            // _artikel(),
+            // _title("Nomor Penting"),
+            // const SizedBox(height: 15),
+            // _nomorPenting(),
+            // const SizedBox(height: 40),
           ],
         )),
       ),
@@ -513,204 +513,204 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _artikel() {
-    return AspectRatio(
-      aspectRatio: 1 / 1.1,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 1,
-            child: Obx(
-              () => ListView(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                children: [
-                  _filter(
-                      title: "Terbaru",
-                      enable: controller.filterArtikel == "Terbaru",
-                      onTap: () {
-                        controller.filterArtikel = "Terbaru";
-                        controller.listArtikel.sort(
-                            ((a, b) => b.dateCreated.compareTo(a.dateCreated)));
-                      }),
-                  _filter(
-                      title: "Populer",
-                      enable: controller.filterArtikel == "Populer",
-                      onTap: () {
-                        controller.filterArtikel = "Populer";
-                        controller.listArtikel
-                            .sort(((a, b) => b.userShow.compareTo(a.userShow)));
-                      })
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-              flex: 9,
-              child: Obx(
-                () => controller.listArtikel.isNotEmpty
-                    ? PageView.builder(
-                        itemCount: controller.listArtikel.length,
-                        controller: controller.artikelController,
-                        itemBuilder: (context, i) => Container(
-                            margin: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 0.2,
-                                  blurRadius: 15,
-                                  offset: const Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: InkWell(
-                                onTap: () {
-                                  controller
-                                      .showArtikel(controller.listArtikel[i]);
-                                },
-                                child:
-                                    _artikelView(controller.listArtikel[i]))))
-                    : const Center(child: Text("Tidak ada Artikel")),
-              )),
-          Expanded(
-              flex: 2,
-              child: Obx(
-                () => Container(
-                  padding: const EdgeInsets.all(8),
-                  child: SizedBox(
-                      width: double.infinity,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                            controller.listArtikel.length,
-                            (index) => Container(
-                                  margin: const EdgeInsets.only(right: 2),
-                                  padding: EdgeInsets.all(
-                                      controller.artikelIndex.value == index
-                                          ? 6
-                                          : 4),
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.grey),
-                                )),
-                      )),
-                ),
-              )),
-        ],
-      ),
-    );
-  }
+  // Widget _artikel() {
+  //   return AspectRatio(
+  //     aspectRatio: 1 / 1.1,
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Expanded(
+  //           flex: 1,
+  //           child: Obx(
+  //             () => ListView(
+  //               scrollDirection: Axis.horizontal,
+  //               shrinkWrap: true,
+  //               children: [
+  //                 _filter(
+  //                     title: "Terbaru",
+  //                     enable: controller.filterArtikel == "Terbaru",
+  //                     onTap: () {
+  //                       controller.filterArtikel = "Terbaru";
+  //                       controller.listArtikel.sort(
+  //                           ((a, b) => b.dateCreated.compareTo(a.dateCreated)));
+  //                     }),
+  //                 _filter(
+  //                     title: "Populer",
+  //                     enable: controller.filterArtikel == "Populer",
+  //                     onTap: () {
+  //                       controller.filterArtikel = "Populer";
+  //                       controller.listArtikel
+  //                           .sort(((a, b) => b.userShow.compareTo(a.userShow)));
+  //                     })
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //         Expanded(
+  //             flex: 9,
+  //             child: Obx(
+  //               () => controller.listArtikel.isNotEmpty
+  //                   ? PageView.builder(
+  //                       itemCount: controller.listArtikel.length,
+  //                       controller: controller.artikelController,
+  //                       itemBuilder: (context, i) => Container(
+  //                           margin: const EdgeInsets.all(16),
+  //                           decoration: BoxDecoration(
+  //                             boxShadow: [
+  //                               BoxShadow(
+  //                                 color: Colors.grey.withOpacity(0.5),
+  //                                 spreadRadius: 0.2,
+  //                                 blurRadius: 15,
+  //                                 offset: const Offset(
+  //                                     0, 3), // changes position of shadow
+  //                               ),
+  //                             ],
+  //                           ),
+  //                           child: InkWell(
+  //                               onTap: () {
+  //                                 controller
+  //                                     .showArtikel(controller.listArtikel[i]);
+  //                               },
+  //                               child:
+  //                                   _artikelView(controller.listArtikel[i]))))
+  //                   : const Center(child: Text("Tidak ada Artikel")),
+  //             )),
+  //         Expanded(
+  //             flex: 2,
+  //             child: Obx(
+  //               () => Container(
+  //                 padding: const EdgeInsets.all(8),
+  //                 child: SizedBox(
+  //                     width: double.infinity,
+  //                     child: Row(
+  //                       mainAxisAlignment: MainAxisAlignment.center,
+  //                       children: List.generate(
+  //                           controller.listArtikel.length,
+  //                           (index) => Container(
+  //                                 margin: const EdgeInsets.only(right: 2),
+  //                                 padding: EdgeInsets.all(
+  //                                     controller.artikelIndex.value == index
+  //                                         ? 6
+  //                                         : 4),
+  //                                 decoration: const BoxDecoration(
+  //                                     shape: BoxShape.circle,
+  //                                     color: Colors.grey),
+  //                               )),
+  //                     )),
+  //               ),
+  //             )),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget _artikelView(Artikel artikel) {
-    return Column(
-      children: [
-        Expanded(
-            flex: 5,
-            child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              clipBehavior: Clip.antiAlias,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                      topRight: Radius.circular(15))),
-              child: Image.network(
-                artikel.image,
-                fit: BoxFit.cover,
-              ),
-            )),
-        Expanded(
-          flex: 3,
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(16),
-                    bottomRight: Radius.circular(16))),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  artikel.judul,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-                ),
-                Text(artikel.dateCreated.toDate().toString().split(" ")[0],
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.poppins(fontWeight: FontWeight.w300))
-              ],
-            ),
-          ),
-        )
-      ],
-    );
-  }
+  // Widget _artikelView(Artikel artikel) {
+  //   return Column(
+  //     children: [
+  //       Expanded(
+  //           flex: 5,
+  //           child: Container(
+  //             height: double.infinity,
+  //             width: double.infinity,
+  //             clipBehavior: Clip.antiAlias,
+  //             decoration: const BoxDecoration(
+  //                 borderRadius: BorderRadius.only(
+  //                     topLeft: Radius.circular(16),
+  //                     topRight: Radius.circular(15))),
+  //             child: Image.network(
+  //               artikel.image,
+  //               fit: BoxFit.cover,
+  //             ),
+  //           )),
+  //       Expanded(
+  //         flex: 3,
+  //         child: Container(
+  //           width: double.infinity,
+  //           padding: const EdgeInsets.all(8),
+  //           decoration: const BoxDecoration(
+  //               color: Colors.white,
+  //               borderRadius: BorderRadius.only(
+  //                   bottomLeft: Radius.circular(16),
+  //                   bottomRight: Radius.circular(16))),
+  //           child: Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Text(
+  //                 artikel.judul,
+  //                 maxLines: 2,
+  //                 overflow: TextOverflow.ellipsis,
+  //                 style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+  //               ),
+  //               Text(artikel.dateCreated.toDate().toString().split(" ")[0],
+  //                   maxLines: 1,
+  //                   overflow: TextOverflow.ellipsis,
+  //                   style: GoogleFonts.poppins(fontWeight: FontWeight.w300))
+  //             ],
+  //           ),
+  //         ),
+  //       )
+  //     ],
+  //   );
+  // }
 
-  Widget _filter(
-      {required String title,
-      required bool enable,
-      required Function() onTap}) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(24, 4, 24, 4),
-          decoration: BoxDecoration(
-              border: enable
-                  ? null
-                  : Border.all(
-                      color: AppColors.primaryColor,
-                    ),
-              color: enable ? AppColors.primaryColor : null,
-              borderRadius: BorderRadius.circular(24)),
-          child: Center(
-            child: Text(
-              title,
-              style: TextStyle(
-                  color: enable ? Colors.white : AppColors.primaryColor),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _filter(
+  //     {required String title,
+  //     required bool enable,
+  //     required Function() onTap}) {
+  //   return Padding(
+  //     padding: const EdgeInsets.only(left: 8.0),
+  //     child: InkWell(
+  //       onTap: onTap,
+  //       child: Container(
+  //         padding: const EdgeInsets.fromLTRB(24, 4, 24, 4),
+  //         decoration: BoxDecoration(
+  //             border: enable
+  //                 ? null
+  //                 : Border.all(
+  //                     color: AppColors.primaryColor,
+  //                   ),
+  //             color: enable ? AppColors.primaryColor : null,
+  //             borderRadius: BorderRadius.circular(24)),
+  //         child: Center(
+  //           child: Text(
+  //             title,
+  //             style: TextStyle(
+  //                 color: enable ? Colors.white : AppColors.primaryColor),
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  Widget _nomorPenting() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Obx(
-        () => controller.listNomorPenting.isNotEmpty
-            ? Column(
-                children: controller.listNomorPenting
-                    .map((e) => Card(
-                          child: ListTile(
-                            onTap: () async {
-                              if (await canLaunch(e.link)) {
-                                launch(e.link);
-                              }
-                            },
-                            title: Text(
-                              e.nama,
-                              style: Get.textTheme.headline6,
-                            ),
-                            subtitle: Text(
-                              e.nomor,
-                              style: Get.textTheme.bodyText1,
-                            ),
-                          ),
-                        ))
-                    .toList(),
-              )
-            : const SizedBox.shrink(),
-      ),
-    );
-  }
+  // Widget _nomorPenting() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(8.0),
+  //     child: Obx(
+  //       () => controller.listNomorPenting.isNotEmpty
+  //           ? Column(
+  //               children: controller.listNomorPenting
+  //                   .map((e) => Card(
+  //                         child: ListTile(
+  //                           onTap: () async {
+  //                             if (await canLaunch(e.link)) {
+  //                               launch(e.link);
+  //                             }
+  //                           },
+  //                           title: Text(
+  //                             e.nama,
+  //                             style: Get.textTheme.headline6,
+  //                           ),
+  //                           subtitle: Text(
+  //                             e.nomor,
+  //                             style: Get.textTheme.bodyText1,
+  //                           ),
+  //                         ),
+  //                       ))
+  //                   .toList(),
+  //             )
+  //           : const SizedBox.shrink(),
+  //     ),
+  //   );
+  // }
 }

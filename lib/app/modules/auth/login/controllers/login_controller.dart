@@ -63,8 +63,41 @@ Kebijakan Privasi ini dapat sewaktu-waktu ditinjau dan diubah kembali atas kebij
                             primary: AppColors.primaryColor),
                         onPressed: () {
                           Get.back();
+                          alertLocation();
                         },
-                        child: const Text("Tutup"))
+                        child: const Text("Setuju"))
+                  ],
+                )
+              ],
+            ));
+  }
+
+  void alertLocation() {
+    showDialog(
+        context: Get.context!,
+        builder: (context) => AlertDialog(
+              title: const Text(
+                "Peringatan",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              content: SizedBox(
+                height: Get.height * 0.7,
+                width: double.infinity,
+                child: const SingleChildScrollView(child: Text('''
+Aplikasi konselingku mengumpulkan data lokasi akurat pengguna yang digunakan untuk keperluan melacak lokasi siswa supaya selalu berada di area sekolah yang ditentukan. Aplikasi ini menggunakan lokasi Anda di latar belakang saat aplikasi digunakan bahkan ketika aplikasi ditutup atau tidak digunakan..
+        ''')),
+              ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: AppColors.primaryColor),
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: const Text("Setuju"))
                   ],
                 )
               ],

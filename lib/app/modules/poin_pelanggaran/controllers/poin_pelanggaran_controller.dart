@@ -103,16 +103,24 @@ class PoinPelanggaranController extends GetxController
             message: "Poin ${siswa.namaLengkap} pelanggaran melebihi batas",
             from: UserRepository.instance.user!.namaPanggilan,
             category: "Pelanggaran");
+
+        siswa.poinPelanggaran = poinSiswa;
+        await UserRepository.instance.updateUser(siswa);
+        Get.back();
+        Get.back();
+        Get.back();
+        Get.back();
         Get.snackbar("Perlu tindakan!",
             "Poin ${siswa.namaLengkap} sudah melebihi batas");
+      } else {
+        siswa.poinPelanggaran = poinSiswa;
+        await UserRepository.instance.updateUser(siswa);
+        Get.back();
+        Get.back();
+        Get.back();
+        Get.back();
+        Get.snackbar("Sukses!", "Berhasil memberikan poin");
       }
-      siswa.poinPelanggaran = poinSiswa;
-      await UserRepository.instance.updateUser(siswa);
-      Get.back();
-      Get.back();
-      Get.back();
-      Get.back();
-      Get.snackbar("Sukses!", "Berhasil memberikan poin");
     } catch (e, stackTrace) {
       log(e.toString(), stackTrace: stackTrace);
       Get.back();
